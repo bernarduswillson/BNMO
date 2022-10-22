@@ -1,6 +1,3 @@
-/* Nama : Afnan Edsa Ramadhan*/
-/* NIM : 13521011*/
-/* Tanggal :7 September 2022*/
 
 #include "point.h"
 #include <stdio.h>
