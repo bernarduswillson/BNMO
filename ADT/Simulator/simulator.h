@@ -9,19 +9,16 @@
 #include "../Boolean/boolean.h"
 
 typedef struct {
-    // char idUser;
-    Word idUser;
+    char *idUser;
     POINT P;
-    // Queue Q;
+    PrioQueueTime Q;
 }Simulator;
 
 #define Nama(S) (S).idUser   //Nama pengguna
 #define Lokasi(S) (S).P     //Lokasi simulator
-// #define Inventory(S) (S).Q  //Inventory simulator
+#define Inventory(S) (S).Q  //Inventory simulator
 
-// void CreateSimulator(Simulator *S, char nama, POINT P/*, Queue Q*/ );
-
-void CreateSimulator(Simulator *S, Word nama, POINT P/*, Queue Q*/ );
+void CreateSimulator(Simulator *S, POINT P, PrioQueueTime Q);
 
 void MoveSimulator(Simulator *S, int x);
 // x = 1 --> NORTH

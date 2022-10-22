@@ -2,30 +2,19 @@
 #include <stdio.h>
 #include "simulator.h"
 
-// void CreateSimulator(Simulator *S, char nama, POINT P/*, Queue Q*/ ){
-//     Nama(*S) = nama;
-//     Lokasi(*S) = P;
-//     // Inventory(*S) = Q;
-// }
 
-void CreateSimulator(Simulator *S, Word nama, POINT P/*, Queue Q*/ ){
-    Nama(*S) = nama;
+void CreateSimulator(Simulator *S,POINT P, PrioQueueTime Q){
+    Nama(*S) = "BNMO";
     Lokasi(*S) = P;
-    // Inventory(*S) = Q;
+    Inventory(*S) = Q;
 }
 
 void BacaSimulator(Simulator *S){
     POINT P;
-    
-    // char nama[100];
-    printf("Masukkan Nama Pengguna : ");
-    STARTWORD();
-
-    // Nama(*S) = nama;
+    PrioQueueTime Q;
     Kolom(P) = 0;
     Baris(P) = 0;    
-    CreateSimulator(S, currentWord, P);
-    ADVWORD();
+    CreateSimulator(S,P,Q);
 }
 
 void MoveSimulator(Simulator *S, int x){
@@ -57,10 +46,7 @@ void DisplaySimulator(Simulator S){
 }
 
 void DisplayNama(Simulator S){
-    for(int i=0;i<Nama(S).Length;i++){
-        printf("%c", Nama(S).TabWord[i]);
-    }
-    printf("\n");
+    printf("%s\n", Nama(S));
 }
 
 void DisplayLokasi(Simulator S){
