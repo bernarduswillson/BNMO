@@ -2,11 +2,11 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
-#include "point.c"
-#include "wordmachine.c"
-#include "charmachine.c"
-#include "queue.c"
-#include "boolean.h"
+#include "../Point/point.c"
+#include "../Mesin_Kata/wordmachine.c"
+#include "../Mesin_Karakter/charmachine.c"
+#include "../PrioQueue/prioqueuetime.h"
+#include "../Boolean/boolean.h"
 
 typedef struct {
     // char idUser;

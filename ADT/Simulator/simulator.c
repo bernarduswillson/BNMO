@@ -1,6 +1,5 @@
 
 #include <stdio.h>
-#include <string.h>
 #include "simulator.h"
 
 // void CreateSimulator(Simulator *S, char nama, POINT P/*, Queue Q*/ ){
@@ -26,6 +25,7 @@ void BacaSimulator(Simulator *S){
     Kolom(P) = 0;
     Baris(P) = 0;    
     CreateSimulator(S, currentWord, P);
+    ADVWORD();
 }
 
 void MoveSimulator(Simulator *S, int x){

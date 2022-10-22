@@ -8,14 +8,17 @@ int main(){
     // printf("%saaaa\n", Nama(S));
     DisplaySimulator(S);
     // printf("%.0f\n", Baris(Lokasi(S))+50);
+    printf("\n");
     MoveSimulator(&S, 2);
     DisplaySimulator(S);
+    printf("\n");
     // printf("%d",(int)Nama(S));
     DisplayNama(S);
     DisplayLokasi(S);
 
-    // int x=0;
-    // while(x!=-999){
+    // printf("TES GESER\n");
+    // int x;
+    // do{
     //     scanf("%d", &x);
     //     switch (x)
     //     {
@@ -35,7 +38,7 @@ int main(){
     //     default:
     //         break;
     //     }
-    // }
+    // }while(x!=-999);
 
     // TulisPOINT(Lokasi(S));
 

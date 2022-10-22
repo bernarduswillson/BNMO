@@ -1,9 +1,7 @@
-/* Nama : Afnan Edsa Ramadhan*/
-/* NIM : 13521011*/
-/* Tanggal :28 September 2022*/
 
-#include "wordmachine.h"
-#include "charmachine.h"
+
+#include "../Mesin_Kata/wordmachine.h"
+#include "../Mesin_Karakter/charmachine.h"
 #include <stdio.h>
 
 boolean EndWord;
