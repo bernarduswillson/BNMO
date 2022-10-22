@@ -2,6 +2,7 @@
 #include "boolean.h"
 #include "prioqueuetime.h"
 
+/* ********* Prototype ********* */
 boolean IsEmpty(PrioQueueTime Q) {
     return (Head(Q) == Nil && Tail(Q) == Nil);
 }
