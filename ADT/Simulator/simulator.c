@@ -50,11 +50,10 @@ void MoveSimulator(Simulator *S, int x){
 
 void DisplaySimulator(Simulator S){
     printf("Nama Pengguna :");
-    for(int i=0;i<Nama(S).Length;i++){
-        printf("%c", Nama(S).TabWord[i]);
-    }
-    printf("\n");
-    printf("Lokasi = (%.0f,%.0f)\n", Baris(Lokasi(S)), Kolom(Lokasi(S)));
+    DisplayNama(S);
+
+    printf("Lokasi :");
+    DisplayLokasi(S);
 }
 
 void DisplayNama(Simulator S){
