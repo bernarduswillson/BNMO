@@ -43,6 +43,9 @@ void CopyWord(){
         ADV();
         i++;
     }
-    currentWord.Length = i;
-    
+    currentWord.Length = i;   
+}
+
+void StopWord(){
+    END();
 }
