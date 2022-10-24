@@ -3,8 +3,8 @@
 #include "simulator.h"
 
 
-void CreateSimulator(Simulator *S,POINT P, PrioQueueTime Q){
-    Nama(*S) = "BNMO";
+void CreateSimulator(Simulator *S, Word nama,POINT P, PrioQueueTime Q){
+    Nama(*S) = nama;
     Lokasi(*S) = P;
     Inventory(*S) = Q;
 }
@@ -12,9 +12,14 @@ void CreateSimulator(Simulator *S,POINT P, PrioQueueTime Q){
 void BacaSimulator(Simulator *S){
     POINT P;
     PrioQueueTime Q;
+    printf("Input Username :");
+    STARTWORD();
+    // Nama(*S) = currentWord;
     Kolom(P) = 0;
     Baris(P) = 0;    
-    CreateSimulator(S,P,Q);
+    // Lokasi(*S) = P;
+    // Inventory(*S) = Q;
+    CreateSimulator(S,currentWord,P,Q);
 }
 
 void MoveSimulator(Simulator *S, int x){

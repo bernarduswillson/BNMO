@@ -9,7 +9,7 @@
 #include "../Boolean/boolean.h"
 
 typedef struct {
-    char *idUser;
+    Word idUser;
     POINT P;
     PrioQueueTime Q;
 }Simulator;
@@ -18,7 +18,7 @@ typedef struct {
 #define Lokasi(S) (S).P     //Lokasi simulator
 #define Inventory(S) (S).Q  //Inventory simulator
 
-void CreateSimulator(Simulator *S, POINT P, PrioQueueTime Q);
+void CreateSimulator(Simulator *S,Word nama, POINT P, PrioQueueTime Q);
 
 void MoveSimulator(Simulator *S, int x);
 // x = 1 --> NORTH

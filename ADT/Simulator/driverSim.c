@@ -7,6 +7,7 @@ int main(){
     BacaSimulator(&S);
     DisplaySimulator(S);
     printf("\n");
+    printf("coba geser 1\n");
     MoveSimulator(&S, 2);
     DisplaySimulator(S);
     printf("\n");
