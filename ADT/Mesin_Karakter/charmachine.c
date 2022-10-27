@@ -44,3 +44,12 @@ void ADV()
 void END(){
        fclose(pita);
 }
+
+void STARTFILE(char *namaFile){
+       pita = fopen(namaFile, "r");
+       if(pita == NULL){
+              printf("File tidak ditemukan.\n");
+              // exit(0);
+       }
+       ADV();
+}

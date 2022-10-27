@@ -28,4 +28,6 @@ void ADV();
 
 void END();
 
+void STARTFILE(char *namaFile);
+
 #endif

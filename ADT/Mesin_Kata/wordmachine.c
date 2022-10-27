@@ -49,3 +49,41 @@ void CopyWord(){
 void StopWord(){
     END();
 }
+
+void STARTWORDFILE(char *namaFile){
+    STARTFILE(namaFile);
+    IgnoreBlanks();
+    if (currentChar == MARK){
+        EndWord = true;
+    }
+    else{
+        EndWord = false;
+        CopyWord();
+    }
+}
+
+void ADVNEWLINE(){
+
+    if(currentChar == MARK){
+        EndWord = false;
+        ADV();
+        CopyWord();
+    }
+}
+
+int WordToInt(int x){
+    int cc=1;
+    int sum=0;
+    for(int i=x-1;i>=0;i--){
+        sum = sum + (int)(currentWord.TabWord[i]-48)*cc;
+        cc*=10;
+    }
+    return sum;
+}
+
+void DisplayWord(int x){
+    for(int i=0;i<currentWord.Length;i++){
+        printf("%c", currentWord.TabWord[i]);
+    }
+    printf("\n");
+}

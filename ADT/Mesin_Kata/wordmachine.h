@@ -48,4 +48,13 @@ void CopyWord();
 
 void StopWord();
 
+void STARTWORDFILE(char *namaFile);
+
+void ADVNEWLINE();
+
+int WordToInt(int x);
+
+void DisplayWord(int x);
+
+
 #endif
