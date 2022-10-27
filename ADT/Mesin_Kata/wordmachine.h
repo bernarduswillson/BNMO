@@ -56,5 +56,8 @@ int WordToInt(int x);
 
 void DisplayWord(int x);
 
+void WordToStr(char x[100]);
+
+
 
 #endif
