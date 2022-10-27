@@ -87,3 +87,11 @@ void DisplayWord(int x){
     }
     printf("\n");
 }
+
+void WordToStr(char y[100]){
+
+    for(int i=0;i<currentWord.Length;i++){
+        y[i] = currentWord.TabWord[i];
+    }
+    
+}
