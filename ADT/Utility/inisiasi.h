@@ -4,13 +4,11 @@
 #include "../Mesin_Kata/wordmachine.h"
 #include "../Mesin_Karakter/charmachine.h"
 
-// Functions
 void startMenu();
 // Memulai startmenu
 
-
-// int checkStartInput(Word a[]);
-// // input checker for startmenu
+void checkInput(Word d);
+// input checker for startmenu
 
 // void inputConfigFile(Game *g, Word cfg);
 // // Menginput config file

@@ -52,8 +52,23 @@ void startMenu() {
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    printf("=================================== BNMO GAME ==================================\n");
+    printf("\n");
+    printf("Masukkan input dalam bentuk angka\n");
     printf("1. Start a new game\n");
-    printf("2. Load a saved game\n");
-    printf("3. Help\n");
-    printf("4. Quit\n");
+    printf("2. Quit\n");
+}
+
+void checkInput(Word d) {
+    int a = WordToInt(currentWord.Length);
+    if (a==1) {
+        //Start a new game
+    }
+    else if (a == 2) {
+        printf("Terima kasih telah bermain!\n");
+        exit(0);
+    }
+    else {
+        printf("Input tidak valid\n");
+    }
 }
