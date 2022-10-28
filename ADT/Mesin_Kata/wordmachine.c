@@ -71,24 +71,24 @@ void ADVNEWLINE(){
     }
 }
 
-int WordToInt(int x){
+void WordToInt(int *x){
     int cc=1;
-    int sum=0;
-    for(int i=x-1;i>=0;i--){
-        sum = sum + (int)(currentWord.TabWord[i]-48)*cc;
+    *x=0;
+    int len = currentWord.Length-1;
+    for(int i=len;i>=0;i--){
+        *x = *x + (int)(currentWord.TabWord[i]-48)*cc;
         cc*=10;
     }
-    return sum;
 }
 
-void DisplayWord(int x){
+void DisplayWord(){
     for(int i=0;i<currentWord.Length;i++){
         printf("%c", currentWord.TabWord[i]);
     }
-    printf("\n");
+    printf(" ");
 }
 
-void WordToStr(char y[100]){
+void WordToStr(char y[currentWord.Length]){
 
     for(int i=0;i<currentWord.Length;i++){
         y[i] = currentWord.TabWord[i];

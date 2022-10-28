@@ -52,11 +52,11 @@ void STARTWORDFILE(char *namaFile);
 
 void ADVNEWLINE();
 
-int WordToInt(int x);
+void WordToInt(int *x);
 
-void DisplayWord(int x);
+void DisplayWord();
 
-void WordToStr(char x[100]);
+void WordToStr(char x[currentWord.Length]);
 
 
 
