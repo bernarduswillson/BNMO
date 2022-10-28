@@ -1,5 +1,5 @@
 # Tugas Besar Alstrukdat 2022/2023 (IF2110)
-## "BNMO Simulasi Memasak"
+## "BNMO, Cooking Simulation"
 ## Kelas K3 Kelompok A
 ### Anggota Kelompok A :
 1. Bintang Hijriawan Jachja 	(13521003)
@@ -10,7 +10,7 @@
 6. Agsha Athalla Nurkareem 	    (13521027)
 
 
-Program ini adalah contoh penerapan ADT dalam pembuatan sebuah CLI(command-line interface).
+This program is an example of implementing ADT in creating a CLI (command-line interface).
 > “BNMO sedang memasak mengikuti program simulasi yang telah direkam Doni”
 
 <p align="center">
@@ -21,8 +21,8 @@ This is a project in order to fulfill the requirements of the study of Alstrukda
 
 ## Derivables
 
-## Instalasi Program
+## Program Installation
 
-### Cara Kompilasi Program
+### How to Compile
 
-## Cara Menjalankan Program
+## How to Run
