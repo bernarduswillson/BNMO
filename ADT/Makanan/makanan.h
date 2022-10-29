@@ -2,17 +2,24 @@
 #define MAKANAN_H
 
 #include "../Boolean/boolean.h"
-#include "../Time/time.h"
 #include "../Mesin_Kata/wordmachine.h"
-#include "../List_Dinamis/listdinamis.h"
+#include "../Inventory/inventory.h"
+
+#define IDX_UNDEF -1
+typedef struct {
+    int hari;
+    int jam;
+    int menit;
+} Time;
 
 typedef struct {
     int id;
-    char nama[50];
+    char *nama;
     Time kedaluwarsa;
-    char lokasi;
+    char *lokasi;
     Time pengiriman;
 } Makanan;
+
 
 typedef struct {
     Makanan* content;        //Nanti pake listdinamis, masih bingung
@@ -30,6 +37,7 @@ typedef struct {
 
 #define LASTIDX(l) (l).lastIdx
 #define MAKANAN(l, i) (l).content[i]
+#define CAPACITY(l) (l).capacity
 
     //void readMakanan(); (jadinya digabung sama createMakanan)
     //Baca file makanan, buat listMakanan pake createListMakanan, manggil fungsi createMakanan buat bikin semua
@@ -46,7 +54,7 @@ void createListMakanan(listMakanan *l, int size);
     //F.S:
     //terbentuk listMakanan l kosong dengan ukuran size
 
-void createMakanan(/*file?*/, listMakanan *l); 
+void createMakanan(listMakanan *l); 
     //Baca file dari makanan, masukin ke variabel, trs bikin variabel makanan.
     //Buat makanan baru, isinya id, nama, waktu kedaluwarsa, lokasi aksi, waktu pengiriman
     //Masukin makanan yang baru dibikin ke listMakanan
