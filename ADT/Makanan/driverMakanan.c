@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "makanan.h"
+#include "makanan.c"
+#include "inventory.h"
 
 int main(){
     Makanan m;
     listMakanan l;
     Time kedaluwarsa, pengiriman;
     int id;
-    char nama[50], lokasi[50];
+    Word nama, lokasi;
     
     l.content = (Makanan*) malloc (2*sizeof(Makanan));
     CAPACITY(l) = 2;

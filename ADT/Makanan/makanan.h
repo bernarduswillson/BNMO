@@ -3,26 +3,35 @@
 
 #include "../Boolean/boolean.h"
 #include "../Mesin_Kata/wordmachine.h"
-#include "../Inventory/inventory.h"
+#include "inventory.h"
 
 #define IDX_UNDEF -1
-typedef struct {
+typedef struct
+{
     int hari;
     int jam;
     int menit;
 } Time;
 
-typedef struct {
-    int id;
-    char *nama;
-    Time kedaluwarsa;
-    char *lokasi;
-    Time pengiriman;
+typedef struct
+{
+   int id;
+   Word nama;
+   Time kedaluwarsa;
+   Word lokasi;
+   Time pengiriman;
 } Makanan;
 
+typedef struct
+{
+    Makanan* content;
+    //int size
+    //int sizeEff
+} Inventory;
 
-typedef struct {
-    Makanan* content;        //Nanti pake listdinamis, masih bingung
+typedef struct
+{
+    Makanan *content;        //Nanti pake listdinamis, masih bingung
     int capacity;
     int nEff;
     int lastIdx;
@@ -30,9 +39,9 @@ typedef struct {
 
 /*----Selektor----*/
 #define ID(m) (m).id
-#define NAMA(m) (m).nama
+#define NAMA(m) (m).nama.TabWord
 #define KEDALUWARSA(m) (m).kedaluwarsa
-#define LOKASI(m) (m).lokasi
+#define LOKASI(m) (m).lokasi.TabWord
 #define PENGIRIMAN(m) (m).pengiriman
 
 #define LASTIDX(l) (l).lastIdx
