@@ -1,51 +1,59 @@
-/*
-NIM : 13521021
-Nama : Bernardus Willson
-Tanggal : 7 September 2022
-Topik praktikum : time
-Deskripsi : membuat file time.c
-*/
+
 #include "time.h"
 #include <stdio.h>
 #include <math.h>
 
-boolean IsTIMEValid (int H, int M, int S) {
-    return ((H>=0 && H<24) && (M>=0 && M<60) && (S>=0 && S<60));
+boolean IsTIMEValid (int D, int H, int M) {
+    return ((H>=0 && H<24) && (M>=0 && M<60));
 }
 
-void CreateTime (TIME * T, int HH, int MM, int SS) {
+void CreateTime (TIME * T,int DD, int HH, int MM) {
+    Day(*T) = DD;
     Hour(*T) = HH;
     Minute(*T) = MM;
-    Second(*T) = SS;
 }
 
 void BacaTIME (TIME * T) {
-    int H, M, S;
-    scanf("%d %d %d", &H, &M, &S);
-    while (!IsTIMEValid(H, M, S)) {
+    int D, H, M;
+    scanf("%d %d %d", &D, &H, &M);
+    while (!IsTIMEValid(D, H, M)) {
         printf("Jam tidak valid\n");
-        scanf("%d %d %d", &H, &M, &S);
+        scanf("%d %d %d", &D, &H, &M);
     }
-    CreateTime(T, H, M, S);
+    CreateTime(T, D, H, M);
 }
 
 void TulisTIME (TIME T) {
-    printf("%02d:%02d:%02d", Hour(T), Minute(T), Second(T));
+    if(Day(T)!=0) {
+        printf("%d hari ", Day(T));
+    }
+    if(Hour(T)!=0) {
+        printf("%d jam ", Hour(T));
+    }
+    if(Minute(T)!=0) {
+        printf("%d menit ", Minute(T));
+    }
 }
 
-long TIMEToDetik (TIME T) {
-    return ((Hour(T)*3600 + Minute(T)*60 + Second(T)));
+long TIMEToMenit (TIME T) {
+    return (Day(T)*1440 + Hour(T)*60 + Minute(T));
 }
 
-TIME DetikToTIME (long N) {
+TIME MenitToTIME (long N) {
     TIME T;
-    N = (N+86400) % 86400;
-    CreateTime(&T, N/3600, (N%3600)/60, N%60);
+    int D, H, M;
+    D = N/1440;
+    N = N%1440;
+    H = N/60;
+    N = N%60;
+    M = N;
+    
+    CreateTime(&T, D, H, M);
     return T;
 }
 
 boolean TEQ (TIME T1, TIME T2) {
-    return (TIMEToDetik(T1) == TIMEToDetik(T2));
+    return (TIMEToMenit(T1) == TIMEToMenit(T2));
 }
 
 boolean TNEQ (TIME T1, TIME T2) {
@@ -53,34 +61,34 @@ boolean TNEQ (TIME T1, TIME T2) {
 }
 
 boolean TLT (TIME T1, TIME T2) {
-    return (TIMEToDetik(T1) < TIMEToDetik(T2));
+    return (TIMEToMenit(T1) < TIMEToMenit(T2));
 }
 
 boolean TGT (TIME T1, TIME T2) {
-    return (TIMEToDetik(T1) > TIMEToDetik(T2));
+    return (TIMEToMenit(T1) > TIMEToMenit(T2));
 }
 
-TIME NextDetik (TIME T) {
-    return (DetikToTIME(TIMEToDetik(T)+1));
+TIME NextMenit (TIME T) {
+    return (MenitToTIME(TIMEToMenit(T)+1));
 }
 
-TIME NextNDetik (TIME T, int N) {
-    return (DetikToTIME(TIMEToDetik(T)+N));
+TIME NextNMenit (TIME T, int N) {
+    return (MenitToTIME(TIMEToMenit(T)+N));
 }
 
-TIME PrevDetik (TIME T) {
-    return (DetikToTIME(TIMEToDetik(T)-1));
+TIME PrevMenit (TIME T) {
+    return (MenitToTIME(TIMEToMenit(T)-1));
 }
 
-TIME PrevNDetik (TIME T, int N) {
-    return (DetikToTIME(TIMEToDetik(T)-N));
+TIME PrevNMenit (TIME T, int N) {
+    return (MenitToTIME(TIMEToMenit(T)-N));
 }
 
-long Durasi (TIME TAw, TIME TAkh) {
-    if (TIMEToDetik(TAw) > TIMEToDetik(TAkh)) {
-        return (86400 + TIMEToDetik(TAkh) - TIMEToDetik(TAw));
-    }
-    else {
-        return (TIMEToDetik(TAkh)-TIMEToDetik(TAw));
-    }
-}
+// long Durasi (TIME TAw, TIME TAkh) {
+//     if (TIMEToMenit(TAw) > TIMEToMenit(TAkh)) {
+//         return (86400 + TIMEToMenit(TAkh) - TIMEToMenit(TAw));
+//     }
+//     else {
+//         return (TIMEToMenit(TAkh)-TIMEToMenit(TAw));
+//     }
+// }
