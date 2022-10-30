@@ -1,5 +1,6 @@
 
 #include "time.h"
+#include "../Mesin_Kata/wordmachine.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -15,15 +16,16 @@ void CreateTime (TIME * T,int DD, int HH, int MM) {
 
 void BacaTIME (TIME * T) {
     int D, H, M;
-    scanf("%d %d %d", &D, &H, &M);
-    while (!IsTIMEValid(D, H, M)) {
-        printf("Jam tidak valid\n");
-        scanf("%d %d %d", &D, &H, &M);
-    }
+    WordToInt(&D);
+    ADVWORD1();
+    WordToInt(&H);
+    ADVWORD1();
+    WordToInt(&M);
+    // scanf("%d %d %d", &D, &H, &M);
     CreateTime(T, D, H, M);
 }
 
-void TulisTIME (TIME T) {
+void TulisTIME1 (TIME T) {
     if(Day(T)!=0) {
         printf("%d hari ", Day(T));
     }
@@ -32,6 +34,18 @@ void TulisTIME (TIME T) {
     }
     if(Minute(T)!=0) {
         printf("%d menit ", Minute(T));
+    }
+}
+
+void TulisTIME2 (TIME T) {
+    if(Day(T)!=0) {
+        printf("%d.", Day(T));
+    }
+    if(Hour(T)!=0) {
+        printf("%d.", Hour(T));
+    }
+    if(Minute(T)!=0) {
+        printf("%d", Minute(T));
     }
 }
 
@@ -84,11 +98,22 @@ TIME PrevNMenit (TIME T, int N) {
     return (MenitToTIME(TIMEToMenit(T)-N));
 }
 
-// long Durasi (TIME TAw, TIME TAkh) {
-//     if (TIMEToMenit(TAw) > TIMEToMenit(TAkh)) {
-//         return (86400 + TIMEToMenit(TAkh) - TIMEToMenit(TAw));
-//     }
-//     else {
-//         return (TIMEToMenit(TAkh)-TIMEToMenit(TAw));
-//     }
-// }
+void AddAllTIME (TIME *T1, TIME *T2, TIME *T3){
+    *T1 = NextMenit(*T1);
+    *T2 = PrevMenit(*T2);
+    *T3 = PrevMenit(*T3);
+}
+
+void AddAllNTIME (TIME *T1, TIME *T2, TIME *T3, int N){
+    *T1 = NextNMenit(*T1,N);
+    *T2 = PrevNMenit(*T2,N);
+    *T3 = PrevNMenit(*T3,N);
+}
+long Durasi (TIME TAw, TIME TAkh) {
+    if (TIMEToMenit(TAw) > TIMEToMenit(TAkh)) {
+        return (86400 + TIMEToMenit(TAkh) - TIMEToMenit(TAw));
+    }
+    else {
+        return (TIMEToMenit(TAkh)-TIMEToMenit(TAw));
+    }
+}
