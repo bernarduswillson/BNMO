@@ -29,29 +29,29 @@ void catalog(listMakanan l){
     printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time\n");
     for (int i = 0; i<CAPACITY(l); i++){
         printf("%d. %s - ", i+1, NAMA(MAKANAN(l, i)));
-        if (KEDALUWARSA(MAKANAN(l, i)).jam>0){
-            printf("%d jam ", KEDALUWARSA(MAKANAN(l, i)).jam);
+        if (Hour(KEDALUWARSA(MAKANAN(l, i)))>0){
+            printf("%d jam ", Hour(KEDALUWARSA(MAKANAN(l, i))));
         }
-        if (KEDALUWARSA(MAKANAN(l, i)).menit>0){
-            printf("%d menit ", KEDALUWARSA(MAKANAN(l, i)).menit);
+        if (Minute(KEDALUWARSA(MAKANAN(l, i)))>0){
+            printf("%d menit ", Minute(KEDALUWARSA(MAKANAN(l, i))));
         }
-        if ((KEDALUWARSA(MAKANAN(l, i)).jam==0)&&(KEDALUWARSA(MAKANAN(l, i)).menit==0)){
+        if ((Hour(KEDALUWARSA(MAKANAN(l, i)))==0)&&(Minute(KEDALUWARSA(MAKANAN(l, i)))==0)){
             printf("0 ");
         }
         printf("- %s - ", AKSI(MAKANAN(l, i)));
-        if (PENGIRIMAN(MAKANAN(l, i)).jam>0){
-            printf("%d jam ", PENGIRIMAN(MAKANAN(l, i)).jam);
+        if (Hour(PENGIRIMAN(MAKANAN(l, i)))>0){
+            printf("%d jam ", Hour(PENGIRIMAN(MAKANAN(l, i))));
         }
-        if (PENGIRIMAN(MAKANAN(l, i)).menit>0){
-            printf("%d menit", PENGIRIMAN(MAKANAN(l, i)).menit);
-        }if ((PENGIRIMAN(MAKANAN(l, i)).jam==0)&&(PENGIRIMAN(MAKANAN(l, i)).menit==0)){
+        if (Minute(PENGIRIMAN(MAKANAN(l, i)))>0){
+            printf("%d menit", Minute(PENGIRIMAN(MAKANAN(l, i))));
+        }if ((Hour(PENGIRIMAN(MAKANAN(l, i)))==0)&&(Minute(PENGIRIMAN(MAKANAN(l, i)))==0)){
             printf("0 ");
         }
         printf("\n");
     }
 }
 
-void buy(listMakanan l, Inventory *i, Makanan m);
+void buy(listMakanan l, PrioQueueTime *i, Makanan m);
     //beli makanan yang ada di listMakanan, masukin ke inventory.
     //lokasi harus pas (Makanan.lokasi harus "BUY")
     //I.S:
@@ -59,7 +59,7 @@ void buy(listMakanan l, Inventory *i, Makanan m);
     //F.S:
     //masukin Makanan m ke delivery queue (belum tau gimana) 
 
-void fry(listMakanan l, Inventory *i, Makanan m);
+void fry(listMakanan l, PrioQueueTime *i, Makanan m);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //goreng makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang digoreng (m) masukin ke inventory
@@ -69,7 +69,7 @@ void fry(listMakanan l, Inventory *i, Makanan m);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void boil(listMakanan l, Inventory *i);
+void boil(listMakanan l, PrioQueueTime *i);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //rebus makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang direbus masukin ke inventory
@@ -79,7 +79,7 @@ void boil(listMakanan l, Inventory *i);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void mix(listMakanan l, Inventory *i);
+void mix(listMakanan l, PrioQueueTime *i);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //campur makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dicampur masukin ke inventory
@@ -89,7 +89,7 @@ void mix(listMakanan l, Inventory *i);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void chop(listMakanan l, Inventory *i);
+void chop(listMakanan l, PrioQueueTime *i);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //potong makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dipotong masukin ke inventory

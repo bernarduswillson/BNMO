@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "makanan.c"
-#include "inventory.h"
+#include "../PrioQueue/prioqueuetime.h"
 
 int main(){
     Makanan m;
     listMakanan l;
-    Time kedaluwarsa, pengiriman;
+    TIME kedaluwarsa, pengiriman;
     int id;
     Word nama, lokasi;
     
@@ -17,7 +17,7 @@ int main(){
     printf("Masukan ID, nama, waktu kedaluwarsa, lokasi aksi, dan waktu pengiriman\n");
     
     for(int i = 0; i<CAPACITY(l); i++){
-        scanf("%d %s %d %d %s %d %d", &ID(m), NAMA(m), &KEDALUWARSA(m).jam, &KEDALUWARSA(m).menit, AKSI(m), &PENGIRIMAN(m).jam, &PENGIRIMAN(m).menit);
+        scanf("%d %s %d %d %s %d %d", &ID(m), NAMA(m), &Hour(KEDALUWARSA(m)), &Minute(KEDALUWARSA(m)), AKSI(m), &Hour(PENGIRIMAN(m)), &Minute(PENGIRIMAN(m)));
         MAKANAN(l, i) = m;
         LASTIDX(l)++;
         l.nEff++;

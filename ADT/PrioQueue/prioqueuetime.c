@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "boolean.h"
+#include <stdlib.h>
+#include "../Boolean/boolean.h"
 #include "prioqueuetime.h"
 
 /* ********* Prototype ********* */
@@ -72,7 +73,7 @@ void Enqueue(PrioQueueTime *Q, infotype X) {
         InfoTail(*Q) = X;
         i = Tail(*Q);
         j = i == 0 ? MaxEl(*Q) - 1 : i - 1;
-        while (i != Head(*Q) && Time(Elmt(*Q, i)) < (Time(Elmt(*Q, j)))) {
+        while ((i != Head(*Q)) /*&& (Time(Elmt(*Q, i)) < (Time(Elmt(*Q, j))))   pake compare time*/) {
             temp = Elmt(*Q, i);
             Elmt(*Q, i) = Elmt(*Q, j);
             Elmt(*Q, j) = temp;
