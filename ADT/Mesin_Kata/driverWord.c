@@ -49,15 +49,18 @@ int main(){
         printf("ID          :%d \n", p);
         ADVNEWLINE();
         char y[currentWord.Length];
+        DisplayWord();
         WordToStr(&y);
         ADVWORD();
         char z[currentWord.Length]; 
         WordToStr(&z);
         if(isSamaStr(y, z)){
-            printf("Nama        :%s\n", z);
-        }else{
-            printf("Nama        :%s ", y);
-            printf("%s\n", z);
+            // printf("Nama        :%s\n", z);
+            DisplayWord();
+        }else{  
+            // printf("Nama        :%s ", y);
+            // printf("%s\n", z);
+            DisplayWord();
         }
         ADVNEWLINE();
         int a,b,c;
