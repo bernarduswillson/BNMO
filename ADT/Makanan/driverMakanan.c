@@ -17,7 +17,7 @@ int main(){
     printf("Masukan ID, nama, waktu kedaluwarsa, lokasi aksi, dan waktu pengiriman\n");
     
     for(int i = 0; i<CAPACITY(l); i++){
-        scanf("%d %s %d %d %s %d %d", &ID(m), NAMA(m), &KEDALUWARSA(m).jam, &KEDALUWARSA(m).menit, LOKASI(m), &PENGIRIMAN(m).jam, &PENGIRIMAN(m).menit);
+        scanf("%d %s %d %d %s %d %d", &ID(m), NAMA(m), &KEDALUWARSA(m).jam, &KEDALUWARSA(m).menit, AKSI(m), &PENGIRIMAN(m).jam, &PENGIRIMAN(m).menit);
         MAKANAN(l, i) = m;
         LASTIDX(l)++;
         l.nEff++;

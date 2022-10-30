@@ -38,7 +38,7 @@ void catalog(listMakanan l){
         if ((KEDALUWARSA(MAKANAN(l, i)).jam==0)&&(KEDALUWARSA(MAKANAN(l, i)).menit==0)){
             printf("0 ");
         }
-        printf("- %s - ", LOKASI(MAKANAN(l, i)));
+        printf("- %s - ", AKSI(MAKANAN(l, i)));
         if (PENGIRIMAN(MAKANAN(l, i)).jam>0){
             printf("%d jam ", PENGIRIMAN(MAKANAN(l, i)).jam);
         }

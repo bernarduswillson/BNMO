@@ -6,27 +6,25 @@
 #include "inventory.h"
 
 #define IDX_UNDEF -1
-typedef struct
+typedef struct      //sementara
 {
     int hari;
     int jam;
     int menit;
-} Time;
+} Time;     
 
 typedef struct
 {
    int id;
    Word nama;
    Time kedaluwarsa;
-   Word lokasi;
+   Word aksi;
    Time pengiriman;
 } Makanan;
 
-typedef struct
+typedef struct      //sementara
 {
     Makanan* content;
-    //int size
-    //int sizeEff
 } Inventory;
 
 typedef struct
@@ -41,7 +39,7 @@ typedef struct
 #define ID(m) (m).id
 #define NAMA(m) (m).nama.TabWord
 #define KEDALUWARSA(m) (m).kedaluwarsa
-#define LOKASI(m) (m).lokasi.TabWord
+#define AKSI(m) (m).aksi.TabWord
 #define PENGIRIMAN(m) (m).pengiriman
 
 #define LASTIDX(l) (l).lastIdx
