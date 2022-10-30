@@ -83,7 +83,7 @@ void donat() {
     float z[1760];
     char b[1760];
     printf("\x1b[2J");
-    int time=0;
+    int time=1;
     int waktu = 5;
     while(time<45) {
         memset(b,32,1760);
@@ -107,7 +107,7 @@ void donat() {
                 int N = 8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n);
                 if(22 > y && y > 0 && x > 0 && 80 > x && D > z[o]) {
                     z[o] = D;
-                    b[o] = ".,-~:;=!*#$ "[N > 0 ? N : 0];
+                    b[o] = ".,-~:;=!*#$@"[N > 0 ? N : 0];
                 }
             }
         }

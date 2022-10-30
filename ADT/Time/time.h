@@ -53,11 +53,13 @@ void BacaTIME (TIME * T);
    1 3 4
    --> akan terbentuk TIME <1,3,4> */
    
-void TulisTIME (TIME T);
+void TulisTIME1 (TIME T);
 /* I.S. : T sembarang */
 /* F.S. : Nilai T ditulis dg format HH:MM:SS */
 /* Proses : menulis nilai setiap komponen T ke layar dalam format HH:MM:SS
    tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/ 
+
+void TulisTIME2(TIME T);
 
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
@@ -95,7 +97,12 @@ TIME PrevMenit (TIME T);
 TIME PrevNMenit (TIME T, int N);
 /* Mengirim N Menit sebelum T dalam bentuk TIME */
 /* *** Kelompok Operator Aritmetika *** */
-long Durasi (TIME TAw, TIME TAkh);
+
+void AddAllTIME (TIME *T1, TIME *T2, TIME *T3);
+
+void AddAllNTIME (TIME *T1, TIME *T2, TIME *T3, int N);
+
+// long Durasi (TIME TAw, TIME TAkh);
 /* Mengirim TAkh-TAw dlm Menit, dengan kalkulasi */
 /* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
 

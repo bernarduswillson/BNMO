@@ -21,24 +21,45 @@ void STARTWORD(){
         EndWord = true;
     }else{
         EndWord = false;
-        CopyWord();
+        CopyWord1();
     }
 
 }
 
-void ADVWORD(){
+void ADVWORD1(){
     IgnoreBlanks();
     if(currentChar==MARK){
         EndWord = true;
-    }else{
-        CopyWord();
+    }
+    else{
+        CopyWord1();
         IgnoreBlanks();
     }
 }
 
-void CopyWord(){
+void ADVWORD2(){
+    if(currentChar==MARK){
+        EndWord = true;
+    }
+    else{
+        CopyWord2();
+        IgnoreBlanks();
+    }
+}
+
+void CopyWord1(){
     int i=0;
-    while ((currentChar!=MARK && currentChar!=BLANK && i<NMax)){
+    while ((currentChar!=MARK && currentChar!= BLANK && i<NMax)){
+        currentWord.TabWord[i] = currentChar;
+        ADV();
+        i++;
+    }
+    currentWord.Length = i;   
+}
+
+void CopyWord2(){
+    int i=0;
+    while ((currentChar!=MARK && i<NMax)){
         currentWord.TabWord[i] = currentChar;
         ADV();
         i++;
@@ -58,16 +79,27 @@ void STARTWORDFILE(char *namaFile){
     }
     else{
         EndWord = false;
-        CopyWord();
+        CopyWord1();
     }
 }
 
-void ADVNEWLINE(){
-
+void ADVNEWLINE1(){
+    Word EMPTY = {"", 0};
+    currentWord = EMPTY;
     if(currentChar == MARK){
         EndWord = false;
         ADV();
-        CopyWord();
+        CopyWord1();
+    }
+}
+
+void ADVNEWLINE2(){
+    Word EMPTY = {"", 0};
+    currentWord = EMPTY;
+    if(currentChar == MARK){
+        EndWord = false;
+        ADV();
+        CopyWord2();
     }
 }
 
