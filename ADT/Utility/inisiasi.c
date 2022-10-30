@@ -3,6 +3,8 @@
 #include "inisiasi.h"
 
 void startMenu() {
+    donat();
+    printf("\n\n");
     printf("\t   ________   ________    _____ ______    ________\n");
     printf("\t   |\\   __  \\ |\\   ___  \\ |\\   _ \\  _   \\ |\\   __  \\\n");
     printf("\t   \\ \\  \\|\\ /_\\ \\  \\\\ \\  \\\\ \\  \\\\\\__\\ \\  \\\\ \\  \\|\\  \\\n");
@@ -50,8 +52,8 @@ void startMenu() {
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@(((((((@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#((@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-    printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-    printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    // printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    // printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("=================================== BNMO GAME ==================================\n");
     printf("\n");
     printf("Masukkan input dalam bentuk angka\n");
@@ -60,7 +62,8 @@ void startMenu() {
 }
 
 void checkInput(Word d) {
-    int a = WordToInt(currentWord.Length);
+    int a;
+    WordToInt(&a);
     if (a==1) {
         //Start a new game
     }
@@ -71,4 +74,57 @@ void checkInput(Word d) {
     else {
         printf("Input tidak valid\n");
     }
+}
+
+void donat() {
+    float A = 0, B = 0;
+    float i, j;
+    int k;
+    float z[1760];
+    char b[1760];
+    printf("\x1b[2J");
+    int time=0;
+    int waktu = 5;
+    while(time<45) {
+        memset(b,32,1760);
+        memset(z,0,7040);
+        for(j=0; j < 6.28; j += 0.07) {
+            for(i=0; i < 6.28; i += 0.02) {
+                float c = sin(i);
+                float d = cos(j);
+                float e = sin(A);
+                float f = sin(j);
+                float g = cos(A);
+                float h = d + 2;
+                float D = 1 / (c * h * e + f * g + 5);
+                float l = cos(i);
+                float m = cos(B);
+                float n = sin(B);
+                float t = c * h * g - f * e;
+                int x = 40 + 30 * D * (l * h * m - t * n);
+                int y= 12 + 15 * D * (l * h * n + t * m);
+                int o = x + 80 * y;
+                int N = 8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n);
+                if(22 > y && y > 0 && x > 0 && 80 > x && D > z[o]) {
+                    z[o] = D;
+                    b[o] = ".,-~:;=!*#$@"[N > 0 ? N : 0];
+                }
+            }
+        }
+        printf("\x1b[H");
+        for(k = 0; k < 1761; k++) {
+            putchar(k % 80 ? b[k] : 10);
+            A += 0.00004;
+            B += 0.00002;
+        }
+        if(time%10==0){
+            printf("PLEASE WAIT IN %d SECONDS",waktu);
+            waktu--;
+        }else{
+            printf("PLEASE WAIT IN %d SECONDS",waktu);
+        }
+        usleep(3000);
+        time++;
+    }
+
 }
