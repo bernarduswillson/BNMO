@@ -51,14 +51,14 @@ void catalog(listMakanan l){
     }
 }
 
-void buy(listMakanan b, PrioQueueTime *i){
+void buy(listMakanan b, Queue *q){
     int pilihan;
 
     pilihan = -1;
     while (pilihan!=0){
-        printf("======================");
-        printf("=        BUY         =");
-        printf("======================");
+        printf("=====================");
+        printf("=        BUY        =");
+        printf("=====================");
         printf("List Bahan Makanan:");
         for (int i = 0; i<CAPACITY(b); i++){
             printf("    %d. %s ( ", i+1, NAMA(MAKANAN(b, i)));
@@ -74,52 +74,148 @@ void buy(listMakanan b, PrioQueueTime *i){
             printf("Berhasil memesan %s, %s akan diantar dalam ", NAMA(MAKANAN(b, pilihan-1)), NAMA(MAKANAN(b, pilihan-1)));
             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
             printf(".");
+            Add(q, MAKANAN(b, pilihan-1));
         }
     }
 }
-    //beli makanan yang ada di listMakanan, masukin ke inventory.
-    //lokasi harus pas (Makanan.lokasi harus "BUY")
-    //I.S:
-    //listMakanan ada isinya, Inventory i terdefinisi, Makanan m memiliki aksi di buy
-    //F.S:
-    //masukin Makanan m ke delivery queue (belum tau gimana) 
 
-void fry(listMakanan l, PrioQueueTime *i, Makanan m);
-    //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
-    //goreng makanan yang ada di inventory, makanan yang lama dihapus
-    //hasil makanan yang digoreng (m) masukin ke inventory
-    //lokasi harus pas
-    //I.S:
-    //listMakanan ada isinya, Inventory i terdefinisi, Makanan m memiliki aksi di fry
-    //F.S:
-    //masukin m ke i, waktu nambah 1 menit
+void fry(listMakanan f, PrioQueueTime *inv){
+    PrioQueueTime child;
+    boolean available;
+    int pilihan;
 
-void boil(listMakanan l, PrioQueueTime *i);
-    //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
-    //rebus makanan yang ada di inventory, makanan yang lama dihapus
-    //hasil makanan yang direbus masukin ke inventory
-    //lokasi harus pas
-    //I.S:
-    //listMakanan ada isinya, Inventory i terdefinisi, Makanan m memiliki aksi di boil
-    //F.S:
-    //masukin m ke i, waktu nambah 1 menit
+    pilihan = -1;
+    while (pilihan!=0){
+        printf("=====================");
+        printf("=        FRY        =");
+        printf("=====================");
+        printf("List Bahan Makanan yang Bisa Dibuat:");
+        for (int i = 0; i<CAPACITY(f); i++){
+            printf("    %d. %s", i+1, NAMA(MAKANAN(f, i)));
+        }
+        printf("\nKetik 0 untuk exit\n");
+        printf("\nEnter Command: ");
+        scanf("%d", &pilihan);
+        if ((pilihan<0)||(pilihan>=CAPACITY(f))){
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+        }else if(pilihan>0){
+            //cari child MAKANAN(f, pilihan-1) dari resep, masukin ke listMakanan child
+            //cek semua makanan di child ada di inventory atau ngga
+            //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
+            //kalau setelah di cek, childnya kosong, berarti available = true
+            if (available){
+                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                Enqueue(inv, MAKANAN(f, pilihan-1));
+            }else{
+                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                PrintPrioQueueTime(child);
+            }
+        }
+    }
+}
 
-void mix(listMakanan l, PrioQueueTime *i);
-    //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
-    //campur makanan yang ada di inventory, makanan yang lama dihapus
-    //hasil makanan yang dicampur masukin ke inventory
-    //lokasi harus pas
-    //I.S:
-    //listMakanan ada isinya, Inventory i terdefinisi, Makanan m memiliki aksi di mix
-    //F.S:
-    //masukin m ke i, waktu nambah 1 menit
+void boil(listMakanan b, PrioQueueTime *inv){
+    PrioQueueTime child;
+    boolean available;
+    int pilihan;
 
-void chop(listMakanan l, PrioQueueTime *i);
-    //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
-    //potong makanan yang ada di inventory, makanan yang lama dihapus
-    //hasil makanan yang dipotong masukin ke inventory
-    //lokasi harus pas
-    //I.S:
-    //listMakanan ada isinya, Inventory i terdefinisi, Makanan m memiliki aksi di mix
-    //F.S:
-    //masukin m ke i, waktu nambah 1 menit
+    pilihan = -1;
+    while (pilihan!=0){
+        printf("======================");
+        printf("=        BOIL        =");
+        printf("======================");
+        printf("List Bahan Makanan yang Bisa Dibuat:");
+        for (int i = 0; i<CAPACITY(b); i++){
+            printf("    %d. %s", i+1, NAMA(MAKANAN(b, i)));
+        }
+        printf("\nKetik 0 untuk exit\n");
+        printf("\nEnter Command: ");
+        scanf("%d", &pilihan);
+        if ((pilihan<0)||(pilihan>=CAPACITY(b))){
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+        }else if(pilihan>0){
+            //cari child MAKANAN(b, pilihan-1) dari resep, masukin ke listMakanan child
+            //cek semua makanan di child ada di inventory atau ngga
+            //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
+            //kalau setelah di cek, childnya kosong, berarti available = true
+            if (available){
+                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                Enqueue(inv, MAKANAN(b, pilihan-1));
+            }else{
+                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                PrintPrioQueueTime(child);
+            }
+        }
+    }
+}
+
+void mix(listMakanan m, PrioQueueTime *inv){
+    PrioQueueTime child;
+    boolean available;
+    int pilihan;
+
+    pilihan = -1;
+    while (pilihan!=0){
+        printf("=======================");
+        printf("=         MIX         =");
+        printf("=======================");
+        printf("List Bahan Makanan yang Bisa Dibuat:");
+        for (int i = 0; i<CAPACITY(m); i++){
+            printf("    %d. %s", i+1, NAMA(MAKANAN(m, i)));
+        }
+        printf("\nKetik 0 untuk exit\n");
+        printf("\nEnter Command: ");
+        scanf("%d", &pilihan);
+        if ((pilihan<0)||(pilihan>=CAPACITY(m))){
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+        }else if(pilihan>0){
+            //cari child MAKANAN(m, pilihan-1) dari resep, masukin ke listMakanan child
+            //cek semua makanan di child ada di inventory atau ngga
+            //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
+            //kalau setelah di cek, childnya kosong, berarti available = true
+            if (available){
+                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                Enqueue(inv, MAKANAN(m, pilihan-1));
+            }else{
+                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                PrintPrioQueueTime(child);
+            }
+        }
+    }
+}
+
+
+void chop(listMakanan c, PrioQueueTime *inv){
+    PrioQueueTime child;
+    boolean available;
+    int pilihan;
+
+    pilihan = -1;
+    while (pilihan!=0){
+        printf("======================");
+        printf("=        CHOP        =");
+        printf("======================");
+        printf("List Bahan Makanan yang Bisa Dibuat:");
+        for (int i = 0; i<CAPACITY(c); i++){
+            printf("    %d. %s", i+1, NAMA(MAKANAN(c, i)));
+        }
+        printf("\nKetik 0 untuk exit\n");
+        printf("\nEnter Command: ");
+        scanf("%d", &pilihan);
+        if ((pilihan<0)||(pilihan>=CAPACITY(c))){
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+        }else if(pilihan>0){
+            //cari child MAKANAN(c, pilihan-1) dari resep, masukin ke listMakanan child
+            //cek semua makanan di child ada di inventory atau ngga
+            //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
+            //kalau setelah di cek, childnya kosong, berarti available = true
+            if (available){
+                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                Enqueue(inv, MAKANAN(c, pilihan-1));
+            }else{
+                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                PrintPrioQueueTime(child);
+            }
+        }
+    }
+}

@@ -3,8 +3,9 @@
 
 #include "../Boolean/boolean.h"
 #include "../Mesin_Kata/wordmachine.h"
-#include "../PrioQueue/prioqueuetime.c"
-#include "../Time/time.c"
+#include "../PrioQueue/prioqueuetime.h"
+#include "../PrioQueue/prioqueue.h"
+#include "../Time/time.h"
 
 #define IDX_UNDEF -1
 
@@ -68,7 +69,7 @@ void catalog(listMakanan l);
     //F.S:
     //display semua makanan yang ada di listMakanan l
 
-void buy(listMakanan b, PrioQueueTime *i);
+void buy(listMakanan b, Queue *q);
     //beli makanan yang ada di listMakanan, masukin ke inventory.
     //lokasi harus pas (Makanan.lokasi harus "BUY")
     //I.S:
@@ -76,7 +77,7 @@ void buy(listMakanan b, PrioQueueTime *i);
     //F.S:
     //masukin Makanan m ke delivery queue (belum tau gimana) 
 
-void fry(listMakanan l, PrioQueueTime *i, Makanan m);
+void fry(listMakanan f, PrioQueueTime *inv, Makanan m);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //goreng makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang digoreng (m) masukin ke inventory
@@ -86,7 +87,7 @@ void fry(listMakanan l, PrioQueueTime *i, Makanan m);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void boil(listMakanan l, PrioQueueTime *i);
+void boil(listMakanan b, PrioQueueTime *inv);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //rebus makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang direbus masukin ke inventory
@@ -96,7 +97,7 @@ void boil(listMakanan l, PrioQueueTime *i);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void mix(listMakanan l, PrioQueueTime *i);
+void mix(listMakanan m, PrioQueueTime *inv);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //campur makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dicampur masukin ke inventory
@@ -106,7 +107,7 @@ void mix(listMakanan l, PrioQueueTime *i);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void chop(listMakanan l, PrioQueueTime *i);
+void chop(listMakanan c, PrioQueueTime *inv);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //potong makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dipotong masukin ke inventory
