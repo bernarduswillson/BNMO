@@ -23,20 +23,22 @@ int main() {
     printf("TES GESER SIMULATOR\n");
     int x=0;
     int y=0;
+    POINT P;
+    CreatePoint(&P,0,0);
 
     while(y<20){
         STARTWORD2();
         int p;
         WordToInt(&p);
         // scanf("%d", &x);
-        moveSim(&m, p,&S);
+        moveSim(&m, p,&P);
         displayMap(m);
         DisplayLokasi(S);
         // TulisPOINT(P);
         printf("\n");
         y++;
     }
-    DisplaySimulator(S);
+    // DisplaySimulator(S);
 
     return 0;
 }
