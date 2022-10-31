@@ -23,7 +23,7 @@ int main() {
     int x=0;
     int y=0;
 
-    while(y<5){
+    while(y<20){
         STARTWORD2();
         int p;
         WordToInt(&p);
