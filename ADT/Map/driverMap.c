@@ -1,10 +1,16 @@
 #include "map.c"
 #include "../Mesin_Karakter/charmachine.c"
 #include "../Mesin_Kata/wordmachine.c"
+#include "../Point/point.c"
+#include "../Simulator/simulator.c"
 
-int main(){
+int main() {
+    Simulator S;
+    BacaSimulator(&S);
+    DisplaySimulator(S);
+
     STARTWORDFILE("../../Config/map.txt");
-    // STARTWORDFILE("tesConfigMap.txt");
+
     MAP m;
     int row,col;
     WordToInt(&row);
@@ -15,17 +21,22 @@ int main(){
     displayMap(m);
 
     printf("TES GESER SIMULATOR\n");
-    int x=0,y=0;
-    // STARTWORD();
-    // char p[currentWord.Length];
-    // WordToStr(p);
-    // DisplayWord();
-    // moveSim(&m,p);
+    int x=0;
+    int y=0;
 
-    while(y<5){
-        scanf("%d", &x);
-        moveSim(&m, x);
+    while(y<20){
+        STARTWORD2();
+        int p;
+        WordToInt(&p);
+        // scanf("%d", &x);
+        moveSim(&m, p,&S);
+        displayMap(m);
+        DisplayLokasi(S);
+        // TulisPOINT(P);
+        printf("\n");
         y++;
     }
-    displayMap(m);
+    DisplaySimulator(S);
+
+    return 0;
 }
