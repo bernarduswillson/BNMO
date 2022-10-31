@@ -1,55 +1,58 @@
 #include <stdio.h>
 #include "makanan.h"
 
-void createListMakanan(listMakanan *l, int size);
-    //Buat listMakanan kosong, sizenya baca dari file, lastIdx awal IDX_UNDEF
-    //I.S:
-    //sembarang, size dari baca file
-    //F.S:
-    //terbentuk listMakanan l kosong dengan ukuran size
+void createListMakanan(listMakanan *l, int size)
+    {
+        CAPACITY(*l) = size;
+        CONTENT(*l) = (Makanan *) malloc(size * sizeof(Makanan));
+        LASTIDX(*l) = IDX_UNDEF;
+    }
 
-void createMakanan(listMakanan *l); 
-    //Baca file dari makanan, masukin ke variabel, trs bikin variabel makanan.
-    //Buat makanan baru, isinya id, nama, waktu kedaluwarsa, lokasi aksi, waktu pengiriman
-    //Masukin makanan yang baru dibikin ke listMakanan
-    //I.S:
-    //sembarang
-    //F.S:
-    //terbentuk listMakanan l dengan isi semua makanan sesuai bacaan dari file
+void createMakanan(listMakanan *l)
+    {
+        STARTWORDFILE("../../Config/makanan.txt");
+        int size;
+        WordToInt(&size);
+        CAPACITY(*l) = size;
+        createListMakanan(l, size);
+        for(int i = 0; i < size; i++){
+            ADVNEWLINE1();
+            int id;
+            WordToInt(&id);
+            ID(MAKANAN(*l, i)) = id;
+            ADVNEWLINE2();
+            NAMA(MAKANAN(*l, i)) = currentWord;
+            ADVNEWLINE1();
+            TIME kedaluarsa;
+            BacaTIME(&kedaluarsa);
+            KEDALUWARSA(MAKANAN(*l, i)) = kedaluarsa;
+            ADVNEWLINE1();
+            TIME pengiriman;
+            BacaTIME(&pengiriman);
+            PENGIRIMAN(MAKANAN(*l, i)) = pengiriman;
+            ADVNEWLINE1();
+            AKSI(MAKANAN(*l, i)) = currentWord;
+        }
+    }
 
-void addMakanan(Makanan *m, listMakanan *l);
-    //Masukin makanan ke listMakanan
-    //I.S:
-    //Makanan m dan listMakanan l terdefinisi
-    //F.S:
-    //m dimasukan ke l
 
 void catalog(listMakanan l){
     printf("List Makanan\n");
-    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time\n");
+    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
     for (int i = 0; i<CAPACITY(l); i++){
         printf("%d. %s - ", i+1, NAMA(MAKANAN(l, i)));
-        if (Hour(KEDALUWARSA(MAKANAN(l, i)))>0){
-            printf("%d jam ", Hour(KEDALUWARSA(MAKANAN(l, i))));
-        }
-        if (Minute(KEDALUWARSA(MAKANAN(l, i)))>0){
-            printf("%d menit ", Minute(KEDALUWARSA(MAKANAN(l, i))));
-        }
-        if ((Hour(KEDALUWARSA(MAKANAN(l, i)))==0)&&(Minute(KEDALUWARSA(MAKANAN(l, i)))==0)){
-            printf("0 ");
-        }
-        printf("- %s - ", AKSI(MAKANAN(l, i)));
-        if (Hour(PENGIRIMAN(MAKANAN(l, i)))>0){
-            printf("%d jam ", Hour(PENGIRIMAN(MAKANAN(l, i))));
-        }
-        if (Minute(PENGIRIMAN(MAKANAN(l, i)))>0){
-            printf("%d menit", Minute(PENGIRIMAN(MAKANAN(l, i))));
-        }if ((Hour(PENGIRIMAN(MAKANAN(l, i)))==0)&&(Minute(PENGIRIMAN(MAKANAN(l, i)))==0)){
-            printf("0 ");
+        TulisTIME1(KEDALUWARSA(MAKANAN(l, i)));
+        printf("- %s ", AKSI(MAKANAN(l, i)));
+        if((Hour(PENGIRIMAN(MAKANAN(l, i))) == 0) && (Minute(PENGIRIMAN(MAKANAN(l, i))) == 0)){
+            TulisTIME1(PENGIRIMAN(MAKANAN(l, i)));
+        } else {
+            printf("- ");
+            TulisTIME1(PENGIRIMAN(MAKANAN(l, i)));
         }
         printf("\n");
     }
 }
+
 
 void buy(listMakanan b, Queue *q){
     int pilihan;

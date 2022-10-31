@@ -11,7 +11,7 @@
 
 typedef struct
 {
-    Makanan *content;        //Nanti pake listdinamis, masih bingung
+    Makanan *content;        
     int capacity;
     int nEff;
     int lastIdx;
@@ -21,14 +21,15 @@ extern PrioQueueTime i;
 
 /*----Selektor----*/
 #define ID(m) (m).id
-#define NAMA(m) (m).nama.TabWord
+#define NAMA(m) (m).nama
 #define KEDALUWARSA(m) (m).kedaluwarsa
-#define AKSI(m) (m).aksi.TabWord
+#define AKSI(m) (m).aksi
 #define PENGIRIMAN(m) (m).pengiriman
 
 #define LASTIDX(l) (l).lastIdx
 #define MAKANAN(l, i) (l).content[i]
 #define CAPACITY(l) (l).capacity
+#define CONTENT(l) (l).content
 
     //void readMakanan(); (jadinya digabung sama createMakanan)
     //Baca file makanan, buat listMakanan pake createListMakanan, manggil fungsi createMakanan buat bikin semua

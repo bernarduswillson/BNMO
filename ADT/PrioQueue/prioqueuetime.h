@@ -11,7 +11,7 @@
 #include "../Time/time.h"
 #include "../Mesin_Kata/wordmachine.h"
 
-#define Nil -1
+#define Nil 0
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 typedef struct
 {

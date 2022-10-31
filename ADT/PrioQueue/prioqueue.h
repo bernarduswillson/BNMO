@@ -6,8 +6,8 @@
 #ifndef prioqueue_H
 #define prioqueue_H
 
-#include "boolean.h"
-#include "matriks.h"
+#include "../Boolean/boolean.h"
+#include "../Map/matrix.h"
 
 
 #define Nil 0
