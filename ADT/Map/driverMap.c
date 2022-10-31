@@ -2,11 +2,12 @@
 #include "../Mesin_Karakter/charmachine.c"
 #include "../Mesin_Kata/wordmachine.c"
 #include "../Point/point.c"
+#include "../Simulator/simulator.c"
 
 int main() {
-    POINT P;
-    CreatePoint(&P,0,0);
-    TulisPOINT(P);printf("\n");
+    Simulator S;
+    BacaSimulator(&S);
+    DisplaySimulator(S);
 
     STARTWORDFILE("../../Config/map.txt");
 
@@ -28,12 +29,14 @@ int main() {
         int p;
         WordToInt(&p);
         // scanf("%d", &x);
-        moveSim(&m, p,&P);
+        moveSim(&m, p,&S);
         displayMap(m);
+        DisplayLokasi(S);
         // TulisPOINT(P);
         printf("\n");
         y++;
     }
+    DisplaySimulator(S);
 
     return 0;
 }

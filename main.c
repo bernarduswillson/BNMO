@@ -4,7 +4,7 @@
 
 int main() {
     startMenu();
-    STARTWORD();
+    STARTWORD1();
     checkInput(currentWord);
     return 0;
 }
