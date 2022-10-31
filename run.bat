@@ -1,0 +1,2 @@
+gcc .\main.c -o main &&.\main.exe
+@REM .\ADT\Mesin_Karakter\charmachine.c .\ADT\Mesin_Kata\wordmachine.c .\ADT\Utility\inisiasi.c .\ADT\Stack\stack.c .\ADT\PrioQueue\prioqueuetime.c .\ADT\Point\point.c .\ADT\Map\matrix.c .\ADT\Map\map.c .\ADT\Map\map.c
