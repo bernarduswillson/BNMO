@@ -73,25 +73,49 @@ void moveSim(MAP *m, int x, POINT *P){
     if(isCommandValid(x)){
         switch (x){
         case -1860003584:
-            ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-            ELMT(*m,(Baris(*P)-1),Kolom(*P)) = 'S';
-            Baris(*P) = Baris(*P)-1;
-            break;
+            if (ELMT(*m, Baris(*P)-1, Kolom(*P)) == ' '){
+                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
+                ELMT(*m,(Baris(*P)-1),Kolom(*P)) = 'S';
+                Baris(*P) = Baris(*P)-1;
+                break;
+            }
+            else{
+                printf("You can't move there!\n");
+                break;
+            }
         case -1859953284:
-            ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-            ELMT(*m,(Baris(*P)+1),Kolom(*P)) = 'S';
-            Baris(*P) = Baris(*P)+1;
-            break;
+            if (ELMT(*m, Baris(*P)+1, Kolom(*P)) == ' '){
+                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
+                ELMT(*m,(Baris(*P)+1),Kolom(*P)) = 'S';
+                Baris(*P) = Baris(*P)+1;
+                break;
+            }
+            else{
+                printf("You can't move there!\n");
+                break;
+            }
         case -1045004210:
-            ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-            ELMT(*m,Baris(*P),(Kolom(*P)+1)) = 'S';
-            Kolom(*P) = Kolom(*P)+1;
-            break;
+            if (ELMT(*m, Baris(*P), Kolom(*P)+1) == ' '){
+                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
+                ELMT(*m,Baris(*P),(Kolom(*P)+1)) = 'S';
+                Kolom(*P) = Kolom(*P)+1;
+                break;
+            }
+            else{
+                printf("You can't move there!\n");
+                break;
+            }
         case -1044985810:
-            ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-            ELMT(*m,Baris(*P),(Kolom(*P)-1)) = 'S';
-            Kolom(*P) = Kolom(*P)-1;
-            break;
+            if (ELMT(*m, Baris(*P), Kolom(*P)-1) == ' '){
+                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
+                ELMT(*m,Baris(*P),(Kolom(*P)-1)) = 'S';
+                Kolom(*P) = Kolom(*P)-1;
+                break;
+            }
+            else{
+                printf("You can't move there!\n");
+                break;
+            }
         default:
             printf("Command is not valid!\n");
             break;
