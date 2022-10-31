@@ -6,8 +6,7 @@
 int main() {
     POINT P;
     CreatePoint(&P,0,0);
-    TulisPOINT(P);
-    printf("afsfa\n");
+    TulisPOINT(P);printf("\n");
 
     STARTWORDFILE("../../Config/map.txt");
 
@@ -25,12 +24,14 @@ int main() {
     int y=0;
 
     while(y<5){
-        STARTWORD();
+        STARTWORD2();
         int p;
         WordToInt(&p);
         // scanf("%d", &x);
         moveSim(&m, p,&P);
         displayMap(m);
+        // TulisPOINT(P);
+        printf("\n");
         y++;
     }
 

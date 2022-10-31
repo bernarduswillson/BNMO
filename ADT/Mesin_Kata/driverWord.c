@@ -20,17 +20,17 @@ int main(){
     printf("====================================\n");
     printf("COBA INPUT 1 KATA\n");
     printf("Input 1 kata: ");
-    STARTWORD();
+    STARTWORD1();
     printf("Kata yang diinput: ");
     DisplayWord();
     printf("\n");
     printf("====================================\n");
     printf("COBA INPUT 2 KATA\n");
     printf("Input 2 kata: ");
-    STARTWORD();
+    STARTWORD1();
     printf("Kata yang diinput: ");
     DisplayWord();
-    ADVWORD();
+    ADVWORD1();
     DisplayWord();
     printf("\n");
     printf("====================================\n");
@@ -43,45 +43,38 @@ int main(){
 
     for (int i=0; i<jumlah; i++){
         printf("\nMAKANAN %d\n", i+1);
-        ADVNEWLINE();
+        ADVNEWLINE1();
         int p;
         WordToInt(&p);
         printf("ID          :%d \n", p);
-        ADVNEWLINE();
-        char y[currentWord.Length];
+        ADVNEWLINE2();
+        // char y[currentWord.Length];
+        // WordToStr(y);
+        printf("NAMA        :");
         DisplayWord();
-        WordToStr(&y);
-        ADVWORD();
-        char z[currentWord.Length]; 
-        WordToStr(&z);
-        if(isSamaStr(y, z)){
-            // printf("Nama        :%s\n", z);
-            DisplayWord();
-        }else{  
-            // printf("Nama        :%s ", y);
-            // printf("%s\n", z);
-            DisplayWord();
-        }
-        ADVNEWLINE();
+        printf("\n");
+        ADVNEWLINE1();
         int a,b,c;
         WordToInt(&a);
-        ADVWORD();
+        ADVWORD1();
         WordToInt(&b);
-        ADVWORD();
+        ADVWORD1();
         WordToInt(&c);
         printf("KADALUARSA  :%d %d %d\n", a,b,c);
-        ADVNEWLINE();
+        ADVNEWLINE1();
         int d,e,f;
         WordToInt(&d);
-        ADVWORD();
+        ADVWORD1();
         WordToInt(&e);
-        ADVWORD();
+        ADVWORD1();
         WordToInt(&f);
         printf("PENGIRIMAN  :%d %d %d\n", d,e,f);
-        ADVNEWLINE();
-        char g[currentWord.Length];
-        WordToStr(&g);
-        printf("AKSI        :%s\n", g);    
-        printf("\n");   
+        ADVNEWLINE1();
+        // char g[3];
+        // WordToStr(g);
+        printf("AKSI        :");    
+        DisplayWord();
+        printf("\n");
+        // DisplayWord();
     }
 }

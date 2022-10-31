@@ -50,18 +50,6 @@ void displayMap(MAP m){
     }
 }
 
-// boolean isCommandValid(Word command){
-//     char north[] = {'M','O','V','E',' ','N','O','R','T','H'};
-//     char south[] = {'M','O','V','E',' ','S','O','U','T','H'};
-//     char east[] = {'M','O','V','E',' ','E','A','S','T'};
-//     char west[] = {'M','O','V','E',' ','W','E','S','T'};
-
-//     if(command.TabWord == north ||command.TabWord == south ||command.TabWord == east ||command.TabWord == west){
-//         return true;
-//     }else{
-//         return false;
-//     }
-// }
 
 boolean isCommandValid(int x){
     int north = -1860003584;
@@ -87,61 +75,27 @@ void moveSim(MAP *m, int x, POINT *P){
         case -1860003584:
             ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
             ELMT(*m,(Baris(*P)-1),Kolom(*P)) = 'S';
+            Baris(*P) = Baris(*P)-1;
             break;
         case -1859953284:
             ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
             ELMT(*m,(Baris(*P)+1),Kolom(*P)) = 'S';
+            Baris(*P) = Baris(*P)+1;
             break;
         case -1045004210:
             ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
             ELMT(*m,Baris(*P),(Kolom(*P)+1)) = 'S';
+            Kolom(*P) = Kolom(*P)+1;
             break;
         case -1044985810:
             ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
             ELMT(*m,Baris(*P),(Kolom(*P)-1)) = 'S';
+            Kolom(*P) = Kolom(*P)-1;
             break;
         default:
             printf("Command is not valid!\n");
             break;
         }
-    //     if(x == north){
-    //         for (int i = 0; i < ROW_EFF(*m); i++) {
-    //             for (int j = 0; j < COL_EFF(*m); j++) {
-    //                 if(ELMT(*m, i, j) == 'S'){
-    //                     ELMT(*m, i, j) = ' ';
-    //                     ELMT(*m, i-1, j) = 'S';
-    //                 }
-    //             }
-    //         }
-    //     }else if(x == south){
-    //         for (int i = 0; i < ROW_EFF(*m); i++) {
-    //             for (int j = 0; j < COL_EFF(*m); j++) {
-    //                 if(ELMT(*m, i, j) == 'S'){
-    //                     ELMT(*m, i, j) = ' ';
-    //                     ELMT(*m, i+1, j) = 'S';
-    //                 }
-    //             }
-    //         }
-    //     }else if(x == east){
-    //         for (int i = 0; i < ROW_EFF(*m); i++) {
-    //             for (int j = 0; j < COL_EFF(*m); j++) {
-    //                 if(ELMT(*m, i, j) == 'S'){
-    //                     ELMT(*m, i, j) = ' ';
-    //                     ELMT(*m, i, j+1) = 'S';
-    //                 }
-    //             }
-    //         }
-    //     }else if(x == west){
-    //         for (int i = 0; i < ROW_EFF(*m); i++) {
-    //             for (int j = 0; j < COL_EFF(*m); j++) {
-    //                 if(ELMT(*m, i, j) == 'S'){
-    //                     ELMT(*m, i, j) = ' ';
-    //                     ELMT(*m, i, j-1) = 'S';
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }else{
-    //     printf("Command is not valid!\n");
-    // }
+    }
+    
 }

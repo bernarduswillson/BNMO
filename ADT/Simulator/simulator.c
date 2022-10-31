@@ -13,7 +13,7 @@ void BacaSimulator(Simulator *S){
     POINT P;
     PrioQueueTime Q;
     printf("Input Username :");
-    STARTWORD();
+    STARTWORD1();
     // Nama(*S) = currentWord;
     Kolom(P) = 0;
     Baris(P) = 0;    
