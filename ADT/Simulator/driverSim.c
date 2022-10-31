@@ -1,4 +1,6 @@
 #include "simulator.c"
+#include "../Mesin_Karakter/charmachine.c"
+#include "../Mesin_Kata/wordmachine.c"
 
 
 int main(){

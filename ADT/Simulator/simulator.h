@@ -3,8 +3,8 @@
 #define SIMULATOR_H
 
 #include "../Point/point.c"
-#include "../Mesin_Kata/wordmachine.c"
-#include "../Mesin_Karakter/charmachine.c"
+#include "../Mesin_Kata/wordmachine.h"
+#include "../Mesin_Karakter/charmachine.h"
 #include "../PrioQueue/prioqueuetime.h"
 #include "../Boolean/boolean.h"
 

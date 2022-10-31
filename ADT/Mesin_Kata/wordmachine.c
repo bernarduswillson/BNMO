@@ -14,7 +14,7 @@ void IgnoreBlanks(){
     
 }
 
-void STARTWORD(){
+void STARTWORD1(){
     START();
     IgnoreBlanks();
     if(currentChar==MARK){
@@ -22,6 +22,18 @@ void STARTWORD(){
     }else{
         EndWord = false;
         CopyWord1();
+    }
+
+}
+
+void STARTWORD2(){
+    START();
+    IgnoreBlanks();
+    if(currentChar==MARK){
+        EndWord = true;
+    }else{
+        EndWord = false;
+        CopyWord2();
     }
 
 }

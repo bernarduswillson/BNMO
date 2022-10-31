@@ -4,7 +4,7 @@
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk POINT *** */
-void CreatePoint (POINT *P, float X, float Y) {
+void CreatePoint (POINT *P, int X, int Y) {
     Kolom(*P) = X;
     Baris(*P) = Y;
 }
@@ -12,7 +12,7 @@ void CreatePoint (POINT *P, float X, float Y) {
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */
 void BacaPOINT (POINT *P) {
-    float X, Y;
+    int X, Y;
     scanf("%f %f", &X, &Y);
     CreatePoint(P, X, Y);
 }
@@ -93,7 +93,7 @@ POINT NextY (POINT P) {
 }
 /* Mengirim salinan P dengan Baris ditambah satu */
 
-POINT PlusDelta (POINT P, float deltaX, float deltaY) {
+POINT PlusDelta (POINT P, int deltaX, int deltaY) {
     CreatePoint(&P, Kolom(P) + deltaX, Baris(P) + deltaY);
     return P;
 }
@@ -113,19 +113,19 @@ POINT MirrorOf (POINT P, boolean SbX) {
 /* Jika SbX bernilai true, maka dicerminkan terhadap sumbu X */
 /* Jika SbX bernilai false, maka dicerminkan terhadap sumbu Y */
 
-float Jarak0 (POINT P) {
+int Jarak0 (POINT P) {
     return sqrt((Kolom(P)*Kolom(P))+(Baris(P)*Baris(P)));
 }
 /* Menghitung jarak P ke (0,0) */
 
-float Panjang (POINT P1, POINT P2) {
+int Panjang (POINT P1, POINT P2) {
     return sqrt(((Kolom(P1) - Kolom(P2)) * (Kolom(P1) - Kolom(P2))) + ((Baris(P1) - Baris(P2)) * (Baris(P1) - Baris(P2))));
 }
 /* Menghitung panjang garis yang dibentuk P1 dan P2 */
 /* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
 /* Tuliskan spec fungsi yang lebih tepat. */
 
-void Geser (POINT *P, float deltaX, float deltaY) {
+void Geser (POINT *P, int deltaX, int deltaY) {
     CreatePoint(P, Kolom(*P)+deltaX, Baris(*P)+deltaY);
 }
 /* I.S. P terdefinisi */
@@ -160,8 +160,8 @@ void Mirror (POINT *P, boolean SbX) {
 /* Jika SbX true maka dicerminkan terhadap sumbu X */
 /* Jika SbX false maka dicerminkan terhadap sumbu Y */
 
-void Putar (POINT *P, float Sudut) {
-    float X, Y, Radian;
+void Putar (POINT *P, int Sudut) {
+    int X, Y, Radian;
     Radian = Sudut * 3.14159265358979323846 / 180;
     X = cos(Radian) * Kolom(*P) + sin(Radian) * Baris(*P);
     Y = -sin(Radian) * Kolom(*P) + cos(Radian) * Baris(*P);
