@@ -51,7 +51,32 @@ void catalog(listMakanan l){
     }
 }
 
-void buy(listMakanan l, PrioQueueTime *i, Makanan m);
+void buy(listMakanan b, PrioQueueTime *i){
+    int pilihan;
+
+    pilihan = -1;
+    while (pilihan!=0){
+        printf("======================");
+        printf("=        BUY         =");
+        printf("======================");
+        printf("List Bahan Makanan:");
+        for (int i = 0; i<CAPACITY(b); i++){
+            printf("    %d. %s ( ", i+1, NAMA(MAKANAN(b, i)));
+            TulisTIME1(PENGIRIMAN(MAKANAN(b, i)));
+            printf(")\n");
+        }
+        printf("\nKetik 0 untuk exit\n");
+        printf("\nEnter Command: ");
+        scanf("%d", &pilihan);
+        if ((pilihan<0)||(pilihan>=CAPACITY(b))){
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+        }else if(pilihan>0){
+            printf("Berhasil memesan %s, %s akan diantar dalam ", NAMA(MAKANAN(b, pilihan-1)), NAMA(MAKANAN(b, pilihan-1)));
+            TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
+            printf(".");
+        }
+    }
+}
     //beli makanan yang ada di listMakanan, masukin ke inventory.
     //lokasi harus pas (Makanan.lokasi harus "BUY")
     //I.S:

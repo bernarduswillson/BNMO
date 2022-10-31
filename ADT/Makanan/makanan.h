@@ -3,8 +3,8 @@
 
 #include "../Boolean/boolean.h"
 #include "../Mesin_Kata/wordmachine.h"
-#include "../PrioQueue/prioqueuetime.h"
-#include "../Time/time.h"
+#include "../PrioQueue/prioqueuetime.c"
+#include "../Time/time.c"
 
 #define IDX_UNDEF -1
 
@@ -68,7 +68,7 @@ void catalog(listMakanan l);
     //F.S:
     //display semua makanan yang ada di listMakanan l
 
-void buy(listMakanan l, PrioQueueTime *i, Makanan m);
+void buy(listMakanan b, PrioQueueTime *i);
     //beli makanan yang ada di listMakanan, masukin ke inventory.
     //lokasi harus pas (Makanan.lokasi harus "BUY")
     //I.S:
