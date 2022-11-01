@@ -43,17 +43,21 @@ void BacaSimulator(Simulator *S){
 // }
 
 void DisplaySimulator(Simulator S){
-    printf("Nama Pengguna :");
-    DisplayNama(S);
+    // printf("Nama Pengguna :");
+    // DisplayNama(S);
 
-    printf("Lokasi :");
+    // printf("Lokasi :");
+    // DisplayLokasi(S);
+    DisplayNama(S);
+    printf(" berada di posisi:");
     DisplayLokasi(S);
+    // printf("\n");
 }
 
 void DisplayNama(Simulator S){
-    printf("%s\n", Nama(S));
+    printf("%s", Nama(S));
 }
 
 void DisplayLokasi(Simulator S){
-    printf("(%.0f,%.0f)\n", Baris(Lokasi(S)), Kolom(Lokasi(S)));
+    printf("(%d,%d)\n", Baris(Lokasi(S)), Kolom(Lokasi(S)));
 }

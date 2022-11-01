@@ -1,7 +1,6 @@
 #include "map.c"
 #include "../Mesin_Karakter/charmachine.c"
 #include "../Mesin_Kata/wordmachine.c"
-#include "../Point/point.c"
 #include "../Simulator/simulator.c"
 
 int main() {
@@ -23,22 +22,19 @@ int main() {
     printf("TES GESER SIMULATOR\n");
     int x=0;
     int y=0;
-    POINT P;
-    CreatePoint(&P,0,0);
 
-    while(y<20){
+    while(y<10){
         STARTWORD2();
         int p;
         WordToInt(&p);
-        // scanf("%d", &x);
-        moveSim(&m, p,&P);
+        printf("\n");
+        moveSim(&m, p, &S);
+        DisplaySimulator(S);
         displayMap(m);
-        DisplayLokasi(S);
-        // TulisPOINT(P);
         printf("\n");
         y++;
     }
-    // DisplaySimulator(S);
+    // // DisplaySimulator(S);
 
     return 0;
 }

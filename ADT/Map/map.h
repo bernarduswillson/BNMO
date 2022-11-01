@@ -3,6 +3,7 @@
 
 #include "../Boolean/boolean.h"
 #include "../Mesin_Kata/wordmachine.h"
+#include "../Simulator/simulator.h"
 #include "../Point/point.h"
 
 #define ROW_CAP 100
@@ -33,7 +34,7 @@ void readMap(MAP *m, int nRow, int nCol);
 void displayMap(MAP m);
 
 // void moveSim(MAP *m, Word command);
-void moveSim(MAP *m, int x, POINT *P);
+void moveSim(MAP *m, int x, Simulator *S);
 
 // boolean isCommandValid(Word command);
 boolean isCommandValid(int x);

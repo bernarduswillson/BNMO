@@ -65,7 +65,7 @@ boolean isCommandValid(int x){
 }
 
 
-void moveSim(MAP *m, int x, POINT *P){
+void moveSim(MAP *m, int x, Simulator *S){
     int north = -1860003584;
     int south = -1859953284;
     int east = -1045004210;
@@ -73,10 +73,10 @@ void moveSim(MAP *m, int x, POINT *P){
     if(isCommandValid(x)){
         switch (x){
         case -1860003584:
-            if (ELMT(*m, Baris(*P)-1, Kolom(*P)) == ' '){
-                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-                ELMT(*m,(Baris(*P)-1),Kolom(*P)) = 'S';
-                Baris(*P) = Baris(*P)-1;
+            if (ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == ' '){
+                ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
+                ELMT(*m,(Baris(Lokasi(*S))-1),Kolom(Lokasi(*S))) = 'S';
+                Baris(Lokasi(*S)) --;
                 break;
             }
             else{
@@ -84,10 +84,10 @@ void moveSim(MAP *m, int x, POINT *P){
                 break;
             }
         case -1859953284:
-            if (ELMT(*m, Baris(*P)+1, Kolom(*P)) == ' '){
-                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-                ELMT(*m,(Baris(*P)+1),Kolom(*P)) = 'S';
-                Baris(*P) = Baris(*P)+1;
+            if (ELMT(*m, Baris(Lokasi(*S))+1, Kolom(Lokasi(*S))) == ' '){
+                ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
+                ELMT(*m,(Baris(Lokasi(*S))+1),Kolom(Lokasi(*S))) = 'S';
+                Baris(Lokasi(*S)) ++;
                 break;
             }
             else{
@@ -95,10 +95,10 @@ void moveSim(MAP *m, int x, POINT *P){
                 break;
             }
         case -1045004210:
-            if (ELMT(*m, Baris(*P), Kolom(*P)+1) == ' '){
-                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-                ELMT(*m,Baris(*P),(Kolom(*P)+1)) = 'S';
-                Kolom(*P) = Kolom(*P)+1;
+            if (ELMT(*m, Baris(Lokasi(*S)), Kolom(Lokasi(*S))+1) == ' '){
+                ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
+                ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))+1)) = 'S';
+                Kolom(Lokasi(*S)) ++;
                 break;
             }
             else{
@@ -106,10 +106,10 @@ void moveSim(MAP *m, int x, POINT *P){
                 break;
             }
         case -1044985810:
-            if (ELMT(*m, Baris(*P), Kolom(*P)-1) == ' '){
-                ELMT(*m,Baris(*P),Kolom(*P)) = ' ';
-                ELMT(*m,Baris(*P),(Kolom(*P)-1)) = 'S';
-                Kolom(*P) = Kolom(*P)-1;
+            if (ELMT(*m, Baris(Lokasi(*S)), Kolom(Lokasi(*S))-1) == ' '){
+                ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
+                ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))-1)) = 'S';
+                Kolom(Lokasi(*S)) --;
                 break;
             }
             else{

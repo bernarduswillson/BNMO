@@ -25,7 +25,7 @@ void BacaPOINT (POINT *P) {
 /* F.S. P terdefinisi */
 
 void TulisPOINT (POINT P) {
-    printf("(%.2f,%.2f)", Kolom(P), Baris(P));
+    printf("(%d,%d)", Kolom(P), Baris(P));
 }
 /* Nilai P ditulis ke layar dengan format "(X,Y)" 
    tanpa spasi, enter, atau karakter lain di depan, belakang, 
