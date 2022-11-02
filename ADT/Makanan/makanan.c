@@ -10,18 +10,29 @@ void createListMakanan(listMakanan *l, int size)
 
 void createMakanan(listMakanan *l)
     {
+        listMakanan *BUY;
+        listMakanan *FRY;
+        listMakanan *BOIL; 
+        listMakanan *MIX;
+        listMakanan *CHOP;
         STARTWORDFILE("../../Config/makanan.txt");
         int size;
         WordToInt(&size);
         CAPACITY(*l) = size;
         createListMakanan(l, size);
+        createListMakanan(BUY, size);
+        createListMakanan(FRY, size);
+        createListMakanan(BOIL, size);
+        createListMakanan(MIX, size);
+        createListMakanan(CHOP, size);
         for(int i = 0; i < size; i++){
             ADVNEWLINE1();
             int id;
             WordToInt(&id);
             ID(MAKANAN(*l, i)) = id;
             ADVNEWLINE2();
-            NAMA(MAKANAN(*l, i)) = currentWord;
+            Word nama = currentWord;
+            NAMA(MAKANAN(*l, i)) = nama;
             ADVNEWLINE1();
             TIME kedaluarsa;
             BacaTIME(&kedaluarsa);
@@ -31,7 +42,55 @@ void createMakanan(listMakanan *l)
             BacaTIME(&pengiriman);
             PENGIRIMAN(MAKANAN(*l, i)) = pengiriman;
             ADVNEWLINE1();
-            AKSI(MAKANAN(*l, i)) = currentWord;
+            Word aksi = currentWord;
+            AKSI(MAKANAN(*l, i)) = aksi;
+            char aksii;
+            WordToStr(&aksii);
+            if (aksii == "Buy"){
+                int indeks = LASTIDX(*BUY);
+                ID(MAKANAN(*BUY, indeks)) = id;
+                NAMA(MAKANAN(*BUY, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*BUY, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*BUY, indeks)) = pengiriman;
+                AKSI(MAKANAN(*BUY, indeks)) = aksi;
+                LASTIDX(*BUY)++;
+            }
+            else if (aksii = "Fry"){
+                int indeks = LASTIDX(*FRY);
+                ID(MAKANAN(*FRY, indeks)) = id;
+                NAMA(MAKANAN(*FRY, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*FRY, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*FRY, indeks)) = pengiriman;
+                AKSI(MAKANAN(*FRY, indeks)) = aksi;
+                LASTIDX(*FRY)++;
+            }
+            else if (aksii = "Boil"){
+                int indeks = LASTIDX(*BOIL);
+                ID(MAKANAN(*BOIL, indeks)) = id;
+                NAMA(MAKANAN(*BOIL, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*BOIL, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*BOIL, indeks)) = pengiriman;
+                AKSI(MAKANAN(*BOIL, indeks)) = aksi;
+                LASTIDX(*BOIL)++;
+            }
+            else if (aksii = "Mix"){
+                int indeks = LASTIDX(*MIX);
+                ID(MAKANAN(*MIX, indeks)) = id;
+                NAMA(MAKANAN(*MIX, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*MIX, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*MIX, indeks)) = pengiriman;
+                AKSI(MAKANAN(*MIX, indeks)) = aksi;
+                LASTIDX(*MIX)++;
+            }
+            else if (aksii = "Chop"){
+                int indeks = LASTIDX(*CHOP);
+                ID(MAKANAN(*CHOP, indeks)) = id;
+                NAMA(MAKANAN(*CHOP, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*CHOP, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*CHOP, indeks)) = pengiriman;
+                AKSI(MAKANAN(*CHOP, indeks)) = aksi;
+                LASTIDX(*CHOP)++;
+            }
         }
     }
 
