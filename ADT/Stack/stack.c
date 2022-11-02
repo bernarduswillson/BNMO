@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include "boolean.h"
+#include "../Boolean/boolean.h"
 #include "stack.h"
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S) {
+void CreateEmptyS(Stack *S) {
     Top(*S) = Nil;
 }
 /* I.S. sembarang; */

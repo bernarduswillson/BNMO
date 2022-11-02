@@ -1,2 +1,1 @@
-gcc main.c -o mainlinux -lm && ./mainlinux
-# ADT/Mesin_Karakter/charmachine.c ADT/Mesin_Kata/wordmachine.c ADT/Utility/inisiasi.c ADT/Stack/stack.c ADT/PrioQueue/prioqueuetime.c ADT/Point/point.c ADT/Map/matrix.c ADT/Map/map.c ADT/Map/map.c
+gcc main.c /ADT/List_Statik/liststatik.c /ADT/Map/map.c /ADT/Mesin_Karakter/charmachine.c /ADT/Mesin_Kata/wordmachine.c /ADT/Point/point.c /ADT/PrioQueue/prioqueue.c /ADT/Simulator/simulator.c /ADT/Stack/stack.c /ADT/Time/time.c -o mainlinux -lm && ./mainlinux

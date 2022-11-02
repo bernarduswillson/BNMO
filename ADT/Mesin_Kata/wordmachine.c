@@ -1,5 +1,3 @@
-
-
 #include "../Mesin_Kata/wordmachine.h"
 #include "../Mesin_Karakter/charmachine.h"
 #include <stdio.h>
