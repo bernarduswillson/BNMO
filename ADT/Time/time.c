@@ -39,14 +39,14 @@ void TulisTIME1 (TIME T) {
 
 void TulisTIME2 (TIME T) {
     if(Day(T)!=0) {
-        printf("%d.", Day(T));
+        printf("%.2d.", Day(T));
     }
-    if(Hour(T)!=0) {
-        printf("%d.", Hour(T));
-    }
-    if(Minute(T)!=0) {
-        printf("%d", Minute(T));
-    }
+    // if(Hour(T)!=0) {
+        printf("%.2d.", Hour(T));
+    // }
+    // if(Minute(T)!=0) {
+        printf("%.2d", Minute(T));
+    // }
 }
 
 long TIMEToMenit (TIME T) {
