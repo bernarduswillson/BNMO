@@ -55,7 +55,8 @@ void DisplaySimulator(Simulator S){
 }
 
 void DisplayNama(Simulator S){
-    printf("%s", Nama(S));
+    // printf("%s", Nama(S));
+    DisplayWord(Nama(S));
 }
 
 void DisplayLokasi(Simulator S){

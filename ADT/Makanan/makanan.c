@@ -40,11 +40,16 @@ void catalog(listMakanan l){
     printf("List Makanan\n");
     printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
     for (int i = 0; i<CAPACITY(l); i++){
-        printf("%d. %s - ", i+1, NAMA(MAKANAN(l, i)));
+        printf("%d. ", i+1);
+        DisplayWord(NAMA(MAKANAN(l, i)));
+        printf("- ");
+
         TulisTIME1(KEDALUWARSA(MAKANAN(l, i)));
-        printf("- %s ", AKSI(MAKANAN(l, i)));
+        printf("- ");
+        DisplayWord(AKSI(MAKANAN(l,i)));
         if((Hour(PENGIRIMAN(MAKANAN(l, i))) == 0) && (Minute(PENGIRIMAN(MAKANAN(l, i))) == 0)){
-            TulisTIME1(PENGIRIMAN(MAKANAN(l, i)));
+            // TulisTIME1(PENGIRIMAN(MAKANAN(l, i)));
+            printf("- 0");
         } else {
             printf("- ");
             TulisTIME1(PENGIRIMAN(MAKANAN(l, i)));
@@ -64,7 +69,8 @@ void buy(listMakanan b, Queue *q){
         printf("=====================");
         printf("List Bahan Makanan:");
         for (int i = 0; i<CAPACITY(b); i++){
-            printf("    %d. %s ( ", i+1, NAMA(MAKANAN(b, i)));
+            printf("    %d. ( ", i+1);
+            DisplayWord(NAMA(MAKANAN(b, i)));
             TulisTIME1(PENGIRIMAN(MAKANAN(b, i)));
             printf(")\n");
         }
@@ -74,7 +80,11 @@ void buy(listMakanan b, Queue *q){
         if ((pilihan<0)||(pilihan>=CAPACITY(b))){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
-            printf("Berhasil memesan %s, %s akan diantar dalam ", NAMA(MAKANAN(b, pilihan-1)), NAMA(MAKANAN(b, pilihan-1)));
+            printf("Berhasil memesan " );
+            DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
+            printf(", ");
+            DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
+            printf("akan diantar dalam ");
             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
             printf(".");
             Add(q, MAKANAN(b, pilihan-1));
@@ -129,7 +139,8 @@ void boil(listMakanan b, PrioQueueTime *inv){
         printf("======================");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(b); i++){
-            printf("    %d. %s", i+1, NAMA(MAKANAN(b, i)));
+            printf("    %d.", i+1);
+            DisplayWord(NAMA(MAKANAN(b, i)));
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
@@ -142,10 +153,13 @@ void boil(listMakanan b, PrioQueueTime *inv){
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
             if (available){
-                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
+                printf(" selesai dibuat dan sudah masuk ke inventory.");
                 Enqueue(inv, MAKANAN(b, pilihan-1));
             }else{
-                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                printf("Gagal membuat ");
+                DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
+                printf("karena kamu tidak memiliki bahan berikut: ");
                 PrintPrioQueueTime(child);
             }
         }
@@ -164,7 +178,8 @@ void mix(listMakanan m, PrioQueueTime *inv){
         printf("=======================");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(m); i++){
-            printf("    %d. %s", i+1, NAMA(MAKANAN(m, i)));
+            printf("    %d. ", i+1);
+            DisplayWord(NAMA(MAKANAN(m, i)));
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
@@ -177,10 +192,13 @@ void mix(listMakanan m, PrioQueueTime *inv){
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
             if (available){
-                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
+                printf(" selesai dibuat dan sudah masuk ke inventory.");
                 Enqueue(inv, MAKANAN(m, pilihan-1));
             }else{
-                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                printf("Gagal membuat ");
+                DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
+                printf("karena kamu tidak memiliki bahan berikut: ");
                 PrintPrioQueueTime(child);
             }
         }
@@ -200,7 +218,8 @@ void chop(listMakanan c, PrioQueueTime *inv){
         printf("======================");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(c); i++){
-            printf("    %d. %s", i+1, NAMA(MAKANAN(c, i)));
+            printf("    %d. ", i+1);
+            DisplayWord(NAMA(MAKANAN(c, i)));
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
@@ -213,10 +232,13 @@ void chop(listMakanan c, PrioQueueTime *inv){
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
             if (available){
-                printf("%s selesai dibuat dan sudah masuk ke inventory.");
+                DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
+                printf(" selesai dibuat dan sudah masuk ke inventory.");
                 Enqueue(inv, MAKANAN(c, pilihan-1));
             }else{
-                printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
+                printf("Gagal membuat ");
+                DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
+                printf("karena kamu tidak memiliki bahan berikut: ");
                 PrintPrioQueueTime(child);
             }
         }

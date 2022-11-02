@@ -22,16 +22,16 @@ int main(){
     printf("Input 1 kata: ");
     STARTWORD1();
     printf("Kata yang diinput: ");
-    DisplayWord();
+    DisplayWord(currentWord);
     printf("\n");
     printf("====================================\n");
     printf("COBA INPUT 2 KATA\n");
     printf("Input 2 kata: ");
     STARTWORD1();
     printf("Kata yang diinput: ");
-    DisplayWord();
+    DisplayWord(currentWord);
     ADVWORD1();
-    DisplayWord();
+    DisplayWord(currentWord);
     printf("\n");
     printf("====================================\n");
     printf("COBA INPUT FILE\n");
@@ -51,7 +51,7 @@ int main(){
         // char y[currentWord.Length];
         // WordToStr(y);
         printf("NAMA        :");
-        DisplayWord();
+        DisplayWord(currentWord);
         printf("\n");
         ADVNEWLINE1();
         int a,b,c;
@@ -73,7 +73,7 @@ int main(){
         // char g[3];
         // WordToStr(g);
         printf("AKSI        :");    
-        DisplayWord();
+        DisplayWord(currentWord);
         printf("\n");
         // DisplayWord();
     }

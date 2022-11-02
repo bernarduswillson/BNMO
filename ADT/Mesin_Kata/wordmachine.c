@@ -125,7 +125,7 @@ void WordToInt(int *x){
     }
 }
 
-void DisplayWord(){
+void DisplayWord(Word currentWord){
     for(int i=0;i<currentWord.Length;i++){
         printf("%c", currentWord.TabWord[i]);
     }

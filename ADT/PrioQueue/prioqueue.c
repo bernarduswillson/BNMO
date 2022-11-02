@@ -4,14 +4,14 @@
 
 
 /* ********* Prototype ********* */
-boolean IsEmpty (Queue Q)
+boolean IsQueueEmpty (Queue Q)
 {
 /* Mengirim true jika Q kosong: lihat definisi di atas */
     return (Head(Q)==Nil && Tail(Q)==Nil);
 }
 
 
-boolean IsFull (Queue Q)
+boolean IsQueueFull (Queue Q)
 {
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
@@ -23,12 +23,12 @@ boolean IsFull (Queue Q)
 }
 
 
-int NBElmt (Queue Q){
+int NBQueueElmt (Queue Q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
     //Kamus
     int count;
     //Algoritma
-    if (IsEmpty(Q))
+    if (IsQueueEmpty(Q))
     {
         count = 0;
     }
@@ -65,7 +65,7 @@ void CreateEmpty (Queue * Q, int Max)
 
 
 /* *** Destruktor *** */
-void DeAlokasi(Queue * Q)
+void DeAlokasiQueue(Queue * Q)
 {
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
@@ -88,7 +88,7 @@ void Add (Queue * Q, infotype X)
     int indeks;
     infotype temp;
     //Algoritma
-    if (IsEmpty(*Q))
+    if (IsQueueEmpty(*Q))
     {
         Head(*Q)=1;
         Tail(*Q)=1;
@@ -120,7 +120,7 @@ void Del (Queue * Q, infotype * X)
     int indeks;
     //Algoritma
     *X = InfoHead(*Q);
-    if ((!IsEmpty(*Q)) && (Head(*Q) == Tail(*Q))) { /* Satu elemen */
+    if ((!IsQueueEmpty(*Q)) && (Head(*Q) == Tail(*Q))) { /* Satu elemen */
         Head (*Q) = Nil;
         Tail(*Q) = Nil;
     } else {
