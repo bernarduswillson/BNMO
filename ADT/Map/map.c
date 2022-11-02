@@ -67,7 +67,7 @@ boolean isCommandValid(int x){
 }
 
 
-void moveSim(MAP *m, int x, Simulator *S, TIME *T){
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
     int north = -1860003584;
     int south = -1859953284;
     int east = -1045004210;
@@ -84,7 +84,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T){
                 break;
             }
             else{
-                printf("You can't move there!\n");
+                *notif = 1;
                 break;
             }
         case -1859953284:
@@ -96,7 +96,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T){
                 break;
             }
             else{
-                printf("You can't move there!\n");
+                *notif = 1;
                 break;
             }
         case -1045004210:
@@ -108,7 +108,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T){
                 break;
             }
             else{
-                printf("You can't move there!\n");
+                *notif = 1;
                 break;
             }
         case -1044985810:
@@ -120,7 +120,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T){
                 break;
             }
             else{
-                printf("You can't move there!\n");
+                *notif = 1;
                 break;
             }
         case 36986:

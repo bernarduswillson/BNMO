@@ -30,15 +30,21 @@ int main() {
         printf("\n");
         boolean y = true;
         while(y) {
+            int x = 0;
             printf("Enter Command: ");
             STARTWORD2();
             int p;
             WordToInt(&p);
             printf("\n");
-            moveSim(&m, p, &S, &T);
+            moveSim(&m, p, &S, &T, &x);
             DisplaySimulator(S);
             TulisTIME2(T);
-            printf("Notifikasi: -\n");
+            if (x==1) {
+                printf("Notifikasi: You can't move there\n");
+            }
+            else {
+                printf("Notifikasi: -\n");
+            }
             displayMap(m);
             printf("\n");
             y++;

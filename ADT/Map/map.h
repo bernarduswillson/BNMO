@@ -36,7 +36,7 @@ void readMap(MAP *m, int nRow, int nCol);
 void displayMap(MAP m);
 
 // void moveSim(MAP *m, Word command);
-void moveSim(MAP *m, int x, Simulator *S, TIME *T);
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif);
 
 // boolean isCommandValid(Word command);
 boolean isCommandValid(int x);
