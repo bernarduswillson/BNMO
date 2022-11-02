@@ -4,7 +4,7 @@
 
 int main() {
     int x;
-    STARTWORD1();
+    STARTWORD2();
     WordToInt(&x);
     printf("%d",x);
 }

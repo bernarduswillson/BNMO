@@ -116,18 +116,3 @@ void startMenu() {
     printf("1. Start a new game\n");
     printf("2. Quit\n");
 }
-
-void checkInput(Word d) {
-    int a;
-    WordToInt(&a);
-    if (a==1) {
-        //Start a new game
-    }
-    else if (a == 2) {
-        printf("Terima kasih telah bermain!\n");
-        exit(0);
-    }
-    else {
-        printf("Input tidak valid\n");
-    }
-}

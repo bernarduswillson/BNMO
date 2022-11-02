@@ -37,6 +37,7 @@ void TulisTIME1 (TIME T) {
 }
 
 void TulisTIME2 (TIME T) {
+    printf("Waktu: ");
     if(Day(T)!=0) {
         printf("%.2d.", Day(T));
     }
@@ -46,6 +47,7 @@ void TulisTIME2 (TIME T) {
     // if(Minute(T)!=0) {
         printf("%.2d", Minute(T));
     // }
+    printf("\n");
 }
 
 long TIMEToMenit (TIME T) {

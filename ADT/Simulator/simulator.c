@@ -1,7 +1,5 @@
-
 #include <stdio.h>
 #include "simulator.h"
-
 
 void CreateSimulator(Simulator *S, Word nama,POINT P, PrioQueueTime Q){
     Nama(*S) = nama;
@@ -12,7 +10,7 @@ void CreateSimulator(Simulator *S, Word nama,POINT P, PrioQueueTime Q){
 void BacaSimulator(Simulator *S){
     POINT P;
     PrioQueueTime Q;
-    printf("Input Username :");
+    printf("Input Username: ");
     STARTWORD1();
     // Nama(*S) = currentWord;
     Kolom(P) = 0;
@@ -49,7 +47,7 @@ void DisplaySimulator(Simulator S){
     // printf("Lokasi :");
     // DisplayLokasi(S);
     DisplayNama(S);
-    printf(" berada di posisi:");
+    printf("di posisi: ");
     DisplayLokasi(S);
     // printf("\n");
 }

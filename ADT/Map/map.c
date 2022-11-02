@@ -67,7 +67,7 @@ boolean isCommandValid(int x){
 }
 
 
-void moveSim(MAP *m, int x, Simulator *S){
+void moveSim(MAP *m, int x, Simulator *S, TIME *T){
     int north = -1860003584;
     int south = -1859953284;
     int east = -1045004210;
@@ -80,6 +80,7 @@ void moveSim(MAP *m, int x, Simulator *S){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,(Baris(Lokasi(*S))-1),Kolom(Lokasi(*S))) = 'S';
                 Baris(Lokasi(*S)) --;
+                *T = NextMenit(*T);
                 break;
             }
             else{
@@ -91,6 +92,7 @@ void moveSim(MAP *m, int x, Simulator *S){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,(Baris(Lokasi(*S))+1),Kolom(Lokasi(*S))) = 'S';
                 Baris(Lokasi(*S)) ++;
+                *T = NextMenit(*T);
                 break;
             }
             else{
@@ -102,6 +104,7 @@ void moveSim(MAP *m, int x, Simulator *S){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))+1)) = 'S';
                 Kolom(Lokasi(*S)) ++;
+                *T = NextMenit(*T);
                 break;
             }
             else{
@@ -113,6 +116,7 @@ void moveSim(MAP *m, int x, Simulator *S){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))-1)) = 'S';
                 Kolom(Lokasi(*S)) --;
+                *T = NextMenit(*T);
                 break;
             }
             else{

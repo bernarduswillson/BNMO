@@ -5,6 +5,8 @@
 #include "../Mesin_Kata/wordmachine.h"
 #include "../Simulator/simulator.h"
 #include "../Point/point.h"
+#include "../Time/time.h"
+
 
 #define ROW_CAP 100
 #define COL_CAP 100
@@ -34,7 +36,7 @@ void readMap(MAP *m, int nRow, int nCol);
 void displayMap(MAP m);
 
 // void moveSim(MAP *m, Word command);
-void moveSim(MAP *m, int x, Simulator *S);
+void moveSim(MAP *m, int x, Simulator *S, TIME *T);
 
 // boolean isCommandValid(Word command);
 boolean isCommandValid(int x);
