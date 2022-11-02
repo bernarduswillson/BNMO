@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "map.h"
 
 
@@ -56,8 +57,9 @@ boolean isCommandValid(int x){
     int south = -1859953284;
     int east = -1045004210;
     int west = -1044985810;
+    int quit = 36986;
 
-    if(x == north ||x == south ||x == east ||x == west){
+    if(x == north ||x == south ||x == east ||x == west ||x == quit){
         return true;
     }else{
         return false;
@@ -70,6 +72,7 @@ void moveSim(MAP *m, int x, Simulator *S){
     int south = -1859953284;
     int east = -1045004210;
     int west = -1044985810;
+    int quit = 36986;
     if(isCommandValid(x)){
         switch (x){
         case -1860003584:
@@ -116,6 +119,10 @@ void moveSim(MAP *m, int x, Simulator *S){
                 printf("You can't move there!\n");
                 break;
             }
+        case 36986:
+            printf("You quit the game!\n");
+            exit(0);
+            break;
         default:
             printf("Command is not valid!\n");
             break;

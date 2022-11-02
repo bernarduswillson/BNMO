@@ -21,9 +21,9 @@ int main() {
 
     printf("TES GESER SIMULATOR\n");
     int x=0;
-    int y=0;
+    boolean y = true;
 
-    while(y<10){
+    while(y){
         STARTWORD2();
         int p;
         WordToInt(&p);
