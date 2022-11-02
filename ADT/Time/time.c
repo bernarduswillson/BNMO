@@ -1,4 +1,3 @@
-
 #include "time.h"
 #include "../Mesin_Kata/wordmachine.h"
 #include <stdio.h>
