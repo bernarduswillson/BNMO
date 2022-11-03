@@ -50,7 +50,7 @@ void CreateEmpty (Queue * Q, int Max)
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
      //Kamus
     //Algoritma
-    (*Q).T = (infotype *) malloc ((Max+1) * sizeof (infotype));
+    (*Q).T = (infotypeQueue *) malloc ((Max+1) * sizeof (infotypeQueue));
     if ((*Q).T != NULL)
     {
         MaxEl(*Q) = Max;
@@ -78,7 +78,7 @@ void DeAlokasiQueue(Queue * Q)
 
 
 /* *** Primitif Add/Delete *** */
-void Add (Queue * Q, infotype X)
+void AddQueue (Queue * Q, infotypeQueue X)
 {
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan prio */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
@@ -86,7 +86,7 @@ void Add (Queue * Q, infotype X)
         elemen baru disisipkan pada posisi yang tepat sesuai dengan prioritas */
     //Kamus
     int indeks;
-    infotype temp;
+    infotypeQueue temp;
     //Algoritma
     if (IsQueueEmpty(*Q))
     {
@@ -100,7 +100,7 @@ void Add (Queue * Q, infotype X)
         Tail(*Q) = Tail(*Q) + 1;
         InfoTail(*Q) = X;
         indeks = Tail(*Q);
-        while (( Prio(Elmt(*Q,indeks)) > Prio(Elmt(*Q,indeks-1))) && (indeks-1!=0)){
+        while (( TGT(Prio(Elmt(*Q,indeks)), Prio(Elmt(*Q,indeks-1)))) && (indeks-1!=0)){
             temp = Elmt(*Q,indeks);
             Elmt(*Q,indeks) = Elmt(*Q,indeks-1);
             Elmt(*Q,indeks-1)=temp;
@@ -110,7 +110,7 @@ void Add (Queue * Q, infotype X)
 }
 
 
-void Del (Queue * Q, infotype * X)
+void Del (Queue * Q, infotypeQueue * X)
 {
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
@@ -151,7 +151,7 @@ Waiting Cust
      printf("Waiting Cust\n");
     while (indeks <= Tail(Q))
     {
-        printf("%d\n",Jumlah(Elmt(Q,indeks)));
+        //printf("%d\n",Jumlah(Elmt(Q,indeks)));
         indeks = indeks + 1;    
     }
 }

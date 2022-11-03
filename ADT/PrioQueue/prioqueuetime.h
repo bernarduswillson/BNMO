@@ -83,6 +83,8 @@ void Dequeue (PrioQueueTime * Q, infotype * X);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
+void DequeueID (PrioQueueTime * Q, infotype * X, int id);
+
 /* Operasi Tambahan */
 void PrintPrioQueueTime (PrioQueueTime Q);
 /* Mencetak isi queue Q ke layar */

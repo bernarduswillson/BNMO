@@ -8,20 +8,18 @@
 
 #include "../Boolean/boolean.h"
 #include "../Map/matrix.h"
+#include "../Makanan/makanan.h"
 
 
 #define Nil 0
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
-typedef struct { int prio;  /* [1..3], prioritas dengan nilai 1..3 (3 adalah prioritas tertinggi) */
-                 int sabar;
-                 int jumlah;  /* nilai elemen */
-               } infotype;
+typedef Makanan infotypeQueue;
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-typedef struct { infotype * T;   /* tabel penyimpan elemen */
+typedef struct { infotypeQueue * T;   /* tabel penyimpan elemen */
                  address HEAD;  /* alamat penghapusan */
                  address TAIL;  /* alamat penambahan */
                  int MaxEl;     /* Max elemen queue */
@@ -30,10 +28,10 @@ typedef struct { infotype * T;   /* tabel penyimpan elemen */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
-/* Jika e adalah infotype dan Q adalah Queue, maka akses elemen : */
-#define Prio(e)     (e).prio
-#define Sabar(e)    (e).sabar /* Tambahan Infotype */
-#define Jumlah(e)   (e).jumlah /* Tambahan Infotype */
+/* Jika e adalah infotypeQueue dan Q adalah Queue, maka akses elemen : */
+#define Prio(e)     PENGIRIMAN(e)
+//#define Sabar(e)    (e).sabar /* Tambahan infotypeQueue */
+//#define Jumlah(e)   (e).jumlah /* Tambahan infotypeQueue */
 #define Head(Q)     (Q).HEAD
 #define Tail(Q)     (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
@@ -67,12 +65,12 @@ void DeAlokasiQueue(Queue * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void Add (Queue * Q, infotype X);
+void AddQueue (Queue * Q, infotypeQueue X);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan prio */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer;
         elemen baru disisipkan pada posisi yang tepat sesuai dengan prioritas */
-void Del (Queue * Q, infotype * X);
+void Del (Queue * Q, infotypeQueue * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;

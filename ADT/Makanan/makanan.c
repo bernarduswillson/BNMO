@@ -55,7 +55,7 @@ void createMakanan(listMakanan *l)
                 AKSI(MAKANAN(*BUY, indeks)) = aksi;
                 LASTIDX(*BUY)++;
             }
-            else if (aksii = "Fry"){
+            else if (aksii == "Fry"){
                 int indeks = LASTIDX(*FRY);
                 ID(MAKANAN(*FRY, indeks)) = id;
                 NAMA(MAKANAN(*FRY, indeks)) = nama;
@@ -64,7 +64,7 @@ void createMakanan(listMakanan *l)
                 AKSI(MAKANAN(*FRY, indeks)) = aksi;
                 LASTIDX(*FRY)++;
             }
-            else if (aksii = "Boil"){
+            else if (aksii == "Boil"){
                 int indeks = LASTIDX(*BOIL);
                 ID(MAKANAN(*BOIL, indeks)) = id;
                 NAMA(MAKANAN(*BOIL, indeks)) = nama;
@@ -73,7 +73,7 @@ void createMakanan(listMakanan *l)
                 AKSI(MAKANAN(*BOIL, indeks)) = aksi;
                 LASTIDX(*BOIL)++;
             }
-            else if (aksii = "Mix"){
+            else if (aksii == "Mix"){
                 int indeks = LASTIDX(*MIX);
                 ID(MAKANAN(*MIX, indeks)) = id;
                 NAMA(MAKANAN(*MIX, indeks)) = nama;
@@ -82,7 +82,7 @@ void createMakanan(listMakanan *l)
                 AKSI(MAKANAN(*MIX, indeks)) = aksi;
                 LASTIDX(*MIX)++;
             }
-            else if (aksii = "Chop"){
+            else if (aksii == "Chop"){
                 int indeks = LASTIDX(*CHOP);
                 ID(MAKANAN(*CHOP, indeks)) = id;
                 NAMA(MAKANAN(*CHOP, indeks)) = nama;
@@ -146,7 +146,7 @@ void buy(listMakanan b, Queue *q){
             printf("akan diantar dalam ");
             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
             printf(".");
-            Add(q, MAKANAN(b, pilihan-1));
+            AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
         }
     }
 }
@@ -177,7 +177,7 @@ void fry(listMakanan f, PrioQueueTime *inv){
             //kalau setelah di cek, childnya kosong, berarti available = true
             if (available){
                 printf("%s selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, MAKANAN(f, pilihan-1));
+                Enqueue(inv, (infotype) MAKANAN(f, pilihan-1));
             }else{
                 printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: ");
                 PrintPrioQueueTime(child);
@@ -214,7 +214,7 @@ void boil(listMakanan b, PrioQueueTime *inv){
             if (available){
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, MAKANAN(b, pilihan-1));
+                Enqueue(inv, (infotype) MAKANAN(b, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
@@ -253,7 +253,7 @@ void mix(listMakanan m, PrioQueueTime *inv){
             if (available){
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, MAKANAN(m, pilihan-1));
+                Enqueue(inv, (infotype) MAKANAN(m, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
@@ -293,7 +293,7 @@ void chop(listMakanan c, PrioQueueTime *inv){
             if (available){
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, MAKANAN(c, pilihan-1));
+                Enqueue(inv, (infotype) MAKANAN(c, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));

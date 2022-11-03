@@ -98,6 +98,39 @@ void Dequeue(PrioQueueTime *Q, infotype *X) {
         Head(*Q) = (Head(*Q) == MaxEl(*Q) - 1) ? 0 : Head(*Q) + 1;
     }
 }
+
+void DequeueID(PrioQueueTime *Q, infotype *X, int id) {
+    boolean found;
+    int idx;
+    
+    if (NBElmt(*Q) == 1) {
+        if (ID(InfoHead(*Q))==id){
+            *X = InfoHead(*Q);
+            Head(*Q) = Nil;
+            Tail(*Q) = Nil;
+        }
+    }
+    else {
+        idx = (int) Head(*Q);
+        found = false;
+        while (!false&&(idx<NBElmt(*Q))){
+            if (ID(Elmt(*Q, idx))==id){
+                *X = Elmt(*Q, idx);
+                found = true;
+                if (idx==Head(*Q)){
+                    Head(*Q)++;
+                }else{
+                    idx %= NBElmt(*Q);
+                    while (idx<(int) Tail(*Q)){
+                        Elmt(*Q, idx) = Elmt(*Q, (idx+1)%NBElmt(*Q)); 
+                    idx++;                    
+                    }
+                }
+            }
+            idx++;
+        }
+    }
+}
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;

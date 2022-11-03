@@ -78,7 +78,7 @@ void buy(listMakanan b, Queue *q);
     //F.S:
     //masukin Makanan m ke delivery queue (belum tau gimana) 
 
-void fry(listMakanan f, PrioQueueTime *inv, Makanan m);
+void fry(listMakanan f, PrioQueueTime *inv);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //goreng makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang digoreng (m) masukin ke inventory
