@@ -1,14 +1,28 @@
 #include "tree.c"
+#include "../Mesin_Kata/wordmachine.c"
+#include "../Mesin_Karakter/charmachine.c"
 
 int main(){
-    int N, id, child, idchild;
-    
-    scanf("%d", &N);
-    for (int i = 0; i<N; i++){
-        scanf("%d %d", &id, &child);
-        tree T = newTree(id, child);
-        printTree(T);
+
+
+    STARTWORDFILE("../../Config/resep.txt");
+    int x;
+    WordToInt(&x);
+    ADVNEWLINE1();
+    ListOfTree T;
+    createListTree(&T, x);
+    for(int i=0;i<Size(T);i++){
+        display_tree(Root(TabTree(T,i)));
         printf("\n");
     }
-    return 0;
+    // int N, id, child, idchild;
+    
+    // scanf("%d", &N);
+    // for (int i = 0; i<N; i++){
+    //     scanf("%d %d", &id, &child);
+    //     tree T = newTree(id, child);
+    //     printTree(T);
+    //     printf("\n");
+    // }
+    // return 0;
 }
