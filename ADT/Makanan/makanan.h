@@ -17,7 +17,7 @@ typedef struct
     int lastIdx;
 } listMakanan;
 
-extern PrioQueueTime i;  
+extern PrioQueueTime inv; 
 
 /*----Selektor----*/
 #define ID(m) (m).id

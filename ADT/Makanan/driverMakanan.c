@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "makanan.c"
 #include "../PrioQueue/prioqueuetime.c"
+#include "../PrioQueue/prioqueue.c"
 #include "../Mesin_Kata/wordmachine.c"
 #include "../Mesin_Karakter/charmachine.c"
 #include "../Time/time.c"
@@ -34,5 +35,9 @@ int main(){
     listMakanan l;
     createMakanan(&l);
     catalog(l);
+    catalog(BUY);
+    catalog(CHOP);
+    catalog(MIX);
+
     return 0;
 }
