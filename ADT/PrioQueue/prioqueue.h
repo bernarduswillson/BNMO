@@ -77,7 +77,7 @@ void Del (Queue * Q, infotypeQueue * X);
         Q mungkin kosong */
 
 /* Operasi Tambahan */
-void PrintQueue (Queue Q);
+void showDeliveryQueue (Queue Q);
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
@@ -86,5 +86,9 @@ void PrintQueue (Queue Q);
 <prio-n> <elemen-n>
 #
 */
+
+void delivery(Queue *Q, PrioQueueTime *inv);
+/* Masukin makanan ke inventory kalo delivery timenya udah 0*/
+
 
 #endif

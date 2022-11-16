@@ -135,7 +135,7 @@ void Del (Queue * Q, infotypeQueue * X)
 }
 
 /* Operasi Tambahan */
-void PrintQueue (Queue Q)
+void showDeliveryQueue (Queue Q)
 {
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
