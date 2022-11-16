@@ -1,6 +1,8 @@
-#include "prioqueue.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "prioqueue.h"
+#include "prioqueuetime.h"
 
 
 /* ********* Prototype ********* */
@@ -144,14 +146,21 @@ Waiting Cust
 <jumlah-n>
 #
 */
-    //Kamus Lokal
-    address indeks;
-    //Algoritma
-     indeks = Head(Q);
-     printf("Waiting Cust\n");
-    while (indeks <= Tail(Q))
-    {
-        //printf("%d\n",Jumlah(Elmt(Q,indeks)));
-        indeks = indeks + 1;    
+    printf("List Makanan di Perjalanan");
+    printf("(nama - waktu sisa delivery)");
+    for (int i = 0; i < NBQueueElmt(Q); i++){
+        printf("%d. ", i+1);
+        DisplayWord(NAMA(Elmt(Q, i)));
+        printf(" - ");
+        TulisTIME1(PENGIRIMAN(Elmt(Q,i)));
+    }
+}
+
+void Delivery(Queue *Q, PrioQueueTime *inv){
+    infotype X;
+    
+    if (TIMEToMenit(Prio(InfoHead(*Q)))==0){
+        Del(Q, &X);
+        Enqueue(inv, X);
     }
 }
