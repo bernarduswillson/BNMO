@@ -8,6 +8,7 @@
 
 typedef struct node{
     int id;
+    int numOfChild;
     struct node *next;
     struct node *child;
 }node;
@@ -25,6 +26,7 @@ typedef struct{
 #define IDD(t) ((t)->id)
 #define Next(t) ((t)->next)
 #define Child(t) ((t)->child)
+#define numChild(t) ((t)->numOfChild)
 #define Root(t) ((t).root)
 #define Size(t) ((t).size)
 #define TabTree(l,i) ((l).TabTree[i])

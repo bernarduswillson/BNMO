@@ -8,6 +8,7 @@ node * new_node(int id){
     if(new_node) {
         Next(new_node) = NULL;
         Child(new_node) = NULL;
+        numChild(new_node) = 0;
         IDD(new_node)= id;
     }
     return new_node;
@@ -51,6 +52,7 @@ void createListTree(ListOfTree *L, int size){
         ADVWORD1();
         int child;
         WordToInt(&child);
+        numChild(Root(t)) = child;
         for(int j=0;j<child;j++){
             ADVWORD1();
             int z=0;
@@ -68,6 +70,27 @@ void display_tree(node *n){
     printf("%d ", IDD(n));
     display_tree(Next(n));
     display_tree(Child(n));
+}
+
+node ** searchChild(int id, ListOfTree T){
+    for(int i=0;i<Size(T);i++){
+        if (IDD(Root(TabTree(T,i)))==id){
+            node **child = malloc(numChild(Root(TabTree(T,i))));
+            child[0] = Child(Root(TabTree(T,i)));
+            for (int j = 1; j < numChild(Root(TabTree(T,i))); j++){
+                child[j] = Next(child[j-1]);
+            }
+            return child;
+        }
+    }
+}
+
+int banyakChild (int id, ListOfTree T){
+    for(int i=0;i<Size(T);i++){
+        if (IDD(Root(TabTree(T,i)))==id){
+            return numChild(Root(TabTree(T,i)));        
+        }
+    }
 }
 
 

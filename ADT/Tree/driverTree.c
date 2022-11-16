@@ -7,14 +7,23 @@ int main(){
 
     STARTWORDFILE("../../Config/resep.txt");
     int x;
+    int n = 0;
+    int child[2];
     WordToInt(&x);
     ADVNEWLINE1();
     ListOfTree T;
     createListTree(&T, x);
-    for(int i=0;i<Size(T);i++){
-        display_tree(Root(TabTree(T,i)));
-        printf("\n");
+
+    node ** childfun;
+
+    childfun = searchChild(40, T);
+    printf("Dari fungsi\n");
+    for (int i = 0; i<banyakChild(40, T); i++){
+        printf("%d\n", IDD(childfun[i]));
     }
+    //     display_tree(Root(TabTree(T,i)));
+    //     printf("\n");
+    // }
     // int N, id, child, idchild;
     
     // scanf("%d", &N);
