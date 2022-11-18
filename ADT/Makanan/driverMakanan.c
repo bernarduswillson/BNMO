@@ -3,8 +3,8 @@
 #include "makanan.c"
 #include "../PrioQueue/prioqueuetime.c"
 #include "../PrioQueue/prioqueue.c"
-#include "../Mesin_Kata/wordmachine.c"
-#include "../Mesin_Karakter/charmachine.c"
+// #include "../Mesin_Kata/wordmachine.c"
+// #include "../Mesin_Karakter/charmachine.c"
 #include "../Time/time.c"
 
 // int mmain(){
@@ -33,11 +33,20 @@
 
 int main(){
     listMakanan l;
+    PrioQueueTime q;
+    ListOfTree t;
     createMakanan(&l);
     catalog(l);
-    catalog(BUY);
-    catalog(CHOP);
-    catalog(MIX);
-
+    STARTWORDFILE("../../Config/resep.txt");
+    int x;
+    WordToInt(&x);
+    ADVNEWLINE1();
+    createListTree(&t, x);
+    // DisplayWord(searchMakanan(l,37));
+    // catalog(BUY);
+    // catalog(CHOP);
+    // catalog(MIX);
+    MakeEmpty(&q,100);
+    fry(FRY, &q, t);
     return 0;
 }

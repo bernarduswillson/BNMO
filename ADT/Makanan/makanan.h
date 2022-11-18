@@ -6,6 +6,7 @@
 #include "../PrioQueue/prioqueuetime.h"
 #include "../PrioQueue/prioqueue.h"
 #include "../Time/time.h"
+#include "../Tree/tree.h"
 
 #define IDX_UNDEF -1
 
@@ -78,7 +79,7 @@ void buy(listMakanan b, Queue *q);
     //F.S:
     //masukin Makanan m ke delivery queue (belum tau gimana) 
 
-void fry(listMakanan f, PrioQueueTime *inv);
+void fry(listMakanan f, PrioQueueTime *inv, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //goreng makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang digoreng (m) masukin ke inventory
