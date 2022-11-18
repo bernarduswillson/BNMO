@@ -133,10 +133,10 @@ void catalog(listMakanan l){
     }
 }
 
-Makanan searchMakanan(listMakanan l, int id){
+int searchMakanan(listMakanan l, int id){
     for (int i = 0; i<=LASTIDX(l); i++){
         if (ID(MAKANAN(l, i))==id){
-            return (MAKANAN(l, i));
+            return i;
         }
     }
 }
@@ -178,7 +178,7 @@ void buy(listMakanan b, Queue *q){
     }
 }
 
-void fry(listMakanan f, PrioQueueTime *inv, ListOfTree t){
+void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
@@ -200,7 +200,7 @@ void fry(listMakanan f, PrioQueueTime *inv, ListOfTree t){
         printf("\nEnter Command: ");
         scanf("%d", &pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(f)+1)){
-            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
         }else if(pilihan>0){
             //cari child MAKANAN(f, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
@@ -224,7 +224,7 @@ void fry(listMakanan f, PrioQueueTime *inv, ListOfTree t){
 
             if (available){
                 DisplayWord(NAMA(MAKANAN(f, pilihan-1)));
-                printf(" selesai dibuat dan sudah masuk ke inventory.");
+                printf(" selesai dibuat dan sudah masuk ke inventory.\n");
                 Enqueue(inv, (infotype) MAKANAN(f, pilihan-1));
             }else{
                 printf("Gagal membuat ");
@@ -233,11 +233,9 @@ void fry(listMakanan f, PrioQueueTime *inv, ListOfTree t){
                 int nomor = 1;
                 for(int i=0; i<banyakChild(ID(MAKANAN(f, pilihan-1)),t); i++){
                     int id = IDD(childMakanan[i]);
-                    printf("%d ", id);
                     if(!IsMember(*inv, id)){
-                        // Word nama = searchMakanan(f, id);
                         printf("%d. ", nomor);
-                        DisplayWord(NAMA(searchMakanan(f, id)));
+                        DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
                         printf("\n");
                         nomor++;
                     }
