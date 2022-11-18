@@ -207,8 +207,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
 
-            //resepnya yang mana? childMakanan bentukannya apa?
-            childMakanan = searchChild (ID(MAKANAN(f, pilihan-1)),t);
+            childMakanan = searchChild(ID(MAKANAN(f, pilihan-1)),t);
 
             //fungsi cek
             for(int i=0; i<banyakChild(ID(MAKANAN(f, pilihan-1)),t); i++){
@@ -245,10 +244,11 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
     }
 }
 
-void boil(listMakanan b, PrioQueueTime *inv){
+void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
+    node ** childMakanan;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -256,21 +256,35 @@ void boil(listMakanan b, PrioQueueTime *inv){
         printf("=        BOIL        =");
         printf("======================");
         printf("\n");
-        printf("List Bahan Makanan yang Bisa Dibuat:");
-        for (int i = 0; i<CAPACITY(b); i++){
+        printf("List Bahan Makanan yang Bisa Dibuat:\n");
+        for (int i = 0; i<=LASTIDX(b); i++){
             printf("    %d.", i+1);
             DisplayWord(NAMA(MAKANAN(b, i)));
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
         scanf("%d", &pilihan);
-        if ((pilihan<0)||(pilihan>=CAPACITY(b))){
+        if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
             //cari child MAKANAN(b, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
+
+            childMakanan = searchChild(ID(MAKANAN(b, pilihan-1)),t);
+
+            for(int i=0; i<banyakChild(ID(MAKANAN(b, pilihan-1)),t); i++){
+                int id = IDD(childMakanan[i]);
+                if(IsMember(*inv, id)){
+                    available = true;
+                }
+                else{
+                    available = false;
+                    break;
+                }
+            }
+
             if (available){
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
@@ -278,17 +292,27 @@ void boil(listMakanan b, PrioQueueTime *inv){
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
-                printf("karena kamu tidak memiliki bahan berikut: ");
-                PrintPrioQueueTime(child);
+                printf("karena kamu tidak memiliki bahan berikut: \n");
+                int nomor = 1;
+                for(int i=0; i<banyakChild(ID(MAKANAN(b, pilihan-1)),t); i++){
+                    int id = IDD(childMakanan[i]);
+                    if(!IsMember(*inv, id)){
+                        printf("%d. ", nomor);
+                        DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
+                        printf("\n");
+                        nomor++;
+                    }
+                }
             }
         }
     }
 }
 
-void mix(listMakanan m, PrioQueueTime *inv){
+void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
+    node ** childMakanan;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -296,21 +320,34 @@ void mix(listMakanan m, PrioQueueTime *inv){
         printf("=         MIX         =");
         printf("=======================");
         printf("\n");
-        printf("List Bahan Makanan yang Bisa Dibuat:");
-        for (int i = 0; i<CAPACITY(m); i++){
+        printf("List Bahan Makanan yang Bisa Dibuat:\n");
+        for (int i = 0; i<=LASTIDX(m); i++){
             printf("    %d. ", i+1);
             DisplayWord(NAMA(MAKANAN(m, i)));
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
         scanf("%d", &pilihan);
-        if ((pilihan<0)||(pilihan>=CAPACITY(m))){
+        if ((pilihan<0)||(pilihan>LASTIDX(m)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
             //cari child MAKANAN(m, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
+
+            childMakanan = searchChild(ID(MAKANAN(m, pilihan-1)),t);
+
+            for(int i=0; i<banyakChild(ID(MAKANAN(m, pilihan-1)),t); i++){
+                int id = IDD(childMakanan[i]);
+                if(IsMember(*inv, id)){
+                    available = true;
+                }
+                else{
+                    available = false;
+                    break;
+                }
+            }
             if (available){
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
@@ -318,18 +355,28 @@ void mix(listMakanan m, PrioQueueTime *inv){
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
-                printf("karena kamu tidak memiliki bahan berikut: ");
-                PrintPrioQueueTime(child);
+                printf("karena kamu tidak memiliki bahan berikut: \n");
+                int nomor = 1;
+                for(int i=0; i<banyakChild(ID(MAKANAN(m, pilihan-1)),t); i++){
+                    int id = IDD(childMakanan[i]);
+                    if(!IsMember(*inv, id)){
+                        printf("%d. ", nomor);
+                        DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
+                        printf("\n");
+                        nomor++;
+                    }
+                }
             }
         }
     }
 }
 
 
-void chop(listMakanan c, PrioQueueTime *inv){
+void chop(listMakanan l, listMakanan c, PrioQueueTime *inv, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
+    node ** childMakanan;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -338,20 +385,34 @@ void chop(listMakanan c, PrioQueueTime *inv){
         printf("======================");
         printf("\n");
         printf("List Bahan Makanan yang Bisa Dibuat:");
-        for (int i = 0; i<CAPACITY(c); i++){
+        for (int i = 0; i<=LASTIDX(c); i++){
             printf("    %d. ", i+1);
             DisplayWord(NAMA(MAKANAN(c, i)));
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
         scanf("%d", &pilihan);
-        if ((pilihan<0)||(pilihan>=CAPACITY(c))){
+        if ((pilihan<0)||(pilihan>LASTIDX(c)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
             //cari child MAKANAN(c, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
             //cara ceknya periksa HEAD(child) ada di inv atau ngga, kalau ada di dequeue
             //kalau setelah di cek, childnya kosong, berarti available = true
+
+            childMakanan = searchChild(ID(MAKANAN(c, pilihan-1)),t);
+
+            for(int i=0; i<banyakChild(ID(MAKANAN(c, pilihan-1)),t); i++){
+                int id = IDD(childMakanan[i]);
+                if(IsMember(*inv, id)){
+                    available = true;
+                }
+                else{
+                    available = false;
+                    break;
+                }
+            }
+
             if (available){
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
@@ -360,7 +421,16 @@ void chop(listMakanan c, PrioQueueTime *inv){
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
                 printf("karena kamu tidak memiliki bahan berikut: ");
-                PrintPrioQueueTime(child);
+                int nomor = 1;
+                for(int i=0; i<banyakChild(ID(MAKANAN(c, pilihan-1)),t); i++){
+                    int id = IDD(childMakanan[i]);
+                    if(!IsMember(*inv, id)){
+                        printf("%d. ", nomor);
+                        DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
+                        printf("\n");
+                        nomor++;
+                    }
+                }
             }
         }
     }

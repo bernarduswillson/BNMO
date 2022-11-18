@@ -89,7 +89,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void boil(listMakanan b, PrioQueueTime *inv);
+void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //rebus makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang direbus masukin ke inventory
@@ -99,7 +99,7 @@ void boil(listMakanan b, PrioQueueTime *inv);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void mix(listMakanan m, PrioQueueTime *inv);
+void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //campur makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dicampur masukin ke inventory
@@ -109,7 +109,7 @@ void mix(listMakanan m, PrioQueueTime *inv);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void chop(listMakanan c, PrioQueueTime *inv);
+void chop(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //potong makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dipotong masukin ke inventory

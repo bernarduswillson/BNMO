@@ -47,6 +47,6 @@ int main(){
     // catalog(CHOP);
     // catalog(MIX);
     MakeEmpty(&q,100);
-    fry(l, FRY, &q, t);
+    chop(l, CHOP, &q, t);
     return 0;
 }
