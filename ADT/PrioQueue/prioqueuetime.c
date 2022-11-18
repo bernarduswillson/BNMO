@@ -19,7 +19,7 @@ boolean IsMember(PrioQueueTime Q, int id){
     address p;
     p = Head(Q);
     while (p!=Tail(Q)+1){
-        if (InfoID(Elmt(Q, p))==id){
+        if (InfoId(Elmt(Q, p))==id){
             return true;
         }
         p++;
