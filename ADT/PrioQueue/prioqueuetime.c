@@ -15,6 +15,18 @@ boolean IsFull(PrioQueueTime Q) {
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 
+boolean IsMember(PrioQueueTime Q, int id){
+    address p;
+    p = Head(Q);
+    while (p!=Tail(Q)+1){
+        if (InfoID(Elmt(Q, p))==id){
+            return true;
+        }
+        p++;
+    }
+    return false;
+}
+
 int NBElmt(PrioQueueTime Q) {    
     if (IsEmpty(Q)) {
         return 0;
@@ -144,7 +156,7 @@ void PrintPrioQueueTime(PrioQueueTime Q) {
     if (!IsEmpty(Q)) {
         while (!IsEmpty(temp)) {
             Dequeue(&temp, &val);
-            printf("%d %c\n", Time(val), Info(val));
+            printf("%d %c\n", Time(val), InfoNama(val));
         }
     }
     printf("#\n");

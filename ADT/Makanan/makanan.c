@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "makanan.h"
+#include "../PrioQueue/prioqueue.h"
 
 
 void createListMakanan(listMakanan *l, int size)
@@ -137,8 +138,10 @@ void buy(listMakanan b, Queue *q){
         printf("=====================");
         printf("=        BUY        =");
         printf("=====================");
+        printf("\n");
         printf("List Bahan Makanan:");
-        for (int i = 0; i<CAPACITY(b); i++){
+        printf("\n");
+        for (int i = 0; i<=LASTIDX(b); i++){
             printf("    %d. ( ", i+1);
             DisplayWord(NAMA(MAKANAN(b, i)));
             TulisTIME1(PENGIRIMAN(MAKANAN(b, i)));
@@ -147,8 +150,9 @@ void buy(listMakanan b, Queue *q){
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
         scanf("%d", &pilihan);
-        if ((pilihan<0)||(pilihan>=CAPACITY(b))){
-            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+
+        if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
         }else if(pilihan>0){
             printf("Berhasil memesan " );
             DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
@@ -156,7 +160,7 @@ void buy(listMakanan b, Queue *q){
             DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
             printf("akan diantar dalam ");
             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
-            printf(".");
+            printf(".\n");
             AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
         }
     }
@@ -172,6 +176,7 @@ void fry(listMakanan f, PrioQueueTime *inv){
         printf("=====================");
         printf("=        FRY        =");
         printf("=====================");
+        printf("\n");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(f); i++){
             printf("    %d. %s", i+1, NAMA(MAKANAN(f, i)));
@@ -207,6 +212,7 @@ void boil(listMakanan b, PrioQueueTime *inv){
         printf("======================");
         printf("=        BOIL        =");
         printf("======================");
+        printf("\n");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(b); i++){
             printf("    %d.", i+1);
@@ -246,6 +252,7 @@ void mix(listMakanan m, PrioQueueTime *inv){
         printf("=======================");
         printf("=         MIX         =");
         printf("=======================");
+        printf("\n");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(m); i++){
             printf("    %d. ", i+1);
@@ -286,6 +293,7 @@ void chop(listMakanan c, PrioQueueTime *inv){
         printf("======================");
         printf("=        CHOP        =");
         printf("======================");
+        printf("\n");
         printf("List Bahan Makanan yang Bisa Dibuat:");
         for (int i = 0; i<CAPACITY(c); i++){
             printf("    %d. ", i+1);

@@ -80,7 +80,7 @@ void DeAlokasiQueue(Queue * Q)
 
 
 /* *** Primitif Add/Delete *** */
-void AddQueue (Queue * Q, infotypeQueue X)
+void AddQueue(Queue * Q, infotypeQueue X)
 {
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan prio */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
@@ -102,7 +102,7 @@ void AddQueue (Queue * Q, infotypeQueue X)
         Tail(*Q) = Tail(*Q) + 1;
         InfoTail(*Q) = X;
         indeks = Tail(*Q);
-        while (( TGT(Prio(Elmt(*Q,indeks)), Prio(Elmt(*Q,indeks-1)))) && (indeks-1!=0)){
+        while (( TLT(Prio(Elmt(*Q,indeks)), Prio(Elmt(*Q,indeks-1)))) && (indeks-1!=0)){
             temp = Elmt(*Q,indeks);
             Elmt(*Q,indeks) = Elmt(*Q,indeks-1);
             Elmt(*Q,indeks-1)=temp;
@@ -146,13 +146,14 @@ Waiting Cust
 <jumlah-n>
 #
 */
-    printf("List Makanan di Perjalanan");
-    printf("(nama - waktu sisa delivery)");
-    for (int i = 0; i < NBQueueElmt(Q); i++){
-        printf("%d. ", i+1);
+    printf("List Makanan di Perjalanan\n");
+    printf("(nama - waktu sisa delivery)\n");
+    for (int i = 1; i <= NBQueueElmt(Q); i++){
+        printf("%d. ", i);
         DisplayWord(NAMA(Elmt(Q, i)));
         printf(" - ");
         TulisTIME1(PENGIRIMAN(Elmt(Q,i)));
+        printf("\n");
     }
 }
 

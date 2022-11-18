@@ -13,6 +13,7 @@
 
 #define Nil 0
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
+
 typedef struct
 {
    int id;
@@ -40,7 +41,8 @@ typedef struct {
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueTime, maka akses elemen : */
 #define Time(e)     KEDALUWARSA(e)
-#define Info(e)     NAMA(e)
+#define InfoNama(e) NAMA(e)
+#define InfoId(e)   ID(e)
 #define Head(Q)     (Q).HEAD
 #define Tail(Q)     (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
@@ -54,6 +56,8 @@ boolean IsEmpty (PrioQueueTime Q);
 boolean IsFull (PrioQueueTime Q);
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
+boolean IsMember(PrioQueueTime Q, int id);
+/* true jika makanan dengan id 'id' ada di inventory */
 int NBElmt (PrioQueueTime Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
