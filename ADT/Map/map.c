@@ -52,19 +52,24 @@ void displayMap(MAP m){
 }
 
 
-boolean isCommandValid(int x){
-    int north = -1860003584;
-    int south = -1859953284;
-    int east = -1045004210;
-    int west = -1044985810;
-    int quit = 36986;
+// boolean isCommandValid(int x){
+//     int north = -1860003584;
+//     int south = -1859953284;
+//     int east = -1045004210;
+//     int west = -1044985810;
+//     int buy = 2211;
+//     int mix = 3190;
+//     int fry = 2581;
+//     int chop = 21742;
+//     int boil = 21378;
+//     int quit = 36986;
 
-    if(x == north ||x == south ||x == east ||x == west ||x == quit){
-        return true;
-    }else{
-        return false;
-    }
-}
+//     if(x == north ||x == south ||x == east ||x == west ||x == buy|| x == mix|| x == fry || x == chop|| x == boil|| x == quit){
+//         return true;
+//     }else{
+//         return false;
+//     }
+// }
 
 
 void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
@@ -72,8 +77,13 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
     int south = -1859953284;
     int east = -1045004210;
     int west = -1044985810;
+    int buy = 2211;
+    int mix = 3190;
+    int fry = 2581;
+    int chop = 21742;
+    int boil = 21378;
     int quit = 36986;
-    if(isCommandValid(x)){
+    // if(isCommandValid(x)){
         switch (x){
         case -1860003584:
             if (ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == ' '){
@@ -123,6 +133,51 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 *notif = 1;
                 break;
             }
+        case 2211:
+            if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'T' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'T'){
+                printf("BUY\n");
+                break;
+            }    
+            else {
+                printf("Tidak ada telepon disekitar anda\n");
+                break;
+            }
+        case 3190:
+            if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'M' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'M'){
+                printf("MIX\n");
+                break;
+            }    
+            else {
+                printf("Tidak ada tempat mixing disekitar anda\n");
+                break;
+            }
+        case 2581:
+            if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'F' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'F'){
+                printf("FRY\n");
+                break;
+            }    
+            else {
+                printf("Tidak ada tempat menggoreng disekitar anda\n");
+                break;
+            }
+        case 21742:
+            if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'C' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'C'){
+                printf("CHOP\n");
+                break;
+            }    
+            else {
+                printf("Tidak ada tempat memotong disekitar anda\n");
+                break;
+            }
+        case 21378:
+            if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'B' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'B'){
+                printf("BOIL\n");
+                break;
+            }    
+            else {
+                printf("Tidak ada tempat merebus disekitar anda\n");
+                break;
+            }
         case 36986:
             printf("You quit the game!\n");
             exit(0);
@@ -131,6 +186,5 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
             printf("Command is not valid!\n");
             break;
         }
-    }
-    
+    // }
 }
