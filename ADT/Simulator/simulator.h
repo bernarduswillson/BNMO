@@ -34,14 +34,14 @@ typedef Makanan infotypeQueue;
 typedef Makanan infotype; /* elemen karakter */
 
 typedef struct { 
-    infotypeQueue T[100];   /* tabel penyimpan elemen */
+    infotypeQueue T[50];   /* tabel penyimpan elemen */
     address HEAD;  /* alamat penghapusan */
     address TAIL;  /* alamat penambahan */
     int MaxEl;     /* Max elemen queue */
     } Queue;
 
 typedef struct {
-    infotype T[100];   /* tabel penyimpan elemen */
+    infotype T[50];   /* tabel penyimpan elemen */
     address HEAD;  /* alamat penghapusan */
     address TAIL;  /* alamat penambahan */
     int MaxEl;     /* Max elemen queue */
@@ -333,7 +333,7 @@ void catalog(listMakanan l);
     //F.S:
     //display semua makanan yang ada di listMakanan l
 
-// void buy(listMakanan b, Queue *q);
+void buy(listMakanan b, Queue *q);
     //beli makanan yang ada di listMakanan, masukin ke inventory.
     //lokasi harus pas (Makanan.lokasi harus "BUY")
     //I.S:

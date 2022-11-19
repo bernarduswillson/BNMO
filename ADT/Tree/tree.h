@@ -20,7 +20,7 @@ typedef struct{
 
 typedef struct{
     int size;
-    Tree TabTree[100];
+    Tree TabTree[50];
 }ListOfTree;
 
 #define IDD(t) ((t)->id)

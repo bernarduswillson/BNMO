@@ -22,6 +22,18 @@ int main() {
         Stack U;
         Stack R;
         Simulator S;
+        listMakanan l, BUY, FRY, BOIL, MIX, CHOP;
+        Queue q;
+        CreateEmpty(&q, 50);
+        STARTWORDFILE("Config/resep.txt");
+        int x;
+        int n = 0;
+        WordToInt(&x);
+        ADVNEWLINE1();
+        ListOfTree tree;
+        createListTree(&tree, x);
+        createMakanan(&l, &BUY, &FRY, &BOIL, &MIX, &CHOP);
+        catalog(l);
         BacaSimulator(&S);
         printf("\n");
         DisplaySimulator(S);
@@ -69,7 +81,7 @@ int main() {
                 printf("\n");
             }
             else{
-                moveSim(&m, p, &S, &T, &n, &U, &R);
+                moveSim(&m, p, &S, &T, &n, &U, &R, &q, tree, l, BUY, FRY, BOIL, MIX, CHOP);
                 DisplaySimulator(S);
                 TulisTIME2(T);
                 printf("Notifikasi: ");

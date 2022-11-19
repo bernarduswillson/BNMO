@@ -9,8 +9,8 @@
 #include "../Utility/notif.h"
 #include "../Stack/stack.h"
 
-#define ROW_CAP 100
-#define COL_CAP 100
+#define ROW_CAP 50
+#define COL_CAP 50
 
 typedef int IdxType; /* Index baris, kolom */
 typedef int ElType;
@@ -37,7 +37,7 @@ void readMap(MAP *m, int nRow, int nCol);
 void displayMap(MAP m);
 
 // void moveSim(MAP *m, Word command);
-void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stack *R);
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stack *R, Queue *q, ListOfTree tree, listMakanan l, listMakanan BUY, listMakanan FRY, listMakanan BOIL, listMakanan MIX, listMakanan CHOP);
 
 // boolean isCommandValid(Word command);
 boolean isCommandValid(int x);

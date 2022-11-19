@@ -470,7 +470,7 @@ void createMakanan(listMakanan *l, listMakanan *BUY, listMakanan *FRY, listMakan
     {
 
 
-        STARTWORDFILE("../../Config/makanan.txt");
+        STARTWORDFILE("Config/makanan.txt");
         int size;
         WordToInt(&size);
         CAPACITY(*l) = size;

@@ -57,14 +57,14 @@ void displayMap(MAP m){
 //     int south = -1859953284;
 //     int east = -1045004210;
 //     int west = -1044985810;
-//     int buy = 2211;
-//     int mix = 3190;
-//     int fry = 2581;
+//     int buY = 2211;
+//     int miX = 3190;
+//     int frY = 2581;
 //     int chop = 21742;
-//     int boil = 21378;
+//     int boiL = 21378;
 //     int quit = 36986;
 
-//     if(x == north ||x == south ||x == east ||x == west ||x == buy|| x == mix|| x == fry || x == chop|| x == boil|| x == quit){
+//     if(x == north ||x == south ||x == east ||x == west ||x == buY|| x == miX|| x == frY || x == chop|| x == boiL|| x == quit){
 //         return true;
 //     }else{
 //         return false;
@@ -72,16 +72,16 @@ void displayMap(MAP m){
 // }
 
 
-void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stack *R){
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stack *R, Queue *q, ListOfTree tree, listMakanan l, listMakanan BUY, listMakanan FRY, listMakanan BOIL, listMakanan MIX, listMakanan CHOP){
     int north = -1860003584;
     int south = -1859953284;
     int east = -1045004210;
     int west = -1044985810;
-    int buy = 2211;
-    int mix = 3190;
-    int fry = 2581;
-    int chop = 21742;
-    int boil = 21378;
+    int buY = 2211;
+    int miX = 3190;
+    int frY = 2581;
+    int choP = 21742;
+    int boiL = 21378;
     int quit = 36986;
     CreateQueue(notif);
     // if(isCommandValid(x)){
@@ -148,7 +148,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 2211:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'T' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'T'){
-                printf("BUY\n");
+                buy(BUY, q);
                 break;
             }    
             else {
@@ -157,7 +157,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 3190:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'M' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'M'){
-                printf("MIX\n");
+                mix(l, MIX, &Inventory(*S), tree);
                 break;
             }    
             else {
@@ -166,7 +166,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 2581:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'F' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'F'){
-                printf("FRY\n");
+                fry(l, FRY, &Inventory(*S), tree);
                 break;
             }    
             else {
@@ -175,7 +175,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 21742:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'C' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'C'){
-                printf("CHOP\n");
+                chop(l, CHOP, &Inventory(*S), tree);
                 break;
             }    
             else {
@@ -184,7 +184,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 21378:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'B' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'B'){
-                printf("BOIL\n");
+                boil(l, BOIL, &Inventory(*S), tree);
                 break;
             }    
             else {
