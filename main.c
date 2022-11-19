@@ -36,6 +36,7 @@ int main() {
         printf("\n");
         boolean y = true;
         while(y) {
+            QueueN n;
             int x = 0;
             printf("Enter Command: ");
             STARTWORD2();
@@ -47,6 +48,8 @@ int main() {
                 undo(&U, &R, &S, &T, &m);
                 DisplaySimulator(S);
                 TulisTIME2(T);
+                printf("Notifikasi: ");
+                displayNotif(n);
                 displayMap(m);
                 printf("\n");
             }
@@ -55,11 +58,12 @@ int main() {
                 redo(&U, &R, &S, &T, &m);
                 DisplaySimulator(S);
                 TulisTIME2(T);
+                printf("Notifikasi: ");
+                displayNotif(n);
                 displayMap(m);
                 printf("\n");
             }
             else{
-                QueueN n;
                 moveSim(&m, p, &S, &T, &n, &U, &R);
                 DisplaySimulator(S);
                 TulisTIME2(T);
