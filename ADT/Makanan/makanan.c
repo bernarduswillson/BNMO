@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "makanan.h"
-#include "../PrioQueue/prioqueue.h"
+#include "../PrioQueue/prioqueuetime.h"
 #include "../Tree/tree.h"
 #include "../Tree/tree.c"
 #include "../Mesin_Kata/wordmachine.c"
@@ -142,41 +142,41 @@ int searchMakanan(listMakanan l, int id){
 }
 
 
-void buy(listMakanan b, Queue *q){
-    int pilihan;
+// void buy(listMakanan b, Queue *q){
+//     int pilihan;
 
-    pilihan = -1;
-    while (pilihan!=0){
-        printf("=====================");
-        printf("=        BUY        =");
-        printf("=====================");
-        printf("\n");
-        printf("List Bahan Makanan:");
-        printf("\n");
-        for (int i = 0; i<=LASTIDX(b); i++){
-            printf("    %d. ( ", i+1);
-            DisplayWord(NAMA(MAKANAN(b, i)));
-            TulisTIME1(PENGIRIMAN(MAKANAN(b, i)));
-            printf(")\n");
-        }
-        printf("\nKetik 0 untuk exit\n");
-        printf("\nEnter Command: ");
-        scanf("%d", &pilihan);
+//     pilihan = -1;
+//     while (pilihan!=0){
+//         printf("=====================");
+//         printf("=        BUY        =");
+//         printf("=====================");
+//         printf("\n");
+//         printf("List Bahan Makanan:");
+//         printf("\n");
+//         for (int i = 0; i<=LASTIDX(b); i++){
+//             printf("    %d. ( ", i+1);
+//             DisplayWord(NAMA(MAKANAN(b, i)));
+//             TulisTIME1(PENGIRIMAN(MAKANAN(b, i)));
+//             printf(")\n");
+//         }
+//         printf("\nKetik 0 untuk exit\n");
+//         printf("\nEnter Command: ");
+//         scanf("%d", &pilihan);
 
-        if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
-            printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
-        }else if(pilihan>0){
-            printf("Berhasil memesan " );
-            DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
-            printf(", ");
-            DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
-            printf("akan diantar dalam ");
-            TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
-            printf(".\n");
-            AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
-        }
-    }
-}
+//         if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
+//             printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
+//         }else if(pilihan>0){
+//             printf("Berhasil memesan " );
+//             DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
+//             printf(", ");
+//             DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
+//             printf("akan diantar dalam ");
+//             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
+//             printf(".\n");
+//             AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
+//         }
+//     }
+// }
 
 void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
     PrioQueueTime child;
