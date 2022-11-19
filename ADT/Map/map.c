@@ -101,6 +101,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Baris(Lokasi(*S)) --;
                 *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }
             else{
@@ -114,6 +116,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Baris(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }
             else{
@@ -127,6 +131,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Kolom(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }
             else{
@@ -140,6 +146,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Kolom(Lokasi(*S)) --;
                 *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }
             else{
@@ -149,6 +157,9 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
         case 2211:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'T' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'T'){
                 buy(BUY, q);
+                *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }    
             else {
@@ -158,6 +169,9 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
         case 3190:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'M' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'M'){
                 mix(l, MIX, &Inventory(*S), tree);
+                *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }    
             else {
@@ -167,6 +181,9 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
         case 2581:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'F' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'F'){
                 fry(l, FRY, &Inventory(*S), tree);
+                *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }    
             else {
@@ -176,6 +193,9 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
         case 21742:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'C' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'C'){
                 chop(l, CHOP, &Inventory(*S), tree);
+                *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }    
             else {
@@ -185,6 +205,9 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
         case 21378:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'B' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'B'){
                 boil(l, BOIL, &Inventory(*S), tree);
+                *T = NextMenit(*T);
+                Delivery(q, &Inventory(*S));
+                Kedaluwarsa(&Inventory(*S));
                 break;
             }    
             else {

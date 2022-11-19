@@ -10,6 +10,7 @@ void CreateSimulator(Simulator *S, Word nama,POINT P, PrioQueueTime Q){
 void BacaSimulator(Simulator *S){
     POINT P;
     PrioQueueTime Q;
+    MakeEmpty(&Q, 50);
     printf("Input Username: ");
     STARTWORD1();
     // Nama(*S) = currentWord;
@@ -77,11 +78,13 @@ boolean IsFull(PrioQueueTime Q) {
 boolean IsMember(PrioQueueTime Q, int id){
     address p;
     p = Head(Q);
-    while (p!=Tail(Q)+1){
-        if (InfoId(Elmt(Q, p))==id){
-            return true;
+    if (!IsEmpty(Q)){
+        while (p!=Tail(Q)+1){
+            if (InfoId(Elmt(Q, p))==id){
+                return true;
+            }
+            p++;
         }
-        p++;
     }
     return false;
 }
@@ -440,7 +443,9 @@ void buy(listMakanan b, Queue *q){
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
-        scanf("%d", &pilihan);
+        // scanf("%d", &pilihan);
+        STARTWORD1();
+        WordToInt(&pilihan);
 
         if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
@@ -453,6 +458,8 @@ void buy(listMakanan b, Queue *q){
             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
             printf(".\n");
             AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
+        }else{
+            break;
         }
     }
 }
@@ -643,7 +650,8 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
-        scanf("%d", &pilihan);
+        STARTWORD1();
+        WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(f)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
         }else if(pilihan>0){
@@ -708,7 +716,8 @@ void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
-        scanf("%d", &pilihan);
+        STARTWORD1();
+        WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
@@ -772,7 +781,9 @@ void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
-        scanf("%d", &pilihan);
+        // scanf("%d", &pilihan);
+        STARTWORD1();
+        WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(m)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
@@ -836,7 +847,8 @@ void chop(listMakanan l, listMakanan c, PrioQueueTime *inv, ListOfTree t){
         }
         printf("\nKetik 0 untuk exit\n");
         printf("\nEnter Command: ");
-        scanf("%d", &pilihan);
+        STARTWORD1();
+        WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(c)+1)){
             printf("Pilih dari list makanan atau pilih 0 untuk exit.");
         }else if(pilihan>0){
