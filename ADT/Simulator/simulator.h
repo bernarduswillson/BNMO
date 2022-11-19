@@ -30,11 +30,10 @@ typedef struct
     int lastIdx;
 } listMakanan;
 
-typedef Makanan infotypeQueue;
 typedef Makanan infotype; /* elemen karakter */
 
 typedef struct { 
-    infotypeQueue T[50];   /* tabel penyimpan elemen */
+    infotype T[50];   /* tabel penyimpan elemen */
     address HEAD;  /* alamat penghapusan */
     address TAIL;  /* alamat penambahan */
     int MaxEl;     /* Max elemen queue */
@@ -54,7 +53,7 @@ typedef struct {
 }Simulator;
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-// typedef struct { infotypeQueue T[100];   /* tabel penyimpan elemen */
+// typedef struct { infotype T[100];   /* tabel penyimpan elemen */
 //                  address HEAD;  /* alamat penghapusan */
 //                  address TAIL;  /* alamat penambahan */
 //                  int MaxEl;     /* Max elemen queue */
@@ -77,8 +76,8 @@ typedef struct {
 #define Elmt(Q,i)   (Q).T[(i)]
 
 #define Prio(e)     PENGIRIMAN(e)
-//#define Sabar(e)    (e).sabar /* Tambahan infotypeQueue */
-//#define Jumlah(e)   (e).jumlah /* Tambahan infotypeQueue */
+//#define Sabar(e)    (e).sabar /* Tambahan infotype */
+//#define Jumlah(e)   (e).jumlah /* Tambahan infotype */
 #define Kepala(Q)     (Q).HEAD
 #define Ekor(Q)     (Q).TAIL
 #define InfoKepala(Q) (Q).T[(Q).HEAD]
@@ -174,7 +173,7 @@ void DeAlokasi(PrioQueueTime * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void Enqueue (PrioQueueTime * Q, infotype X);
+void Enqueue (Simulator *S, infotype X);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
@@ -188,7 +187,7 @@ void Dequeue (PrioQueueTime * Q, infotype * X);
 void DequeueID (PrioQueueTime * Q, infotype * X, int id);
 
 /* Operasi Tambahan */
-void PrintPrioQueueTime (PrioQueueTime Q);
+void PrintPrioQueueTime (Simulator S);
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
@@ -197,8 +196,8 @@ void PrintPrioQueueTime (PrioQueueTime Q);
 <time-n> <elemen-n>
 #
 */
-void Kedaluwarsa(PrioQueueTime *inv);
-void waitKedaluwarsa(PrioQueueTime *inv, int min);
+void Kedaluwarsa(Simulator *S, infotype *X);
+void waitKedaluwarsa(Simulator *S, int min, infotype *X);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,11 +205,11 @@ void waitKedaluwarsa(PrioQueueTime *inv, int min);
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
-// typedef Makanan infotypeQueue;
+// typedef Makanan infotype;
 // typedef int address;   /* indeks tabel */
 // /* Contoh deklarasi variabel bertype Queue : */
 // /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-// typedef struct { infotypeQueue T[100];   /* tabel penyimpan elemen */
+// typedef struct { infotype T[100];   /* tabel penyimpan elemen */
 //                  address HEAD;  /* alamat penghapusan */
 //                  address TAIL;  /* alamat penambahan */
 //                  int MaxEl;     /* Max elemen queue */
@@ -219,7 +218,7 @@ void waitKedaluwarsa(PrioQueueTime *inv, int min);
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
-/* Jika e adalah infotypeQueue dan Q adalah Queue, maka akses elemen : */
+/* Jika e adalah infotype dan Q adalah Queue, maka akses elemen : */
 
 
 /* ********* Prototype ********* */
@@ -248,12 +247,12 @@ void DeAlokasiQueue(Queue * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void AddQueue (Queue * Q, infotypeQueue X);
+void AddQueue (Queue * Q, infotype X);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan prio */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer;
         elemen baru disisipkan pada posisi yang tepat sesuai dengan prioritas */
-void Del (Queue * Q, infotypeQueue * X);
+void Del (Queue * Q, infotype * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
@@ -270,10 +269,10 @@ void showDeliveryQueue (Queue Q);
 #
 */
 
-void Delivery(Queue *Q, PrioQueueTime *inv);
+void Delivery(Queue *Q, Simulator *S);
 /* Masukin makanan ke inventory kalo delivery timenya udah 0*/
 
-void waitDelivery(Queue *Q, PrioQueueTime *inv, int min);
+void waitDelivery(Queue *Q, Simulator *S, int min);
 
 
 
@@ -341,7 +340,7 @@ void buy(listMakanan b, Queue *q);
     //F.S:
     //masukin Makanan m ke delivery queue (belum tau gimana) 
 
-void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t);
+void fry(listMakanan l, listMakanan f, Simulator *S, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //goreng makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang digoreng (m) masukin ke inventory
@@ -351,7 +350,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t);
+void boil(listMakanan l, listMakanan b, Simulator *S, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //rebus makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang direbus masukin ke inventory
@@ -361,7 +360,7 @@ void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t);
+void mix(listMakanan l, listMakanan m, Simulator *S, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //campur makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dicampur masukin ke inventory
@@ -371,7 +370,7 @@ void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t);
     //F.S:
     //masukin m ke i, waktu nambah 1 menit
 
-void chop(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t);
+void chop(listMakanan l, listMakanan f, Simulator *S, ListOfTree t);
     //Cek makanan yang di inventory bisa buat makanan m atau ngga, kalau bisa
     //potong makanan yang ada di inventory, makanan yang lama dihapus
     //hasil makanan yang dipotong masukin ke inventory

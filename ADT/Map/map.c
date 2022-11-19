@@ -83,16 +83,21 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
     int choP = 21742;
     int boiL = 21378;
     int quit = 36986;
+    Makanan Mak;
     CreateQueue(notif);
     // if(isCommandValid(x)){
         switch (x){
         case 76536400 ... 76536499:
             x -= 76536400;
             *T = NextNMenit(*T, x);
+            waitDelivery(q, S, x);
+            waitKedaluwarsa(S, x, &Mak);
             break;
         case 765364000 ... 765364999:
             x -= 765364000;
             *T = NextNMenit(*T, x);
+            waitDelivery(q, S, x);
+            waitKedaluwarsa(S, x, &Mak);
             break;
         case -1860003584:
             if (ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == ' '){
@@ -101,8 +106,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Baris(Lokasi(*S)) --;
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }
             else{
@@ -116,8 +121,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Baris(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }
             else{
@@ -131,8 +136,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Kolom(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }
             else{
@@ -146,8 +151,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T);
                 Kolom(Lokasi(*S)) --;
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }
             else{
@@ -158,8 +163,8 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'T' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'T'){
                 buy(BUY, q);
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }    
             else {
@@ -168,10 +173,10 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 3190:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'M' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'M'){
-                mix(l, MIX, &Inventory(*S), tree);
+                mix(l, MIX, S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }    
             else {
@@ -180,10 +185,10 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 2581:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'F' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'F'){
-                fry(l, FRY, &Inventory(*S), tree);
+                fry(l, FRY,S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }    
             else {
@@ -192,10 +197,10 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 21742:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'C' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'C'){
-                chop(l, CHOP, &Inventory(*S), tree);
+                chop(l, CHOP, S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }    
             else {
@@ -204,10 +209,10 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             }
         case 21378:
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'B' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'B'){
-                boil(l, BOIL, &Inventory(*S), tree);
+                boil(l, BOIL, S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, &Inventory(*S));
-                Kedaluwarsa(&Inventory(*S));
+                Delivery(q, S);
+                Kedaluwarsa(S, &Mak);
                 break;
             }    
             else {
@@ -218,6 +223,10 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             printf("You quit the game!\n");
             exit(0);
             break;
+        case 224090481:
+            showDeliveryQueue(*q);
+        case -1454527815:
+            PrintPrioQueueTime(*S);
         default:
             enqueue(notif, 0);
             break;

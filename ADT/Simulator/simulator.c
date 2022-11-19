@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "simulator.h"
 
 void CreateSimulator(Simulator *S, Word nama,POINT P, PrioQueueTime Q){
@@ -65,7 +66,7 @@ void DisplayLokasi(Simulator S){
 
 //////////////////////////////////////////////////////////////////////////////////////
 boolean IsEmpty(PrioQueueTime Q) {
-    return (Head(Q) == Nil && Tail(Q) == Nil);
+    return (Head(Q) == IDX_UNDEF && Tail(Q) == IDX_UNDEF);
 }
 /* Mengirim true jika Q kosong */
 
@@ -94,10 +95,10 @@ int NBElmt(PrioQueueTime Q) {
         return 0;
     }
     else if (Tail(Q) >= Head(Q)) {
-        return Tail(Q) - Head(Q) + 1;
+        return Tail(Q) - Head(Q)+1;
     }
     else {
-        return MaxEl(Q) - Head(Q) + Tail(Q) + 1;
+        return MaxEl(Q) - Head(Q) + Tail(Q)+1;
     }
 }
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
@@ -111,8 +112,8 @@ void MakeEmpty(PrioQueueTime *Q, int Max) {
     }
     else {
         MaxEl(*Q) = Max;
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
     }
 }
 /* I.S. sembarang */
@@ -124,8 +125,8 @@ void MakeEmpty(PrioQueueTime *Q, int Max) {
 /* *** Destruktor *** */
 void DeAlokasi(PrioQueueTime *Q) {
     MaxEl(*Q) = 0;
-    Head(*Q) = Nil;
-    Tail(*Q) = Nil;
+    Head(*Q) = IDX_UNDEF;
+    Tail(*Q) = IDX_UNDEF;
     free((*Q).T);
 }
 /* Proses: Mengembalikan memori Q */
@@ -133,27 +134,28 @@ void DeAlokasi(PrioQueueTime *Q) {
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void Enqueue(PrioQueueTime *Q, infotype X) {
-    boolean found;
+void Enqueue(Simulator *S, infotype X) {
     int idx;
     int i, j;
     infotype temp;
-    if (IsEmpty(*Q)) {
-        Head(*Q) = 0;
-        Tail(*Q) = 0;
-        InfoTail(*Q) = X;
+    if (IsEmpty(Inventory(*S))) {
+        Head(Inventory(*S)) = 0;
+        Tail(Inventory(*S)) = 0;
+        InfoTail(Inventory(*S)) = X;
+        printf("%d telah masuk\n", ID(InfoTail(Inventory(*S))));
+
     }
     else {
-        Tail(*Q) = Tail(*Q) == MaxEl(*Q) - 1 ? 0 : Tail(*Q) + 1;
-        InfoTail(*Q) = X;
-        i = Tail(*Q);
-        j = i == 0 ? MaxEl(*Q) - 1 : i - 1;
-        while ((i != Head(*Q)) /*&& (Time(Elmt(*Q, i)) < (Time(Elmt(*Q, j))))   pake compare time*/) {
-            temp = Elmt(*Q, i);
-            Elmt(*Q, i) = Elmt(*Q, j);
-            Elmt(*Q, j) = temp;
+        Tail(Inventory(*S)) = Tail(Inventory(*S)) == MaxEl(Inventory(*S)) - 1 ? 0 : Tail(Inventory(*S)) + 1;
+        InfoTail(Inventory(*S)) = X;
+        i = Tail(Inventory(*S));
+        j = i == 0 ? MaxEl(Inventory(*S)) - 1 : i - 1;
+        while ((i != Head(Inventory(*S))) /*&& (Time(Elmt(*Q, i)) < (Time(Elmt(*Q, j))))   pake compare time*/) {
+            temp = Elmt(Inventory(*S), i);
+            Elmt(Inventory(*S), i) = Elmt(Inventory(*S), j);
+            Elmt(Inventory(*S), j) = temp;
             i = j;
-            j = i == 0 ? MaxEl(*Q) - 1 : i - 1;
+            j = i == 0 ? MaxEl(Inventory(*S)) - 1 : i - 1;
         }
     }
 }
@@ -165,8 +167,8 @@ void Enqueue(PrioQueueTime *Q, infotype X) {
 void Dequeue(PrioQueueTime *Q, infotype *X) {
     if (NBElmt(*Q) == 1) {
         *X = InfoHead(*Q);
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = IDX_UNDEF;
+        Tail(*Q) = IDX_UNDEF;
     }
     else {
         *X = InfoHead(*Q);
@@ -181,8 +183,8 @@ void DequeueID(PrioQueueTime *Q, infotype *X, int id) {
     if (NBElmt(*Q) == 1) {
         if (ID(InfoHead(*Q))==id){
             *X = InfoHead(*Q);
-            Head(*Q) = Nil;
-            Tail(*Q) = Nil;
+            Head(*Q) = IDX_UNDEF;
+            Tail(*Q) = IDX_UNDEF;
         }
     }
     else {
@@ -212,14 +214,17 @@ void DequeueID(PrioQueueTime *Q, infotype *X, int id) {
         Q mungkin kosong */
 
 /* Operasi Tambahan */
-void PrintPrioQueueTime(PrioQueueTime Q) {
+void PrintPrioQueueTime(Simulator S) {
     infotype val;
     PrioQueueTime temp;
-    temp = Q;
-    if (!IsEmpty(Q)) {
-        while (!IsEmpty(temp)) {
+    temp = Inventory(S);
+    if (!IsEmpty(Inventory(S))){
+        while (!IsEmpty(temp)){
             Dequeue(&temp, &val);
-            printf("%d %c\n", Time(val), InfoNama(val));
+            TulisTIME1(Time(val));
+            printf(" - ");
+            DisplayWord(InfoNama(val));
+            printf("\n");
         }
     }
     printf("#\n");
@@ -232,15 +237,32 @@ void PrintPrioQueueTime(PrioQueueTime Q) {
 <time-n> <elemen-n>
 #
 */
-void Kedaluwarsa(PrioQueueTime *inv){
-    for (int i = Head(*inv); i<= Tail(*inv); i++){
-        Time(Elmt(*inv, i)) = PrevMenit(Time(Elmt(*inv, i)));
+void Kedaluwarsa(Simulator *S, infotype *X){
+    
+    if (!IsEmpty(Inventory(*S))){
+        for (int i = Head(Inventory(*S)); i<=Tail(Inventory(*S)); i++){
+            Time(Elmt(Inventory(*S), i)) = PrevMenit(Time(Elmt(Inventory(*S), i)));
+        }
+
+        while ((Head(Inventory((*S)))!=Nil)&&(TIMEToMenit(Time(InfoHead(Inventory((*S)))))<=0)){
+            Dequeue(&Inventory(*S), X);
+            DisplayWord(NAMA(*X));
+            printf(" Telah Kedaluwarsa\n");
+        }
     }
 }
 
-void waitKedaluwarsa(PrioQueueTime *inv, int min){
-    for (int i = Head(*inv); i<= Tail(*inv); i++){
-        Time(Elmt(*inv, i)) = PrevNMenit(Time(Elmt(*inv, i)), min);
+void waitKedaluwarsa(Simulator *S, int min, infotype *X){
+    if (!IsEmpty(Inventory(*S))){
+        for (int i = Head(Inventory(*S)); i<=Tail(Inventory(*S)); i++){
+            Time(Elmt(Inventory(*S), i)) = PrevNMenit(Time(Elmt(Inventory(*S), i)), min);
+        }
+
+        while ((Head(Inventory((*S)))!=Nil)&&(TIMEToMenit(Time(InfoHead(Inventory((*S)))))<=0)){
+            Dequeue(&Inventory(*S), X);
+            DisplayWord(NAMA(*X));
+            printf(" Telah Kedaluwarsa\n");
+        }
     }
 }
 
@@ -292,7 +314,7 @@ void CreateEmpty (Queue * Q, int Max)
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
      //Kamus
     //Algoritma
-    // (*Q).T = (infotypeQueue *) malloc ((Max+1) * sizeof (infotypeQueue));
+    // (*Q).T = (infotype *) malloc ((Max+1) * sizeof (infotype));
     Q->T[100];
     if ((*Q).T != NULL)
     {
@@ -321,7 +343,7 @@ void DeAlokasiQueue(Queue * Q)
 
 
 /* *** Primitif Add/Delete *** */
-void AddQueue(Queue * Q, infotypeQueue X)
+void AddQueue(Queue * Q, infotype X)
 {
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan prio */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
@@ -329,7 +351,7 @@ void AddQueue(Queue * Q, infotypeQueue X)
         elemen baru disisipkan pada posisi yang tepat sesuai dengan prioritas */
     //Kamus
     int indeks;
-    infotypeQueue temp;
+    infotype temp;
     //Algoritma
     if (IsQueueEmpty(*Q))
     {
@@ -353,7 +375,7 @@ void AddQueue(Queue * Q, infotypeQueue X)
 }
 
 
-void Del (Queue * Q, infotypeQueue * X)
+void Del (Queue * Q, infotype * X)
 {
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
@@ -363,16 +385,12 @@ void Del (Queue * Q, infotypeQueue * X)
     int indeks;
     //Algoritma
     *X = InfoHead(*Q);
-    if ((!IsQueueEmpty(*Q)) && (Head(*Q) == Ekor(*Q))) { /* Satu elemen */
-        Head (*Q) = Nil;
+    if ((Ekor(*Q)==Kepala(*Q))&&Ekor(*Q)!=Nil) { /* Satu elemen */
+        Kepala(*Q) = Nil;
         Ekor(*Q) = Nil;
     } else {
-        indeks = 1;
-        do {
-            Elmt(*Q,indeks) = Elmt(*Q,indeks+1); 
-            indeks = indeks + 1;
-        } while (indeks != Ekor(*Q));
-    }   Ekor(*Q) = Ekor(*Q) - 1;
+        Kepala(*Q)++;
+    }
 }
 
 /* Operasi Tambahan */
@@ -398,31 +416,34 @@ Waiting Cust
     }
 }
 
-void Delivery(Queue *Q, PrioQueueTime *inv){
+void Delivery(Queue *Q, Simulator *S){
     infotype X;
     
     if (!IsQueueEmpty(*Q)){
-        for (int i = Head(*Q); i<=Ekor(*Q); i++){
-            Prio(Elmt(*Q, i)) = PrevMenit(Prio(Elmt(*Q, i)));
+        for (int i = Kepala(*Q); i<=Ekor(*Q); i++){
+            Prio(Elment(*Q, i)) = PrevMenit(Prio(Elment(*Q, i)));
         }
 
-        while (TIMEToMenit(Prio(InfoHead(*Q)))<=0){
+        while ((Head(*Q)!=Nil)&&(TIMEToMenit(Prio(InfoKepala(*Q))))<=0){
             Del(Q, &X);
-            Enqueue(inv, X);
+            DisplayWord(NAMA(X));
+            Enqueue(S, (infotype) X);
         }
     }
 }
 
-void waitDelivery(Queue *Q, PrioQueueTime *inv, int min){
+void waitDelivery(Queue *Q, Simulator *S, int min){
     infotype X;
     
-    for (int i = Head(*Q); i<=Ekor(*Q); i++){
-        Prio(Elmt(*Q, i)) = PrevNMenit(Prio(Elmt(*Q, i)), min);
-    }
+    if (!IsQueueEmpty(*Q)){
+        for (int i = Kepala(*Q); i<=Ekor(*Q); i++){
+            Prio(Elment(*Q, i)) = PrevNMenit(Prio(Elment(*Q, i)), min);
+        }
 
-    while (TIMEToMenit(Prio(InfoHead(*Q)))<=0){
-        Del(Q, &X);
-        Enqueue(inv, X);
+        while ((Head(*Q)!=Nil)&&(TIMEToMenit(Prio(InfoKepala(*Q))))<=0){
+            Del(Q, &X);
+            Enqueue(S, (infotype) X);
+        }
     }
 }
 
@@ -459,7 +480,7 @@ void buy(listMakanan b, Queue *q){
             printf("akan diantar dalam ");
             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
             printf(".\n");
-            AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
+            AddQueue(q, (infotype) MAKANAN(b, pilihan-1));
         }else{
             break;
         }
@@ -627,12 +648,12 @@ int searchMakanan(listMakanan l, int id){
 //             printf("akan diantar dalam ");
 //             TulisTIME1(PENGIRIMAN(MAKANAN(b, pilihan-1)));
 //             printf(".\n");
-//             AddQueue(q, (infotypeQueue) MAKANAN(b, pilihan-1));
+//             AddQueue(q, (infotype) MAKANAN(b, pilihan-1));
 //         }
 //     }
 // }
 
-void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
+void fry(listMakanan l, listMakanan f, Simulator *S, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
@@ -667,7 +688,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
             //fungsi cek
             for(int i=0; i<banyakChild(ID(MAKANAN(f, pilihan-1)),t); i++){
                 int id = IDD(childMakanan[i]);
-                if(IsMember(*inv, id)){
+                if(IsMember(Inventory(*S), id)){
                     available = true;
                 }
                 else{
@@ -679,7 +700,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
             if (available){
                 DisplayWord(NAMA(MAKANAN(f, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.\n");
-                Enqueue(inv, (infotype) MAKANAN(f, pilihan-1));
+                Enqueue(S, (infotype) MAKANAN(f, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(f, pilihan-1)));
@@ -687,7 +708,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
                 int nomor = 1;
                 for(int i=0; i<banyakChild(ID(MAKANAN(f, pilihan-1)),t); i++){
                     int id = IDD(childMakanan[i]);
-                    if(!IsMember(*inv, id)){
+                    if(!IsMember(Inventory(*S), id)){
                         printf("%d. ", nomor);
                         DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
                         printf("\n");
@@ -699,7 +720,7 @@ void fry(listMakanan l, listMakanan f, PrioQueueTime *inv, ListOfTree t){
     }
 }
 
-void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
+void boil(listMakanan l, listMakanan b, Simulator *S, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
@@ -732,7 +753,7 @@ void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
 
             for(int i=0; i<banyakChild(ID(MAKANAN(b, pilihan-1)),t); i++){
                 int id = IDD(childMakanan[i]);
-                if(IsMember(*inv, id)){
+                if(IsMember(Inventory(*S), id)){
                     available = true;
                 }
                 else{
@@ -744,7 +765,7 @@ void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
             if (available){
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, (infotype) MAKANAN(b, pilihan-1));
+                Enqueue(S, (infotype) MAKANAN(b, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
@@ -752,7 +773,7 @@ void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
                 int nomor = 1;
                 for(int i=0; i<banyakChild(ID(MAKANAN(b, pilihan-1)),t); i++){
                     int id = IDD(childMakanan[i]);
-                    if(!IsMember(*inv, id)){
+                    if(!IsMember(Inventory(*S), id)){
                         printf("%d. ", nomor);
                         DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
                         printf("\n");
@@ -764,7 +785,7 @@ void boil(listMakanan l, listMakanan b, PrioQueueTime *inv, ListOfTree t){
     }
 }
 
-void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
+void mix(listMakanan l, listMakanan m, Simulator *S, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
@@ -798,7 +819,7 @@ void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
 
             for(int i=0; i<banyakChild(ID(MAKANAN(m, pilihan-1)),t); i++){
                 int id = IDD(childMakanan[i]);
-                if(IsMember(*inv, id)){
+                if(IsMember(Inventory(*S), id)){
                     available = true;
                 }
                 else{
@@ -809,7 +830,7 @@ void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
             if (available){
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, (infotype) MAKANAN(m, pilihan-1));
+                Enqueue(S, (infotype) MAKANAN(m, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
@@ -817,7 +838,7 @@ void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
                 int nomor = 1;
                 for(int i=0; i<banyakChild(ID(MAKANAN(m, pilihan-1)),t); i++){
                     int id = IDD(childMakanan[i]);
-                    if(!IsMember(*inv, id)){
+                    if(!IsMember(Inventory(*S), id)){
                         printf("%d. ", nomor);
                         DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
                         printf("\n");
@@ -830,7 +851,7 @@ void mix(listMakanan l, listMakanan m, PrioQueueTime *inv, ListOfTree t){
 }
 
 
-void chop(listMakanan l, listMakanan c, PrioQueueTime *inv, ListOfTree t){
+void chop(listMakanan l, listMakanan c, Simulator *S, ListOfTree t){
     PrioQueueTime child;
     boolean available;
     int pilihan;
@@ -863,7 +884,7 @@ void chop(listMakanan l, listMakanan c, PrioQueueTime *inv, ListOfTree t){
 
             for(int i=0; i<banyakChild(ID(MAKANAN(c, pilihan-1)),t); i++){
                 int id = IDD(childMakanan[i]);
-                if(IsMember(*inv, id)){
+                if(IsMember(Inventory(*S), id)){
                     available = true;
                 }
                 else{
@@ -875,7 +896,7 @@ void chop(listMakanan l, listMakanan c, PrioQueueTime *inv, ListOfTree t){
             if (available){
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
-                Enqueue(inv, (infotype) MAKANAN(c, pilihan-1));
+                Enqueue(S, (infotype) MAKANAN(c, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
@@ -883,7 +904,7 @@ void chop(listMakanan l, listMakanan c, PrioQueueTime *inv, ListOfTree t){
                 int nomor = 1;
                 for(int i=0; i<banyakChild(ID(MAKANAN(c, pilihan-1)),t); i++){
                     int id = IDD(childMakanan[i]);
-                    if(!IsMember(*inv, id)){
+                    if(!IsMember(Inventory(*S), id)){
                         printf("%d. ", nomor);
                         DisplayWord(NAMA(MAKANAN(l, searchMakanan(l, id))));
                         printf("\n");
