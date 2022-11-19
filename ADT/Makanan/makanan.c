@@ -3,9 +3,9 @@
 #include "makanan.h"
 #include "../PrioQueue/prioqueuetime.h"
 #include "../Tree/tree.h"
-#include "../Tree/tree.c"
-#include "../Mesin_Kata/wordmachine.c"
-#include "../Mesin_Karakter/charmachine.c"
+// #include "../Tree/tree.c"
+// #include "../Mesin_Kata/wordmachine.c"
+// #include "../Mesin_Karakter/charmachine.c"
 
 
 void createListMakanan(listMakanan *l, int size)
