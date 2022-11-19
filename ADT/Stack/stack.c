@@ -13,14 +13,14 @@ void CreateEmptyStack(Stack *S) {
 /* jadi indeksnya antara 0.. MaxEl */
 /* Ciri stack kosong : TOP bernilai Nil */
 // gameState CreateState(Simulator S, Queue q, TIME time, MAP m)
-gameState CreateState(Simulator S, TIME time, MAP m)
+gameState CreateState(Simulator S, TIME time)
 {
     gameState *g;
     g = (gameState*) malloc (sizeof(gameState));
     SIM(*g) = S;
     // QUEUE(*g) = q;
     TIme(*g) = time;
-    Map(*g) = m;
+    // Map(*g) = m;
 
 
     return *g;
@@ -38,10 +38,10 @@ boolean IsStackFull(Stack S) {
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 // void Push(Stack *S, Simulator Sim, Queue q, TIME time, MAP m)
-void Push(Stack *S, Simulator Sim, TIME time, MAP m)
+void Push(Stack *S, Simulator Sim, TIME time)
  {
     // gameState g = CreateState(Sim, q, time, m);
-    gameState g = CreateState(Sim, time, m);
+    gameState g = CreateState(Sim, time);
     Top(*S)++;
     InfoTop(*S) = g;
 }
@@ -51,13 +51,13 @@ void Push(Stack *S, Simulator Sim, TIME time, MAP m)
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 // void Pop(Stack *S, Simulator *Sim, Queue *q, TIME *time, MAP *m)
-void Pop(Stack *S, Simulator *Sim, TIME *time, MAP *m)
+void Pop(Stack *S, Simulator *Sim, TIME *time)
  {
     gameState g = InfoTop(*S);
     *Sim = SIM(g);
     // *q = QUEUE(g);
     *time = TIme(g);
-    *m = Map(g);
+    // *m = Map(g);
     Top(*S)--;
 }
 /* Menghapus X dari Stack S. */
@@ -70,15 +70,17 @@ void undo(Stack *U, Stack *R, Simulator *Sim, TIME *time, MAP *m)
     Simulator prevStateSim;
     // Queue prevStateQueue;
     TIME prevStateTime;
-    MAP prevStateMap;
+    // MAP prevStateMap;
     // Push(R, *Sim, *q, *time, *m);
-    Push(R, *Sim, *time, *m);
+    Push(R, *Sim, *time);
     // Pop(U, &prevStateSim, &prevStateQueue, &prevStateTime, &prevStateMap);
-    Pop(U, &prevStateSim, &prevStateTime, &prevStateMap);
+    Pop(U, &prevStateSim, &prevStateTime);
+    ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = ' ';
     *Sim = prevStateSim;
     // *q = prevStateQueue;
     *time = prevStateTime;
-    *m = prevStateMap;
+    // *m = prevStateMap;
+    ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = 'S';
 }
 
 // void redo(Stack *U, Stack *R, Simulator *Sim, Queue *q, TIME *time, MAP *m)
@@ -87,16 +89,18 @@ void redo(Stack *U, Stack *R, Simulator *Sim, TIME *time, MAP *m)
     Simulator prevStateSim;
     // Queue prevStateQueue;
     TIME prevStateTime;
-    MAP prevStateMap;
+    // MAP prevStateMap;
     // Push(U, *Sim, *q, *time);
     // Pop(R, &prevStateSim, &prevStateQueue, &prevStateTime, *m);
-    Push(U, *Sim, *time, *m);
+    Push(U, *Sim, *time);
     // Pop(U, &prevStateSim, &prevStateQueue, &prevStateTime, &prevStateMap);
-    Pop(R, &prevStateSim, &prevStateTime, &prevStateMap);
+    Pop(R, &prevStateSim, &prevStateTime);
+    ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = ' ';
     *Sim = prevStateSim;
     // *q = prevStateQueue;
     *time = prevStateTime;
-    *m = prevStateMap;
+    // *m = prevStateMap;
+    ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = 'S';
 }
 
 void displayStack(Stack S){

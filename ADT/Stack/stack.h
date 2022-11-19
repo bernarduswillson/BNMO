@@ -20,7 +20,6 @@ typedef struct {
   Simulator S;
   // Queue q;
   TIME time;
-  MAP m;
 } gameState;
 
 typedef int address;   /* indeks tabel */
@@ -41,7 +40,7 @@ typedef struct {
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
 #define SIM(g) (g).S
-#define Map(g) (g).m
+// #define Map(g) (g).m
 // #define QUEUE(g) (g).q
 #define TIme(g) (g).time
 
@@ -61,14 +60,14 @@ boolean IsStackkFull(Stack S);
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 // void Push(Stack * S, Simulator Sim, Queue q, TIME time, MAP m);
-void Push(Stack * S, Simulator Sim, TIME time, MAP m);
+void Push(Stack * S, Simulator Sim, TIME time);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 // void Pop(Stack * S, Simulator *Sim, Queue *q, TIME *time, MAP *m);
-void Pop(Stack * S, Simulator *Sim, TIME *time, MAP *m);
+void Pop(Stack * S, Simulator *Sim, TIME *time);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
