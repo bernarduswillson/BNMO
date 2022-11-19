@@ -7,6 +7,7 @@
 #include "ADT/Mesin_Karakter/charmachine.c"
 #include "ADT/Stack/stack.c"
 #include "ADT/Utility/notif.c"
+#include "ADT/Makanan/makanan.h"
 
 int main() {
     // startMenu();

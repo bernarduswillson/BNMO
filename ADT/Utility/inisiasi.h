@@ -4,7 +4,7 @@
 #include "../Mesin_Kata/wordmachine.h"
 #include "../Mesin_Karakter/charmachine.h"
 
-void donat();
+// void donat();
 
 void startMenu();
 // Memulai startmenu
