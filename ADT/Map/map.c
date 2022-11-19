@@ -72,7 +72,7 @@ void displayMap(MAP m){
 // }
 
 
-void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif){
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stack *R){
     int north = -1860003584;
     int south = -1859953284;
     int east = -1045004210;
@@ -98,6 +98,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif){
             if (ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,(Baris(Lokasi(*S))-1),Kolom(Lokasi(*S))) = 'S';
+                Push(U, *S, *T);
                 Baris(Lokasi(*S)) --;
                 *T = NextMenit(*T);
                 break;
@@ -110,6 +111,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif){
             if (ELMT(*m, Baris(Lokasi(*S))+1, Kolom(Lokasi(*S))) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,(Baris(Lokasi(*S))+1),Kolom(Lokasi(*S))) = 'S';
+                Push(U, *S, *T);
                 Baris(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
                 break;
@@ -122,6 +124,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif){
             if (ELMT(*m, Baris(Lokasi(*S)), Kolom(Lokasi(*S))+1) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))+1)) = 'S';
+                Push(U, *S, *T);
                 Kolom(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
                 break;
@@ -134,6 +137,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif){
             if (ELMT(*m, Baris(Lokasi(*S)), Kolom(Lokasi(*S))-1) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))-1)) = 'S';
+                Push(U, *S, *T);
                 Kolom(Lokasi(*S)) --;
                 *T = NextMenit(*T);
                 break;

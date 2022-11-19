@@ -21,7 +21,7 @@ int main() {
         printf("\n");
         DisplaySimulator(S);
         TIME T;
-        CreateTime(&T,0,1,23);
+        CreateTime(&T,0,0,0);
         TulisTIME2(T);
         printf("Notifikasi: -\n");
         STARTWORDFILE("Config/map.txt");
@@ -59,9 +59,8 @@ int main() {
                 printf("\n");
             }
             else{
-                Push(&U, S, T);
                 QueueN n;
-                moveSim(&m, p, &S, &T, &n);
+                moveSim(&m, p, &S, &T, &n, &U, &R);
                 DisplaySimulator(S);
                 TulisTIME2(T);
                 printf("Notifikasi: ");

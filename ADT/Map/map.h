@@ -7,7 +7,7 @@
 #include "../Point/point.h"
 #include "../Time/time.h"
 #include "../Utility/notif.h"
-
+#include "../Stack/stack.h"
 
 #define ROW_CAP 100
 #define COL_CAP 100
@@ -37,7 +37,7 @@ void readMap(MAP *m, int nRow, int nCol);
 void displayMap(MAP m);
 
 // void moveSim(MAP *m, Word command);
-void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif);
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stack *R);
 
 // boolean isCommandValid(Word command);
 boolean isCommandValid(int x);

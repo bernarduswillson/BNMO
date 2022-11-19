@@ -11,7 +11,7 @@ boolean isEmpty(QueueN q) {
 }
 
 boolean isFull(QueueN q) {
-    return (IDX_HEAD(q) == 0) && (IDX_TAIL(q) == CAPACITY-1);
+    return (IDX_HEAD(q) == 0) && (IDX_TAIL(q) == NOTIFCAP-1);
 }
 
 int length(QueueN q) {
@@ -22,7 +22,7 @@ int length(QueueN q) {
         return IDX_TAIL(q) - IDX_HEAD(q) + 1;
     }
     else {
-        return CAPACITY - IDX_HEAD(q) + IDX_TAIL(q) + 1;
+        return NOTIFCAP - IDX_HEAD(q) + IDX_TAIL(q) + 1;
     }
 }
 
@@ -31,7 +31,7 @@ void enqueue(QueueN *q, ElTypeN val) {
         IDX_HEAD(*q) = 0;
         IDX_TAIL(*q) = 0;
     }
-    else if (IDX_TAIL(*q) == CAPACITY - 1) {
+    else if (IDX_TAIL(*q) == NOTIFCAP - 1) {
         IDX_TAIL(*q) = 0;
     }
     else {
@@ -47,7 +47,7 @@ void dequeue(QueueN *q, ElTypeN *val) {
         IDX_TAIL(*q) = IDX_UNDEF;
     }
     else {
-        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % CAPACITY;
+        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % NOTIFCAP;
     }
 }
 
