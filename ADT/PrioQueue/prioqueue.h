@@ -87,8 +87,9 @@ void showDeliveryQueue (Queue Q);
 #
 */
 
-void delivery(Queue *Q, PrioQueueTime *inv);
+void Delivery(Queue *Q, PrioQueueTime *inv);
 /* Masukin makanan ke inventory kalo delivery timenya udah 0*/
 
+void waitDelivery(Queue *Q, PrioQueueTime *inv, int min);
 
 #endif

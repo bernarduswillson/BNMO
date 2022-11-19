@@ -47,7 +47,7 @@ void createListMakanan(listMakanan *l, int size);
     //F.S:
     //terbentuk listMakanan l kosong dengan ukuran size
 
-void createMakanan(listMakanan *l); 
+void createMakanan(listMakanan *l, listMakanan *BUY, listMakanan *FRY, listMakanan *BOIL, listMakanan *MIX, listMakanan *CHOP); 
     //Baca file dari makanan, masukin ke variabel, trs bikin variabel makanan.
     //Buat makanan baru, isinya id, nama, waktu kedaluwarsa, lokasi aksi, waktu pengiriman
     //Masukin makanan yang baru dibikin ke listMakanan

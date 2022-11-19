@@ -160,7 +160,24 @@ Waiting Cust
 void Delivery(Queue *Q, PrioQueueTime *inv){
     infotype X;
     
-    if (TIMEToMenit(Prio(InfoHead(*Q)))==0){
+    for (int i = Head(*Q); i<=Tail(*Q); i++){
+        Prio(Elmt(*Q, i))--;
+    }
+
+    while (TIMEToMenit(Prio(InfoHead(*Q)))<=0){
+        Del(Q, &X);
+        Enqueue(inv, X);
+    }
+}
+
+void waitDelivery(Queue *Q, PrioQueueTime *inv, int min){
+    infotype X;
+    
+    for (int i = Head(*Q); i<=Tail(*Q); i++){
+        Prio(Elmt(*Q, i)) -= min;
+    }
+
+    while (TIMEToMenit(Prio(InfoHead(*Q)))<=0){
         Del(Q, &X);
         Enqueue(inv, X);
     }

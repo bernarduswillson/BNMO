@@ -99,5 +99,6 @@ void PrintPrioQueueTime (PrioQueueTime Q);
 <time-n> <elemen-n>
 #
 */
-
+void Kedaluwarsa(PrioQueueTime *inv);
+void waitKedaluwarsa(PrioQueueTime *inv, int min);
 #endif

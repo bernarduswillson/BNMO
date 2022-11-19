@@ -169,3 +169,14 @@ void PrintPrioQueueTime(PrioQueueTime Q) {
 <time-n> <elemen-n>
 #
 */
+void Kedaluwarsa(PrioQueueTime *inv){
+    for (int i = Head(*inv); i<= Tail(*inv); i++){
+        Time(Elmt(*inv, i))--;
+    }
+}
+
+void waitKedaluwarsa(PrioQueueTime *inv, int min){
+    for (int i = Head(*inv); i<= Tail(*inv); i++){
+        Time(Elmt(*inv, i))-= min;
+    }
+}

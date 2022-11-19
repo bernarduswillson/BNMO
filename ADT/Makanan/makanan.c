@@ -15,13 +15,7 @@ void createListMakanan(listMakanan *l, int size)
         LASTIDX(*l) = IDX_UNDEF;
     }
 
-listMakanan BUY;
-listMakanan FRY;
-listMakanan BOIL;
-listMakanan MIX;
-listMakanan CHOP; 
-
-void createMakanan(listMakanan *l)
+void createMakanan(listMakanan *l, listMakanan *BUY, listMakanan *FRY, listMakanan *BOIL, listMakanan *MIX, listMakanan *CHOP)
     {
 
 
@@ -30,11 +24,11 @@ void createMakanan(listMakanan *l)
         WordToInt(&size);
         CAPACITY(*l) = size;
         createListMakanan(l, size);
-        createListMakanan(&BUY, size);
-        createListMakanan(&FRY, size);
-        createListMakanan(&BOIL, size);
-        createListMakanan(&MIX, size);
-        createListMakanan(&CHOP, size);
+        createListMakanan(BUY, size);
+        createListMakanan(FRY, size);
+        createListMakanan(BOIL, size);
+        createListMakanan(MIX, size);
+        createListMakanan(CHOP, size);
         for(int i = 0; i < size; i++){
             ADVNEWLINE1();
             int id;
@@ -58,49 +52,49 @@ void createMakanan(listMakanan *l)
             WordToInt(&aksii);
             LASTIDX(*l)++;
             if (aksii == 2563){
-                LASTIDX(BUY)++;
-                int indeks = LASTIDX(BUY);
-                ID(MAKANAN(BUY, indeks)) = id;
-                NAMA(MAKANAN(BUY, indeks)) = nama;
-                KEDALUWARSA(MAKANAN(BUY, indeks)) = kedaluarsa;
-                PENGIRIMAN(MAKANAN(BUY, indeks)) = pengiriman;
-                AKSI(MAKANAN(BUY, indeks)) = aksi;
+                LASTIDX(*BUY)++;
+                int indeks = LASTIDX(*BUY);
+                ID(MAKANAN(*BUY, indeks)) = id;
+                NAMA(MAKANAN(*BUY, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*BUY, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*BUY, indeks)) = pengiriman;
+                AKSI(MAKANAN(*BUY, indeks)) = aksi;
             }
             else if (aksii == 2933){
-                LASTIDX(FRY)++;
-                int indeks = LASTIDX(FRY);
-                ID(MAKANAN(FRY, indeks)) = id;
-                NAMA(MAKANAN(FRY, indeks)) = nama;
-                KEDALUWARSA(MAKANAN(FRY, indeks)) = kedaluarsa;
-                PENGIRIMAN(MAKANAN(FRY, indeks)) = pengiriman;
-                AKSI(MAKANAN(FRY, indeks)) = aksi;
+                LASTIDX(*FRY)++;
+                int indeks = LASTIDX(*FRY);
+                ID(MAKANAN(*FRY, indeks)) = id;
+                NAMA(MAKANAN(*FRY, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*FRY, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*FRY, indeks)) = pengiriman;
+                AKSI(MAKANAN(*FRY, indeks)) = aksi;
             }
             else if (aksii == 24930){
-                LASTIDX(BOIL)++;
-                int indeks = LASTIDX(BOIL);
-                ID(MAKANAN(BOIL, indeks)) = id;
-                NAMA(MAKANAN(BOIL, indeks)) = nama;
-                KEDALUWARSA(MAKANAN(BOIL, indeks)) = kedaluarsa;
-                PENGIRIMAN(MAKANAN(BOIL, indeks)) = pengiriman;
-                AKSI(MAKANAN(BOIL, indeks)) = aksi;
+                LASTIDX(*BOIL)++;
+                int indeks = LASTIDX(*BOIL);
+                ID(MAKANAN(*BOIL, indeks)) = id;
+                NAMA(MAKANAN(*BOIL, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*BOIL, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*BOIL, indeks)) = pengiriman;
+                AKSI(MAKANAN(*BOIL, indeks)) = aksi;
             }
             else if (aksii == 3542){
-                LASTIDX(MIX)++;
-                int indeks = LASTIDX(MIX);
-                ID(MAKANAN(MIX, indeks)) = id;
-                NAMA(MAKANAN(MIX, indeks)) = nama;
-                KEDALUWARSA(MAKANAN(MIX, indeks)) = kedaluarsa;
-                PENGIRIMAN(MAKANAN(MIX, indeks)) = pengiriman;
-                AKSI(MAKANAN(MIX, indeks)) = aksi;
+                LASTIDX(*MIX)++;
+                int indeks = LASTIDX(*MIX);
+                ID(MAKANAN(*MIX, indeks)) = id;
+                NAMA(MAKANAN(*MIX, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*MIX, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*MIX, indeks)) = pengiriman;
+                AKSI(MAKANAN(*MIX, indeks)) = aksi;
             }
             else if (aksii == 25294){
-                LASTIDX(CHOP)++;
-                int indeks = LASTIDX(CHOP);
-                ID(MAKANAN(CHOP, indeks)) = id;
-                NAMA(MAKANAN(CHOP, indeks)) = nama;
-                KEDALUWARSA(MAKANAN(CHOP, indeks)) = kedaluarsa;
-                PENGIRIMAN(MAKANAN(CHOP, indeks)) = pengiriman;
-                AKSI(MAKANAN(CHOP, indeks)) = aksi;
+                LASTIDX(*CHOP)++;
+                int indeks = LASTIDX(*CHOP);
+                ID(MAKANAN(*CHOP, indeks)) = id;
+                NAMA(MAKANAN(*CHOP, indeks)) = nama;
+                KEDALUWARSA(MAKANAN(*CHOP, indeks)) = kedaluarsa;
+                PENGIRIMAN(MAKANAN(*CHOP, indeks)) = pengiriman;
+                AKSI(MAKANAN(*CHOP, indeks)) = aksi;
             }
         }
     }
