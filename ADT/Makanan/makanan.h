@@ -71,7 +71,7 @@ void catalog(listMakanan l);
     //F.S:
     //display semua makanan yang ada di listMakanan l
 
-void buy(listMakanan b, Queue *q);
+// void buy(listMakanan b, Queue *q);
     //beli makanan yang ada di listMakanan, masukin ke inventory.
     //lokasi harus pas (Makanan.lokasi harus "BUY")
     //I.S:
