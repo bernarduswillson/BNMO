@@ -45,6 +45,10 @@ void createListTree(ListOfTree *L, int size);
 
 void display_tree(node *n);
 
+node ** searchChild(int id, ListOfTree T);
+
+int banyakChild (int id, ListOfTree T);
+
 
 
 
