@@ -6,6 +6,7 @@
 #include "ADT/Mesin_Kata/wordmachine.c"
 #include "ADT/Mesin_Karakter/charmachine.c"
 #include "ADT/Stack/stack.c"
+#include "ADT/Utility/notif.c"
 
 int main() {
     // startMenu();
@@ -56,17 +57,15 @@ int main() {
                 TulisTIME2(T);
                 displayMap(m);
                 printf("\n");
-            }else{
+            }
+            else{
                 Push(&U, S, T);
-                moveSim(&m, p, &S, &T, &x);
+                QueueN n;
+                moveSim(&m, p, &S, &T, &n);
                 DisplaySimulator(S);
                 TulisTIME2(T);
-                if (x==1) {
-                    printf("Notifikasi: You can't move there\n");
-                }
-                else {
-                    printf("Notifikasi: -\n");
-                }
+                printf("Notifikasi: ");
+                displayNotif(n);
                 displayMap(m);
                 printf("\n");
             }
