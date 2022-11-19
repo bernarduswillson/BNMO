@@ -5,13 +5,16 @@
 #include "ADT/Map/map.c"
 #include "ADT/Mesin_Kata/wordmachine.c"
 #include "ADT/Mesin_Karakter/charmachine.c"
+#include "ADT/Stack/stack.c"
 
 int main() {
-    startMenu();
+    // startMenu();
     STARTWORD1();
     int a;
     WordToInt(&a);
     if (a == 1) {
+        Stack U;
+        Stack R;
         Simulator S;
         BacaSimulator(&S);
         printf("\n");
@@ -38,17 +41,35 @@ int main() {
             int p;
             WordToInt(&p);
             printf("\n");
-            moveSim(&m, p, &S, &T, &x);
-            DisplaySimulator(S);
-            TulisTIME2(T);
-            if (x==1) {
-                printf("Notifikasi: You can't move there\n");
+            if (p==40231){
+                displayStack(U);
+                undo(&U, &R, &S, &T, &m);
+                DisplaySimulator(S);
+                TulisTIME2(T);
+                displayMap(m);
+                printf("\n");
             }
-            else {
-                printf("Notifikasi: -\n");
+            else if (p==36331){
+                displayStack(R);
+                redo(&U, &R, &S, &T, &m);
+                DisplaySimulator(S);
+                TulisTIME2(T);
+                displayMap(m);
+                printf("\n");
+            }else{
+                Push(&U, S, T);
+                moveSim(&m, p, &S, &T, &x);
+                DisplaySimulator(S);
+                TulisTIME2(T);
+                if (x==1) {
+                    printf("Notifikasi: You can't move there\n");
+                }
+                else {
+                    printf("Notifikasi: -\n");
+                }
+                displayMap(m);
+                printf("\n");
             }
-            displayMap(m);
-            printf("\n");
             y++;
         }
 
