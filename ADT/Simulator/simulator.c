@@ -401,13 +401,15 @@ Waiting Cust
 void Delivery(Queue *Q, PrioQueueTime *inv){
     infotype X;
     
-    for (int i = Head(*Q); i<=Ekor(*Q); i++){
-        Prio(Elmt(*Q, i)) = PrevMenit(Prio(Elmt(*Q, i)));
-    }
+    if (!IsQueueEmpty(*Q)){
+        for (int i = Head(*Q); i<=Ekor(*Q); i++){
+            Prio(Elmt(*Q, i)) = PrevMenit(Prio(Elmt(*Q, i)));
+        }
 
-    while (TIMEToMenit(Prio(InfoHead(*Q)))<=0){
-        Del(Q, &X);
-        Enqueue(inv, X);
+        while (TIMEToMenit(Prio(InfoHead(*Q)))<=0){
+            Del(Q, &X);
+            Enqueue(inv, X);
+        }
     }
 }
 
