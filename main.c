@@ -5,9 +5,10 @@
 #include "ADT/Map/map.c"
 #include "ADT/Mesin_Kata/wordmachine.c"
 #include "ADT/Mesin_Karakter/charmachine.c"
+#include "ADT/Utility/notif.c"
 
 int main() {
-    startMenu();
+    // startMenu();
     STARTWORD1();
     int a;
     WordToInt(&a);
@@ -38,15 +39,18 @@ int main() {
             int p;
             WordToInt(&p);
             printf("\n");
-            moveSim(&m, p, &S, &T, &x);
+            QueueN n;
+            moveSim(&m, p, &S, &T, &n);
             DisplaySimulator(S);
             TulisTIME2(T);
-            if (x==1) {
-                printf("Notifikasi: You can't move there\n");
-            }
-            else {
-                printf("Notifikasi: -\n");
-            }
+            printf("Notifikasi: ");
+            displayNotif(n);
+            // if (x==1) {
+            //     printf("Notifikasi: You can't move there\n");
+            // }
+            // else {
+            //     printf("Notifikasi: -\n");
+            // }
             displayMap(m);
             printf("\n");
             y++;

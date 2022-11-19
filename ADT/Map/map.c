@@ -72,7 +72,7 @@ void displayMap(MAP m){
 // }
 
 
-void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif){
     int north = -1860003584;
     int south = -1859953284;
     int east = -1045004210;
@@ -83,8 +83,17 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
     int chop = 21742;
     int boil = 21378;
     int quit = 36986;
+    CreateQueue(notif);
     // if(isCommandValid(x)){
         switch (x){
+        case 76536400 ... 76536499:
+            x -= 76536400;
+            *T = NextNMenit(*T, x);
+            break;
+        case 765364000 ... 765364999:
+            x -= 765364000;
+            *T = NextNMenit(*T, x);
+            break;
         case -1860003584:
             if (ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
@@ -94,7 +103,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }
             else{
-                *notif = 1;
+                enqueue(notif, 1);
                 break;
             }
         case -1859953284:
@@ -106,7 +115,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }
             else{
-                *notif = 1;
+                enqueue(notif, 1);
                 break;
             }
         case -1045004210:
@@ -118,7 +127,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }
             else{
-                *notif = 1;
+                enqueue(notif, 1);
                 break;
             }
         case -1044985810:
@@ -130,7 +139,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }
             else{
-                *notif = 1;
+                enqueue(notif, 1);
                 break;
             }
         case 2211:
@@ -139,7 +148,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }    
             else {
-                printf("Tidak ada telepon disekitar anda\n");
+                enqueue(notif, 2);
                 break;
             }
         case 3190:
@@ -148,7 +157,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }    
             else {
-                printf("Tidak ada tempat mixing disekitar anda\n");
+                enqueue(notif, 3);
                 break;
             }
         case 2581:
@@ -157,7 +166,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }    
             else {
-                printf("Tidak ada tempat menggoreng disekitar anda\n");
+                enqueue(notif, 4);
                 break;
             }
         case 21742:
@@ -166,7 +175,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }    
             else {
-                printf("Tidak ada tempat memotong disekitar anda\n");
+                enqueue(notif, 5);
                 break;
             }
         case 21378:
@@ -175,7 +184,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
                 break;
             }    
             else {
-                printf("Tidak ada tempat merebus disekitar anda\n");
+                enqueue(notif, 6);
                 break;
             }
         case 36986:
@@ -183,7 +192,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif){
             exit(0);
             break;
         default:
-            printf("Command is not valid!\n");
+            enqueue(notif, 0);
             break;
         }
     // }

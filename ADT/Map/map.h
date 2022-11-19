@@ -6,6 +6,7 @@
 #include "../Simulator/simulator.h"
 #include "../Point/point.h"
 #include "../Time/time.h"
+#include "../Utility/notif.h"
 
 
 #define ROW_CAP 100
@@ -36,7 +37,7 @@ void readMap(MAP *m, int nRow, int nCol);
 void displayMap(MAP m);
 
 // void moveSim(MAP *m, Word command);
-void moveSim(MAP *m, int x, Simulator *S, TIME *T, int *notif);
+void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif);
 
 // boolean isCommandValid(Word command);
 boolean isCommandValid(int x);
