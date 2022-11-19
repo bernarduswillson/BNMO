@@ -7,7 +7,11 @@
 #include "ADT/Mesin_Karakter/charmachine.c"
 #include "ADT/Stack/stack.c"
 #include "ADT/Utility/notif.c"
-#include "ADT/Makanan/makanan.h"
+#include "ADT/Tree/tree.c"
+// #include "ADT/Makanan/makanan.c"
+// #include "ADT/PrioQueue/prioqueuetime.c"
+// #include "ADT/PrioQueue/prioqueue.c"
+
 
 int main() {
     // startMenu();
