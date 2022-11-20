@@ -224,9 +224,12 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             exit(0);
             break;
         case 224090481:
+            printf("Show Delivery");
             showDeliveryQueue(*q);
+            break;
         case -1454527815:
             PrintPrioQueueTime(*S);
+            break;
         default:
             enqueue(notif, 0);
             break;

@@ -13,7 +13,7 @@
 #include "../Map/map.h"
 
 #define NilStack -1
-#define MaxNEl 50
+#define MaxNEl 90
 /* Nil adalah stack dengan elemen kosong . */
 
 typedef struct {

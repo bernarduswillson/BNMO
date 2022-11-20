@@ -35,10 +35,10 @@ int main() {
         createMakanan(&l, &BUY, &FRY, &BOIL, &MIX, &CHOP);
         catalog(l);
         BacaSimulator(&S);
-        Enqueue(&S, MAKANAN(l, 1));
-        Enqueue(&S, MAKANAN(l, 0));
-        printf("Num elmt = %d\n", NBElmt(Inventory(S)));
-        PrintPrioQueueTime(S);
+        // Enqueue(&S, MAKANAN(l, 1));
+        // Enqueue(&S, MAKANAN(l, 0));
+        // printf("Num elmt = %d\n", NBElmt(Inventory(S)));
+        // PrintPrioQueueTime(S);
         printf("\n");
         DisplaySimulator(S);
         TIME T;

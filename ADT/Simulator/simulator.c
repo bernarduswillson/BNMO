@@ -190,7 +190,7 @@ void DequeueID(PrioQueueTime *Q, infotype *X, int id) {
     else {
         idx = (int) Head(*Q);
         found = false;
-        while (!false&&(idx<NBElmt(*Q))){
+        while (!found&&(idx<NBElmt(*Q))){
             if (ID(Elmt(*Q, idx))==id){
                 *X = Elmt(*Q, idx);
                 found = true;
@@ -199,7 +199,7 @@ void DequeueID(PrioQueueTime *Q, infotype *X, int id) {
                 }else{
                     idx %= NBElmt(*Q);
                     while (idx<(int) Tail(*Q)){
-                        Elmt(*Q, idx) = Elmt(*Q, (idx+1)%NBElmt(*Q)); 
+                        Elmt(*Q, idx) = Elmt(*Q, (idx+1) % NBElmt(*Q)); 
                     idx++;                    
                     }
                 }
@@ -244,11 +244,13 @@ void Kedaluwarsa(Simulator *S, infotype *X){
             Time(Elmt(Inventory(*S), i)) = PrevMenit(Time(Elmt(Inventory(*S), i)));
         }
 
-        while ((Head(Inventory((*S)))!=Nil)&&(TIMEToMenit(Time(InfoHead(Inventory((*S)))))<=0)){
-            Dequeue(&Inventory(*S), X);
-            DisplayWord(NAMA(*X));
-            printf(" Telah Kedaluwarsa\n");
-        }
+        for (int i = 0; i<NBElmt(Inventory(*S)); i++){
+            if (TIMEToMenit(Time(Elmt(Inventory((*S)), i)))<=0){
+                    Dequeue(&Inventory(*S), X);
+                    DisplayWord(NAMA(*X));
+                    printf(" Telah Kedaluwarsa\n");
+                }
+        } 
     }
 }
 
@@ -258,11 +260,13 @@ void waitKedaluwarsa(Simulator *S, int min, infotype *X){
             Time(Elmt(Inventory(*S), i)) = PrevNMenit(Time(Elmt(Inventory(*S), i)), min);
         }
 
-        while ((Head(Inventory((*S)))!=Nil)&&(TIMEToMenit(Time(InfoHead(Inventory((*S)))))<=0)){
-            Dequeue(&Inventory(*S), X);
-            DisplayWord(NAMA(*X));
-            printf(" Telah Kedaluwarsa\n");
-        }
+        for (int i = 0; i<NBElmt(Inventory(*S)); i++){
+            if (TIMEToMenit(Time(Elmt(Inventory((*S)), i)))<=0){
+                    Dequeue(&Inventory(*S), X);
+                    DisplayWord(NAMA(*X));
+                    printf(" Telah Kedaluwarsa\n");
+                }
+        }   
     }
 }
 
@@ -658,7 +662,7 @@ void fry(listMakanan l, listMakanan f, Simulator *S, ListOfTree t){
     boolean available;
     int pilihan;
     node** childMakanan;
-    
+    infotype Mak;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -698,6 +702,9 @@ void fry(listMakanan l, listMakanan f, Simulator *S, ListOfTree t){
             }
 
             if (available){
+                for(int i=0; i<banyakChild(ID(MAKANAN(f, pilihan-1)),t); i++){
+                    DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
+                }
                 DisplayWord(NAMA(MAKANAN(f, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.\n");
                 Enqueue(S, (infotype) MAKANAN(f, pilihan-1));
@@ -725,6 +732,7 @@ void boil(listMakanan l, listMakanan b, Simulator *S, ListOfTree t){
     boolean available;
     int pilihan;
     node ** childMakanan;
+    infotype Mak;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -763,6 +771,9 @@ void boil(listMakanan l, listMakanan b, Simulator *S, ListOfTree t){
             }
 
             if (available){
+                for(int i=0; i<banyakChild(ID(MAKANAN(b, pilihan-1)),t); i++){
+                    DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
+                }
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
                 Enqueue(S, (infotype) MAKANAN(b, pilihan-1));
@@ -790,6 +801,7 @@ void mix(listMakanan l, listMakanan m, Simulator *S, ListOfTree t){
     boolean available;
     int pilihan;
     node ** childMakanan;
+    infotype Mak;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -828,6 +840,11 @@ void mix(listMakanan l, listMakanan m, Simulator *S, ListOfTree t){
                 }
             }
             if (available){
+                printf("banyak child %d\n", banyakChild(ID(MAKANAN(m, pilihan-1)),t));
+                for(int i=0; i<banyakChild(ID(MAKANAN(m, pilihan-1)),t); i++){
+                    DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
+                    printf("Dequeue %d\n", IDD(childMakanan[i]));
+                }
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
                 Enqueue(S, (infotype) MAKANAN(m, pilihan-1));
@@ -856,6 +873,7 @@ void chop(listMakanan l, listMakanan c, Simulator *S, ListOfTree t){
     boolean available;
     int pilihan;
     node ** childMakanan;
+    infotype Mak;
 
     pilihan = -1;
     while (pilihan!=0){
@@ -894,6 +912,9 @@ void chop(listMakanan l, listMakanan c, Simulator *S, ListOfTree t){
             }
 
             if (available){
+                for(int i=0; i<banyakChild(ID(MAKANAN(c, pilihan-1)),t); i++){
+                    DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
+                }
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
                 printf(" selesai dibuat dan sudah masuk ke inventory.");
                 Enqueue(S, (infotype) MAKANAN(c, pilihan-1));

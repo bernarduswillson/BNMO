@@ -42,6 +42,7 @@ void Push(Stack *S, Simulator Sim, TIME time)
  {
     // gameState g = CreateState(Sim, q, time, m);
     gameState g = CreateState(Sim, time);
+
     Top(*S)++;
     InfoTop(*S) = g;
 }
