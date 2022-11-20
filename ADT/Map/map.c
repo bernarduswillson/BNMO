@@ -87,14 +87,20 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
     CreateQueue(notif);
     // if(isCommandValid(x)){
         switch (x){
-        case 76536400 ... 76536499:
-            x -= 76536400;
+        case 4098440 ... 4098449:
+            x -= 4098440;
             *T = NextNMenit(*T, x);
             waitDelivery(q, S, x);
             waitKedaluwarsa(S, x, &Mak);
             break;
-        case 765364000 ... 765364999:
-            x -= 765364000;
+        case 40984400 ... 40984499:
+            x -= 40984400;
+            *T = NextNMenit(*T, x);
+            waitDelivery(q, S, x);
+            waitKedaluwarsa(S, x, &Mak);
+            break;
+        case 409844000 ... 409844999:
+            x -= 409844000;
             *T = NextNMenit(*T, x);
             waitDelivery(q, S, x);
             waitKedaluwarsa(S, x, &Mak);
