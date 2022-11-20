@@ -87,23 +87,33 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
     CreateQueue(notif);
     // if(isCommandValid(x)){
         switch (x){
-        case 76536400 ... 76536499:
-            x -= 76536400;
+        case 4098440 ... 4098449:
+            x -= 4098440;
+            Push(U, *S, *T, *q);
             *T = NextNMenit(*T, x);
             waitDelivery(q, S, x);
             waitKedaluwarsa(S, x, &Mak);
             break;
-        case 765364000 ... 765364999:
-            x -= 765364000;
+        case 40984400 ... 40984499:
+            x -= 40984400;
+            Push(U, *S, *T, *q);
             *T = NextNMenit(*T, x);
             waitDelivery(q, S, x);
             waitKedaluwarsa(S, x, &Mak);
             break;
+        case 409844000 ... 409844999:
+            x -= 409844000;
+            Push(U, *S, *T, *q);
+            *T = NextNMenit(*T, x);
+            waitDelivery(q, S, x);
+            waitKedaluwarsa(S, x, &Mak);
+            break;
+        
         case -1860003584:
             if (ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,(Baris(Lokasi(*S))-1),Kolom(Lokasi(*S))) = 'S';
-                Push(U, *S, *T);
+                Push(U, *S, *T, *q);
                 Baris(Lokasi(*S)) --;
                 *T = NextMenit(*T);
                 Delivery(q, S);
@@ -118,7 +128,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, Baris(Lokasi(*S))+1, Kolom(Lokasi(*S))) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,(Baris(Lokasi(*S))+1),Kolom(Lokasi(*S))) = 'S';
-                Push(U, *S, *T);
+                Push(U, *S, *T, *q);
                 Baris(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
                 Delivery(q, S);
@@ -133,7 +143,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, Baris(Lokasi(*S)), Kolom(Lokasi(*S))+1) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))+1)) = 'S';
-                Push(U, *S, *T);
+                Push(U, *S, *T, *q);
                 Kolom(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
                 Delivery(q, S);
@@ -148,7 +158,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, Baris(Lokasi(*S)), Kolom(Lokasi(*S))-1) == ' '){
                 ELMT(*m,Baris(Lokasi(*S)),Kolom(Lokasi(*S))) = ' ';
                 ELMT(*m,Baris(Lokasi(*S)),(Kolom(Lokasi(*S))-1)) = 'S';
-                Push(U, *S, *T);
+                Push(U, *S, *T, *q);
                 Kolom(Lokasi(*S)) --;
                 *T = NextMenit(*T);
                 Delivery(q, S);

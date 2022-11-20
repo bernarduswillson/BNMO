@@ -21,6 +21,8 @@ int main() {
     if (a == 1) {
         Stack U;
         Stack R;
+        CreateEmptyStack(&U);
+        CreateEmptyStack(&R);
         Simulator S;
         listMakanan l, BUY, FRY, BOIL, MIX, CHOP;
         Queue q;
@@ -33,7 +35,6 @@ int main() {
         ListOfTree tree;
         createListTree(&tree, x);
         createMakanan(&l, &BUY, &FRY, &BOIL, &MIX, &CHOP);
-        catalog(l);
         BacaSimulator(&S);
         // Enqueue(&S, MAKANAN(l, 1));
         // Enqueue(&S, MAKANAN(l, 0));
@@ -65,8 +66,7 @@ int main() {
             WordToInt(&p);
             printf("\n");
             if (p==40231){
-                displayStack(U);
-                undo(&U, &R, &S, &T, &m);
+                undo(&U, &R, &S, &T, &m, &q);
                 DisplaySimulator(S);
                 TulisTIME2(T);
                 printf("Notifikasi: ");
@@ -75,8 +75,7 @@ int main() {
                 printf("\n");
             }
             else if (p==36331){
-                displayStack(R);
-                redo(&U, &R, &S, &T, &m);
+                redo(&U, &R, &S, &T, &m, &q);
                 DisplaySimulator(S);
                 TulisTIME2(T);
                 printf("Notifikasi: ");

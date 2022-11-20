@@ -106,7 +106,7 @@ int NBElmt(PrioQueueTime Q) {
 /* *** Kreator *** */
 void MakeEmpty(PrioQueueTime *Q, int Max) {
     // (*Q).T = (infotype *)malloc((Max) * sizeof(infotype));
-    Q->T[100]; 
+    Q->T[Max]; 
     if ((*Q).T == NULL) {
         MaxEl(*Q) = 0;
     }
@@ -142,7 +142,6 @@ void Enqueue(Simulator *S, infotype X) {
         Head(Inventory(*S)) = 0;
         Tail(Inventory(*S)) = 0;
         InfoTail(Inventory(*S)) = X;
-        printf("%d telah masuk\n", ID(InfoTail(Inventory(*S))));
 
     }
     else {
@@ -187,25 +186,40 @@ void DequeueID(PrioQueueTime *Q, infotype *X, int id) {
             Tail(*Q) = IDX_UNDEF;
         }
     }
-    else {
+    else if (NBElmt(*Q)>1){
         idx = (int) Head(*Q);
         found = false;
-        while (!found&&(idx<NBElmt(*Q))){
-            if (ID(Elmt(*Q, idx))==id){
-                *X = Elmt(*Q, idx);
-                found = true;
-                if (idx==Head(*Q)){
-                    Head(*Q)++;
-                }else{
-                    idx %= NBElmt(*Q);
-                    while (idx<(int) Tail(*Q)){
-                        Elmt(*Q, idx) = Elmt(*Q, (idx+1) % NBElmt(*Q)); 
-                    idx++;                    
-                    }
+        if (Tail(*Q)>Head(*Q)){
+            while (!found&&idx<Tail(*Q)){
+                if (ID(Elmt(*Q, idx))==id){
+                    found = true;
+                    *X = Elmt(*Q, idx);
+                }
+                if (!found){
+                    idx++;
                 }
             }
-            idx++;
+            for (int i = idx; i<Tail(*Q); i++){
+                Elmt(*Q, i) = Elmt(*Q, i+1);
+            }
+            Tail(*Q)--;
+        }else{
+            while (!found&&idx<Tail(*Q)+NBElmt(*Q)){
+                if (ID(Elmt(*Q, idx%NBElmt(*Q)))==id){
+                    found = true;
+                    *X = Elmt(*Q, idx%NBElmt(*Q));
+                }
+                if (!found){
+                    idx++;
+
+                }
+            }
+            for (int i = idx; i<Tail(*Q)+NBElmt(*Q); i++){
+                Elmt(*Q, i%NBElmt(*Q)) = Elmt(*Q, (i+1)%NBElmt(*Q));
+            }
+            Tail(*Q)--;
         }
+        
     }
 }
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
@@ -750,7 +764,7 @@ void boil(listMakanan l, listMakanan b, Simulator *S, ListOfTree t){
         STARTWORD1();
         WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(b)+1)){
-            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
         }else if(pilihan>0){
             //cari child MAKANAN(b, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
@@ -775,7 +789,7 @@ void boil(listMakanan l, listMakanan b, Simulator *S, ListOfTree t){
                     DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
                 }
                 DisplayWord(NAMA(MAKANAN(b, pilihan-1)));
-                printf(" selesai dibuat dan sudah masuk ke inventory.");
+                printf(" selesai dibuat dan sudah masuk ke inventory.\n");
                 Enqueue(S, (infotype) MAKANAN(b, pilihan-1));
             }else{
                 printf("Gagal membuat ");
@@ -820,7 +834,7 @@ void mix(listMakanan l, listMakanan m, Simulator *S, ListOfTree t){
         STARTWORD1();
         WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(m)+1)){
-            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
         }else if(pilihan>0){
             //cari child MAKANAN(m, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
@@ -840,13 +854,11 @@ void mix(listMakanan l, listMakanan m, Simulator *S, ListOfTree t){
                 }
             }
             if (available){
-                printf("banyak child %d\n", banyakChild(ID(MAKANAN(m, pilihan-1)),t));
                 for(int i=0; i<banyakChild(ID(MAKANAN(m, pilihan-1)),t); i++){
                     DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
-                    printf("Dequeue %d\n", IDD(childMakanan[i]));
                 }
                 DisplayWord(NAMA(MAKANAN(m, pilihan-1)));
-                printf(" selesai dibuat dan sudah masuk ke inventory.");
+                printf(" selesai dibuat dan sudah masuk ke inventory.\n");
                 Enqueue(S, (infotype) MAKANAN(m, pilihan-1));
             }else{
                 printf("Gagal membuat ");
@@ -881,7 +893,7 @@ void chop(listMakanan l, listMakanan c, Simulator *S, ListOfTree t){
         printf("=        CHOP        =");
         printf("======================");
         printf("\n");
-        printf("List Bahan Makanan yang Bisa Dibuat:");
+        printf("List Bahan Makanan yang Bisa Dibuat:\n");
         for (int i = 0; i<=LASTIDX(c); i++){
             printf("    %d. ", i+1);
             DisplayWord(NAMA(MAKANAN(c, i)));
@@ -891,7 +903,7 @@ void chop(listMakanan l, listMakanan c, Simulator *S, ListOfTree t){
         STARTWORD1();
         WordToInt(&pilihan);
         if ((pilihan<0)||(pilihan>LASTIDX(c)+1)){
-            printf("Pilih dari list makanan atau pilih 0 untuk exit.");
+            printf("Pilih dari list makanan atau pilih 0 untuk exit.\n");
         }else if(pilihan>0){
             //cari child MAKANAN(c, pilihan-1) dari resep, masukin ke listMakanan child
             //cek semua makanan di child ada di inventory atau ngga
@@ -916,12 +928,12 @@ void chop(listMakanan l, listMakanan c, Simulator *S, ListOfTree t){
                     DequeueID(&Inventory(*S), &Mak, IDD(childMakanan[i]));
                 }
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
-                printf(" selesai dibuat dan sudah masuk ke inventory.");
+                printf(" selesai dibuat dan sudah masuk ke inventory.\n");
                 Enqueue(S, (infotype) MAKANAN(c, pilihan-1));
             }else{
                 printf("Gagal membuat ");
                 DisplayWord(NAMA(MAKANAN(c, pilihan-1)));
-                printf("karena kamu tidak memiliki bahan berikut: ");
+                printf("karena kamu tidak memiliki bahan berikut: \n");
                 int nomor = 1;
                 for(int i=0; i<banyakChild(ID(MAKANAN(c, pilihan-1)),t); i++){
                     int id = IDD(childMakanan[i]);

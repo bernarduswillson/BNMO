@@ -42,7 +42,6 @@ void createTree(Tree *T, int id){
 
 void createListTree(ListOfTree *L, int size){
     Size(*L) = size;
-    printf("Size: %d\n", Size(*L));
     for(int i=0;i<Size(*L);i++){
         int x;
         WordToInt(&x);
