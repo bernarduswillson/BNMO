@@ -36,6 +36,9 @@ Program ini merupakan permainan simulator memasak yang menggunakan implementasi 
 ## How to Run
 Untuk menjalankan program, kita dapat melakukan run pada main.exe
 
+## Laporan 
+https://itbdsti-my.sharepoint.com/:w:/g/personal/13521016_mahasiswa_itb_ac_id/Ean4aMoC8OFNrYqMdt9L1-0BH1ZiUKXuaKzxxYSmHrk69w?e=5rotUw
+
 ## Pembagian Kerja Kelompok
 | Nama | NIM | Pembagian Tugas |
 | ------| ---- | ---- |
