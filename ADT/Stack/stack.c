@@ -38,7 +38,7 @@ boolean IsStackFull(Stack S) {
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 // void Push(Stack *S, Simulator Sim, Queue q, TIME time, MAP m)
-void Push(Stack *S, Simulator Sim, TIME time)
+void Push(Stack *S, Simulator Sim, TIME time, Queue q)
  {
     // gameState g = CreateState(Sim, q, time, m);
     gameState g = CreateState(Sim, time);
@@ -52,7 +52,7 @@ void Push(Stack *S, Simulator Sim, TIME time)
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 // void Pop(Stack *S, Simulator *Sim, Queue *q, TIME *time, MAP *m)
-void Pop(Stack *S, Simulator *Sim, TIME *time)
+void Pop(Stack *S, Simulator *Sim, TIME *time, Queue *q)
  {
     gameState g = InfoTop(*S);
     *Sim = SIM(g);
@@ -66,39 +66,39 @@ void Pop(Stack *S, Simulator *Sim, TIME *time)
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
 // void undo(Stack *U, Stack *R, Simulator *Sim, Queue *q, TIME *time, MAP *m)
-void undo(Stack *U, Stack *R, Simulator *Sim, TIME *time, MAP *m)
+void undo(Stack *U, Stack *R, Simulator *Sim, TIME *time, MAP *m, Queue *q)
 {
     Simulator prevStateSim;
-    // Queue prevStateQueue;
+    Queue prevStateQueue;
     TIME prevStateTime;
     // MAP prevStateMap;
     // Push(R, *Sim, *q, *time, *m);
-    Push(R, *Sim, *time);
+    Push(R, *Sim, *time, *q);
     // Pop(U, &prevStateSim, &prevStateQueue, &prevStateTime, &prevStateMap);
-    Pop(U, &prevStateSim, &prevStateTime);
+    Pop(U, &prevStateSim, &prevStateTime, &prevStateQueue);
     ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = ' ';
     *Sim = prevStateSim;
-    // *q = prevStateQueue;
+    *q = prevStateQueue;
     *time = prevStateTime;
     // *m = prevStateMap;
     ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = 'S';
 }
 
 // void redo(Stack *U, Stack *R, Simulator *Sim, Queue *q, TIME *time, MAP *m)
-void redo(Stack *U, Stack *R, Simulator *Sim, TIME *time, MAP *m)
+void redo(Stack *U, Stack *R, Simulator *Sim, TIME *time, MAP *m, Queue *q)
 {
     Simulator prevStateSim;
-    // Queue prevStateQueue;
+    Queue prevStateQueue;
     TIME prevStateTime;
     // MAP prevStateMap;
     // Push(U, *Sim, *q, *time);
     // Pop(R, &prevStateSim, &prevStateQueue, &prevStateTime, *m);
-    Push(U, *Sim, *time);
+    Push(U, *Sim, *time, *q);
     // Pop(U, &prevStateSim, &prevStateQueue, &prevStateTime, &prevStateMap);
-    Pop(R, &prevStateSim, &prevStateTime);
+    Pop(R, &prevStateSim, &prevStateTime, &prevStateQueue);
     ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = ' ';
     *Sim = prevStateSim;
-    // *q = prevStateQueue;
+    *q = prevStateQueue;
     *time = prevStateTime;
     // *m = prevStateMap;
     ELMT(*m, Baris(Lokasi(*Sim)), Kolom(Lokasi(*Sim))) = 'S';

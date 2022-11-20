@@ -60,14 +60,14 @@ boolean IsStackkFull(Stack S);
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 // void Push(Stack * S, Simulator Sim, Queue q, TIME time, MAP m);
-void Push(Stack * S, Simulator Sim, TIME time);
+void Push(Stack * S, Simulator Sim, TIME time, Queue q);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
 // void Pop(Stack * S, Simulator *Sim, Queue *q, TIME *time, MAP *m);
-void Pop(Stack * S, Simulator *Sim, TIME *time);
+void Pop(Stack * S, Simulator *Sim, TIME *time, Queue *q);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
