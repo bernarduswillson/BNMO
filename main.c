@@ -14,7 +14,7 @@
 
 
 int main() {
-    // startMenu();
+    startMenu();
     STARTWORD1();
     int a;
     WordToInt(&a);

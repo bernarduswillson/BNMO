@@ -80,6 +80,12 @@ void displayNotif(QueueN q) {
             else if (x==6) {
                 printf("tidak ada tempat merebus di sekitar anda");
             }
+            else if (x==7) {
+                printf("ada makanan yang sudah kedaluwarsa");
+            }
+            else if (x==8) {
+                printf("ada makanan yang sudah sampai");
+            }
             if (!isEmpty(q)) {
                 printf(", ");
             }

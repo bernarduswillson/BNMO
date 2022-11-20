@@ -196,8 +196,8 @@ void PrintPrioQueueTime (Simulator S);
 <time-n> <elemen-n>
 #
 */
-void Kedaluwarsa(Simulator *S, infotype *X);
-void waitKedaluwarsa(Simulator *S, int min, infotype *X);
+void Kedaluwarsa(Simulator *S, infotype *X, int *n);
+void waitKedaluwarsa(Simulator *S, int min, infotype *X, int *n);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -269,10 +269,10 @@ void showDeliveryQueue (Queue Q);
 #
 */
 
-void Delivery(Queue *Q, Simulator *S);
+void Delivery(Queue *Q, Simulator *S, int *n);
 /* Masukin makanan ke inventory kalo delivery timenya udah 0*/
 
-void waitDelivery(Queue *Q, Simulator *S, int min);
+void waitDelivery(Queue *Q, Simulator *S, int min, int *n);
 
 
 

@@ -84,6 +84,7 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
     int boiL = 21378;
     int quit = 36986;
     Makanan Mak;
+    int n;
     CreateQueue(notif);
     // if(isCommandValid(x)){
         switch (x){
@@ -91,22 +92,40 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             x -= 4098440;
             Push(U, *S, *T, *q);
             *T = NextNMenit(*T, x);
-            waitDelivery(q, S, x);
-            waitKedaluwarsa(S, x, &Mak);
+            waitDelivery(q, S, x, &n);
+            waitKedaluwarsa(S, x, &Mak, &n);
+            if (n==1) {
+                enqueue(notif, 7);
+            }
+            else if (n==2) {
+                enqueue(notif, 8);
+            }
             break;
         case 40984400 ... 40984499:
             x -= 40984400;
             Push(U, *S, *T, *q);
             *T = NextNMenit(*T, x);
-            waitDelivery(q, S, x);
-            waitKedaluwarsa(S, x, &Mak);
+            waitDelivery(q, S, x, &n);
+            waitKedaluwarsa(S, x, &Mak, &n);
+            if (n==1) {
+                enqueue(notif, 7);
+            }
+            else if (n==2) {
+                enqueue(notif, 8);
+            }
             break;
         case 409844000 ... 409844999:
             x -= 409844000;
             Push(U, *S, *T, *q);
             *T = NextNMenit(*T, x);
-            waitDelivery(q, S, x);
-            waitKedaluwarsa(S, x, &Mak);
+            waitDelivery(q, S, x, &n);
+            waitKedaluwarsa(S, x, &Mak, &n);
+            if (n==1) {
+                enqueue(notif, 7);
+            }
+            else if (n==2) {
+                enqueue(notif, 8);
+            }
             break;
         
         case -1860003584:
@@ -116,8 +135,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T, *q);
                 Baris(Lokasi(*S)) --;
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }
             else{
@@ -131,8 +156,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T, *q);
                 Baris(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }
             else{
@@ -146,8 +177,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T, *q);
                 Kolom(Lokasi(*S)) ++;
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }
             else{
@@ -161,8 +198,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
                 Push(U, *S, *T, *q);
                 Kolom(Lokasi(*S)) --;
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }
             else{
@@ -173,8 +216,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'T' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'T' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'T'){
                 buy(BUY, q);
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }    
             else {
@@ -185,8 +234,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'M' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'M' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'M'){
                 mix(l, MIX, S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }   
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }    
             else {
@@ -197,8 +252,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'F' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'F' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'F'){
                 fry(l, FRY,S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }    
             else {
@@ -209,8 +270,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'C' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'C' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'C'){
                 chop(l, CHOP, S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }    
             else {
@@ -221,8 +288,14 @@ void moveSim(MAP *m, int x, Simulator *S, TIME *T, QueueN *notif, Stack *U, Stac
             if (ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))+1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))), Kolom(Lokasi(*S))-1) == 'B' || ELMT(*m, (Baris(Lokasi(*S))+1), Kolom(Lokasi(*S))) == 'B' || ELMT(*m, (Baris(Lokasi(*S))-1), Kolom(Lokasi(*S))) == 'B'){
                 boil(l, BOIL, S, tree);
                 *T = NextMenit(*T);
-                Delivery(q, S);
-                Kedaluwarsa(S, &Mak);
+                Delivery(q, S, &n);
+                Kedaluwarsa(S, &Mak, &n);
+                if (n==1) {
+                enqueue(notif, 7);
+                }
+                else if (n==2) {
+                enqueue(notif, 8);
+                }
                 break;
             }    
             else {

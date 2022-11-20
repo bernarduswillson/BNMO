@@ -251,7 +251,7 @@ void PrintPrioQueueTime(Simulator S) {
 <time-n> <elemen-n>
 #
 */
-void Kedaluwarsa(Simulator *S, infotype *X){
+void Kedaluwarsa(Simulator *S, infotype *X, int *n){
     
     if (!IsEmpty(Inventory(*S))){
         for (int i = Head(Inventory(*S)); i<=Tail(Inventory(*S)); i++){
@@ -262,13 +262,13 @@ void Kedaluwarsa(Simulator *S, infotype *X){
             if (TIMEToMenit(Time(Elmt(Inventory((*S)), i)))<=0){
                     Dequeue(&Inventory(*S), X);
                     DisplayWord(NAMA(*X));
-                    printf(" Telah Kedaluwarsa\n");
+                    *n = 1;
                 }
         } 
     }
 }
 
-void waitKedaluwarsa(Simulator *S, int min, infotype *X){
+void waitKedaluwarsa(Simulator *S, int min, infotype *X, int *n){
     if (!IsEmpty(Inventory(*S))){
         for (int i = Head(Inventory(*S)); i<=Tail(Inventory(*S)); i++){
             Time(Elmt(Inventory(*S), i)) = PrevNMenit(Time(Elmt(Inventory(*S), i)), min);
@@ -278,7 +278,7 @@ void waitKedaluwarsa(Simulator *S, int min, infotype *X){
             if (TIMEToMenit(Time(Elmt(Inventory((*S)), i)))<=0){
                     Dequeue(&Inventory(*S), X);
                     DisplayWord(NAMA(*X));
-                    printf(" Telah Kedaluwarsa\n");
+                    *n = 1;
                 }
         }   
     }
@@ -425,16 +425,18 @@ Waiting Cust
 */
     printf("List Makanan di Perjalanan\n");
     printf("(nama - waktu sisa delivery)\n");
-    for (int i = 1; i <= NBQueueElmt(Q); i++){
-        printf("%d. ", i);
-        DisplayWord(NAMA(Elmt(Q, i)));
-        printf(" - ");
-        TulisTIME1(PENGIRIMAN(Elmt(Q,i)));
-        printf("\n");
+    if (!IsQueueEmpty(Q)) {
+        for (int i = 1; i <= NBQueueElmt(Q); i++){
+            printf("%d. ", i);
+            DisplayWord(NAMA(Elmt(Q, i)));
+            printf(" - ");
+            TulisTIME1(PENGIRIMAN(Elmt(Q,i)));
+            printf("\n");
+        }
     }
 }
 
-void Delivery(Queue *Q, Simulator *S){
+void Delivery(Queue *Q, Simulator *S, int *n){
     infotype X;
     
     if (!IsQueueEmpty(*Q)){
@@ -444,13 +446,13 @@ void Delivery(Queue *Q, Simulator *S){
 
         while ((Head(*Q)!=Nil)&&(TIMEToMenit(Prio(InfoKepala(*Q))))<=0){
             Del(Q, &X);
-            DisplayWord(NAMA(X));
             Enqueue(S, (infotype) X);
+            *n = 2;
         }
     }
 }
 
-void waitDelivery(Queue *Q, Simulator *S, int min){
+void waitDelivery(Queue *Q, Simulator *S, int min, int *n){
     infotype X;
     
     if (!IsQueueEmpty(*Q)){
@@ -461,6 +463,7 @@ void waitDelivery(Queue *Q, Simulator *S, int min){
         while ((Head(*Q)!=Nil)&&(TIMEToMenit(Prio(InfoKepala(*Q))))<=0){
             Del(Q, &X);
             Enqueue(S, (infotype) X);
+            *n = 2;
         }
     }
 }
