@@ -34,7 +34,9 @@ Program ini merupakan permainan simulator memasak yang menggunakan implementasi 
 11. Tree
 
 ## How to Run
-Untuk menjalankan program, kita dapat melakukan run pada main.exe
+1. Clone this repository.
+1. If you're in windows type ./run.bat in terminal to run program.
+2. If you're in UNIX based OS type ./run.sh in terminal to run program.
 
 ## Laporan 
 https://itbdsti-my.sharepoint.com/:w:/g/personal/13521016_mahasiswa_itb_ac_id/Ean4aMoC8OFNrYqMdt9L1-0BH1ZiUKXuaKzxxYSmHrk69w?e=5rotUw
